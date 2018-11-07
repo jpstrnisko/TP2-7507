@@ -20,5 +20,12 @@ public class FooTest {
         Assert.assertEquals("Bar", result);
 	}
 	
+	@Test
+	public void doLoopShouldReturn3(){
+		Foo foo = new Foo();
+        int result = foo.doLoop();
+        Assert.assertEquals(3, result);
+	}
+	
 
 }
