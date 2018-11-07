@@ -1,6 +1,6 @@
 package fiuba.algo3.ejemplo1;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class FooTest {
@@ -12,13 +12,13 @@ public class FooTest {
         Assert.assertEquals("Foo", result);
 	}
 	
-	/*
+	
 	@Test
 	public void doBarShouldReturnBar(){
         Foo foo = new Foo();
         String result = foo.doBar();
         Assert.assertEquals("Bar", result);
 	}
-	*/
+	
 
 }
