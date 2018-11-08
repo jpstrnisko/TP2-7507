@@ -24,5 +24,7 @@ public class Foo {
 		}
 		return x;
 	}
-
+	public String algo3() {
+		return "TP2-ALGO3";
+	}
 }

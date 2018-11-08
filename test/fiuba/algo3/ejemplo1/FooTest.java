@@ -26,6 +26,11 @@ public class FooTest {
         int result = foo.doLoop();
         Assert.assertEquals(3, result);
 	}
-	
+	@Test
+	public void algo3ShouldReturnTP2ALGO3() {
+		Foo foo = new Foo();
+		String result = foo.algo3();
+		Assert.assertEquals("TP2-ALGO3", result);
+	}
 
 }
