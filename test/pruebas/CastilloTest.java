@@ -15,5 +15,9 @@ public class CastilloTest {
 	public void elCastilloCreaUnArmaDeAsedio() {
 		assert(castillo.crearUnArmaDeAsedio() instanceof ArmaDeAsedio);
 	}
-
+	
+	@Test
+	public void elCastilloSeCreaCon1000DeVida() {
+		assertEquals(castillo.obtenerVida(), 1000);
+	}
 }
