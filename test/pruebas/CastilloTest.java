@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import edificios.Castillo;
-import modelo.ArmaDeAsedio;
+import unidades.ArmaDeAsedio;
 
 public class CastilloTest {
 	
@@ -19,5 +19,12 @@ public class CastilloTest {
 	@Test
 	public void elCastilloSeCreaCon1000DeVida() {
 		assertEquals(castillo.obtenerVida(), 1000);
+	}
+	
+	@Test
+	public void alRepararUnCastilloLaVidaAumentaEn15() {
+		Castillo nuevoCasti = new Castillo();
+		nuevoCasti.reparar();
+		assertEquals(nuevoCasti.obtenerVida(), 1015);
 	}
 }

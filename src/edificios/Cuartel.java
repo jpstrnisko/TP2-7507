@@ -1,9 +1,17 @@
 package edificios;
 
-import modelo.Arquero;
-import modelo.Espadachin;
+import unidades.Arquero;
+import unidades.Espadachin;
 
-public class Cuartel {
+public class Cuartel extends Edificio {
+	
+	public Cuartel() {
+		this.vida = 250;
+		this.costo = 50;
+		this.velocidadReparacion = 50;
+		this.tamanio = 4;
+	}
+	
 	public Espadachin crearUnEspadachin() {
 		return new Espadachin();
 	}
@@ -11,4 +19,5 @@ public class Cuartel {
 	public Arquero crearUnArquero() {
 		return new Arquero();
 	}
+
 }

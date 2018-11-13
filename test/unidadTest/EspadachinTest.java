@@ -1,7 +1,7 @@
 package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
-import modelo.Espadachin;
+import unidades.Espadachin;
 
 public class EspadachinTest {
 

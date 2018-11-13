@@ -8,13 +8,17 @@ public class ZonaDeJuegoTest {
 	private ZonaDeJuego zonaDeJuego = new ZonaDeJuego();
 	
 	@Test
-	public void celdaNollegoAlFinalDeLaZonaDeJuego() {
+	public void crearUnaZonaDeJuego() {
 		
-		zonaDeJuego.cantidadFilas = 10;
-		zonaDeJuego.cantidadColumnas = 10;
+		Integer[][] tamanio = new Integer[10][20];
+		
+		zonaDeJuego.crearZonaDeJuego(tamanio, 10, 20);
 		
 		assertEquals(true, zonaDeJuego.nollegoAlFinal(3,3));
+		assertEquals(false, zonaDeJuego.nollegoAlFinal(11,1));
+			
 	}
+	
 	
 	
 }
