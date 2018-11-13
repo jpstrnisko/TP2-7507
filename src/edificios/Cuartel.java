@@ -11,4 +11,8 @@ public class Cuartel {
 	public Arquero crearUnArquero() {
 		return new Arquero();
 	}
+
+	public Object obtenerVida() {
+		return 250;
+	}
 }
