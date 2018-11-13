@@ -1,7 +1,7 @@
 package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
-import modelo.Aldeano;
+import unidades.Aldeano;
 
 public class AldeanoTest {
 
