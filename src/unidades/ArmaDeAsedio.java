@@ -5,6 +5,7 @@ public class ArmaDeAsedio extends Unidad{
 	public ArmaDeAsedio() {
 		this.vida = 150;
 		this.costo = 200;
+		this.distanciaMaximaAtaque = 5;
 	}
 
 }

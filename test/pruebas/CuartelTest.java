@@ -28,4 +28,11 @@ public class CuartelTest {
 		Cuartel cuartel = new Cuartel();
 		Assert.assertEquals(cuartel.obtenerVida(), 250);
 	}
+	
+	@Test
+	public void alRepararUnCuartelLaVidaAumentaEn50() {
+		Cuartel cuartel = new Cuartel();
+		cuartel.reparar();
+		Assert.assertEquals(cuartel.obtenerVida(), 300);
+	}
 }

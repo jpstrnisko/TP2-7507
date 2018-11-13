@@ -3,7 +3,14 @@ package edificios;
 import unidades.Arquero;
 import unidades.Espadachin;
 
-public class Cuartel {
+public class Cuartel extends Edificio {
+	
+	public Cuartel() {
+		this.vida = 250;
+		this.costo = 50;
+		this.velocidadReparacion = 50;
+	}
+	
 	public Espadachin crearUnEspadachin() {
 		return new Espadachin();
 	}
@@ -12,7 +19,4 @@ public class Cuartel {
 		return new Arquero();
 	}
 
-	public Object obtenerVida() {
-		return 250;
-	}
 }

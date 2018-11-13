@@ -20,4 +20,11 @@ public class CastilloTest {
 	public void elCastilloSeCreaCon1000DeVida() {
 		assertEquals(castillo.obtenerVida(), 1000);
 	}
+	
+	@Test
+	public void alRepararUnCastilloLaVidaAumentaEn15() {
+		Castillo nuevoCasti = new Castillo();
+		nuevoCasti.reparar();
+		assertEquals(nuevoCasti.obtenerVida(), 1015);
+	}
 }

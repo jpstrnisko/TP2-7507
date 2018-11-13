@@ -15,5 +15,11 @@ public class PlazaCentralTest {
 	public void laPlazaCentralCreaUnAldeano() {
 		assert(plazaCentral.crearUnAldeano() instanceof Aldeano);
 	}
-
+	
+	@Test
+	public void alRepararUnaPlazaSuVidaAumentaEn25() {
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.reparar();
+		assertEquals(plaza.obtenerVida(), 475);
+	}
 }
