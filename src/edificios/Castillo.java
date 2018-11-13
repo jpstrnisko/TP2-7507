@@ -1,6 +1,6 @@
 package edificios;
 
-import unidades.ArmaDeAsedio;
+import modelo.ArmaDeAsedio;
 
 public class Castillo {
 	public ArmaDeAsedio crearUnArmaDeAsedio() {

@@ -1,6 +1,6 @@
 package edificios;
 
-import unidades.Aldeano;
+import modelo.Aldeano;
 
 public class PlazaCentral {
 	public Aldeano crearUnAldeano() {

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import edificios.Castillo;
-import unidades.ArmaDeAsedio;
+import modelo.ArmaDeAsedio;
 
 public class CastilloTest {
 	

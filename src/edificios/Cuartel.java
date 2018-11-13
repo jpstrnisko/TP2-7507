@@ -1,7 +1,7 @@
 package edificios;
 
-import unidades.Arquero;
-import unidades.Espadachin;
+import modelo.Arquero;
+import modelo.Espadachin;
 
 public class Cuartel {
 	public Espadachin crearUnEspadachin() {

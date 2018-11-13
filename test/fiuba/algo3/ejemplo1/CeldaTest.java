@@ -19,8 +19,7 @@ public class CeldaTest {
 		celda.colocarUnidad(2,2);
 		assertEquals(false, celda.estaLibre());
 	}
-	
-	
+
 	
 	
 }

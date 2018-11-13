@@ -20,6 +20,12 @@ public class Celda {
 			libre = false;
 			
 		}
+	
+	public void colocarEdificio(int fil, int col) {
+		
+		
+		
+	}
 		
 				
 	}
