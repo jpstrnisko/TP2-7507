@@ -1,4 +1,4 @@
-package modelo;
+package unidades;
 
 public class Arquero extends Unidad {
 	
