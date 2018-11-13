@@ -1,0 +1,6 @@
+package turnos;
+
+interface Turno {
+
+	
+}
