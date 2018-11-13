@@ -1,5 +1,10 @@
-package unidades;
+package modelo;
 
-public class ArmaDeAsedio {
+public class ArmaDeAsedio extends Unidad{
+	
+	public ArmaDeAsedio() {
+		this.vida = 150;
+		this.costo = 200;
+	}
 
 }

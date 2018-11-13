@@ -1,5 +1,9 @@
-package unidades;
+package modelo;
 
-public class Aldeano {
+public class Aldeano extends Unidad {
 	
+	public Aldeano() {
+		this.vida = 50;
+		this.costo = 25;
+	}
 }

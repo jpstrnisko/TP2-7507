@@ -1,5 +1,9 @@
-package unidades;
+package modelo;
 
-public class Arquero {
-
+public class Arquero extends Unidad {
+	
+	public Arquero() {
+		this.vida = 75;
+		this.costo = 75;
+	}
 }
