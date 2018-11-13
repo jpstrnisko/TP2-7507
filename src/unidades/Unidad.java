@@ -6,6 +6,7 @@ public abstract class Unidad {
 	protected int vida;
 	protected int costo;
 	protected int distanciaMaximaAtaque;
+	protected TurnoMovimiento turnoMovimiento;
 
 
 	public int obtenerVida() {
