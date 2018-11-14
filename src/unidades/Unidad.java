@@ -8,7 +8,6 @@ public abstract class Unidad {
 	protected int distanciaMaximaAtaque;
 	protected TurnoMovimiento turnoMovimiento;
 
-
 	public int obtenerVida() {
 		return this.vida;
 	}

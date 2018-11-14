@@ -9,6 +9,7 @@ public class Cuartel extends Edificio {
 		this.vida = 250;
 		this.costo = 50;
 		this.velocidadReparacion = 50;
+		this.tamanio = 4;
 	}
 	
 	public Espadachin crearUnEspadachin() {
@@ -20,3 +21,4 @@ public class Cuartel extends Edificio {
 	}
 
 }
+

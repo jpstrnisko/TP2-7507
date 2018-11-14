@@ -45,5 +45,4 @@ public class Aldeano extends Unidad {
 	public boolean moverA(Celda celda) {
 		return turnoMovimiento.moverA(celda);
 	}
-	
 }

@@ -1,14 +1,21 @@
 package fiuba.algo3.ejemplo1;
 
+import edificios.Edificio;
+
+
 public class Mapa {
 	
-	Celda celda = new Celda();
 	ZonaDeJuego zonaDeJuego = new ZonaDeJuego();
+	Integer[][] tamanio;
+		
 	
 	
 	public void asignarTamanio(int filas,int columnas) {
 		
-		zonaDeJuego.crearZonaDeJuego(filas, columnas);
+		tamanio = new Integer[filas][columnas];
+		
+		zonaDeJuego.crearZonaDeJuego(tamanio,filas,columnas);
+		
 				
 	}
 	
@@ -22,10 +29,17 @@ public class Mapa {
 	
 	public void colocarUnidad(int fila, int columna) {
 		
-		if (zonaDeJuego.nollegoAlFinal(fila,columna)) {
+		zonaDeJuego.colocarUnidad(fila,columna);
 			
-			celda.colocarUnidad(fila,columna);
-		}
 	}	
+	
+	public void colocarEdificio (Edificio edificio, int fila, int columna) {
+		
+		zonaDeJuego.colocarEdificio(edificio,fila,columna);
+	}	
+		
+	
+		
+	
 			
 }

@@ -5,6 +5,7 @@ public abstract class Edificio {
 	protected int vida;
 	protected int costo;
 	protected int velocidadReparacion;
+	protected int tamanio;
 	
 	public int obtenerVida() {
 		return this.vida;
@@ -20,5 +21,10 @@ public abstract class Edificio {
 	
 	public void quitarVida(int danio) {
 		this.vida -= danio;
+	}
+	
+	public int obtenerTamanio() {
+		return this.tamanio;
+		
 	}
 }
