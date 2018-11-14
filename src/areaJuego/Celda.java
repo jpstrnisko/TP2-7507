@@ -1,47 +1,35 @@
 package areaJuego;
-
-
+import interfaces.Atacable;
 
 
 public class Celda {
 	
-	boolean libre = true;
-	int fila;
-	int columna;
-		
+	protected Posicion posicion;
+	protected boolean libre = true;
+	protected Atacable atacable = null;
 	
-	
-	public int obtenerCelda() {
-		
-		return fila+columna;
-		
+	public Celda(Posicion posicion) {
+		this.posicion = posicion;
 	}
-	
-	
+			
 	public boolean estaLibre() {
 		
-		return libre;		
+		return this.libre;		
 	}
 	
-	
-	public void colocarUnidad(int fil, int col) {
+	public void colocarAtacable(Atacable atacable, Posicion posicion) {
 		
-		if ( estaLibre()) {
-			
-			fila = fil;
-			columna = col;
-			libre = false;
-			
+		if (this.estaLibre()){
+			this.libre = false;
+			this.atacable = atacable;
+			this.posicion = posicion;
 		}
-	}	
-	
-	public void colocarEdificio(int fil, int col) {
-		
-		
-		
 	}
+}
+	
+
 		
 				
-	}
+
 	
 		

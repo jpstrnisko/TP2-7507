@@ -15,14 +15,15 @@ public class ZonaDeJuego {
 		this.cantidadFilas = filas;
 		this.cantidadColumnas = columnas;
 		
-		Celda celda = new Celda();
+		
 		
 		Hashtable<Integer, Celda> mapaDeCeldas = new Hashtable<Integer, Celda>();
 		
 		for (int i=1; i <= cantidadFilas; i++) {
 			
 			for (int j=1; j <= cantidadColumnas; j++) {
-	 
+				
+				Celda celda = new Celda(new Posicion(i,j));
 				mapaDeCeldas.put(i+j, celda);
 			}
 		}

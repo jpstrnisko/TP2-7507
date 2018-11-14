@@ -32,7 +32,7 @@ public class AldeanoTest {
 		assert(aldeano.construirCuartel() instanceof Cuartel);
 	}
 	
-	@Test
+	/*@Test
 	public void elAldeanoRecolecta25OroPorTurno() {
 		Aldeano aldeano = new Aldeano();
 		assertEquals(25, aldeano.recolectarOro());
@@ -58,6 +58,6 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano();
 		assertTrue(aldeano.construirCuartel() instanceof Cuartel);
 		assertEquals(0, aldeano.recolectarOro());
-	}
+	}*/
 }
 

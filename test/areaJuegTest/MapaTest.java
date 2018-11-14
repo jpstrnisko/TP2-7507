@@ -18,10 +18,5 @@ public class MapaTest {
 		assertEquals(1000, mapa.obtenerTamanio());
 	}
 	
-	@Test	
-	public void seColocaUnaUnidadEnUnaCelda() {
-		
-		
-	}
 	
 }

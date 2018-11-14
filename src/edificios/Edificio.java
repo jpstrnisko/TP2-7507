@@ -1,6 +1,7 @@
 package edificios;
+import interfaces.Atacable;
 
-public abstract class Edificio {
+public abstract class Edificio implements Atacable{
 	
 	protected int vida;
 	protected int costo;
@@ -25,6 +26,10 @@ public abstract class Edificio {
 	
 	public int obtenerTamanio() {
 		return this.tamanio;
-		
 	}
+	
+	public void atacar(Atacable atacable) {
+		//Como se hace para que cada Edificio implemente este mensaje a su manera?
+	}
+		
 }

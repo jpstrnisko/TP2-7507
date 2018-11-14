@@ -6,17 +6,17 @@ import edificios.Edificio;
 
 public class Aldeano extends Unidad {
 	
-	private TurnoRecogerOro turnoRecogerOro;
-	private TurnoConstruir turnoConstruir;
-	private TurnoReparar turnoReparar;
+	//private TurnoRecogerOro turnoRecogerOro;
+	//private TurnoConstruir turnoConstruir;
+	//private TurnoReparar turnoReparar;
 	
 	public Aldeano() {
 		this.vida = 50;
 		this.costo = 25;
-		this.turnoMovimiento = new TurnoMovimiento();
-		this.turnoRecogerOro = new TurnoRecolectarOro();
-		this.turnoConstruir = new TurnoConstruir();
-		this.turnoReparar = new TurnoReparar();
+		//this.turnoMovimiento = new TurnoMovimiento();
+		//this.turnoRecogerOro = new TurnoRecolectarOro();
+		//this.turnoConstruir = new TurnoConstruir();
+		//this.turnoReparar = new TurnoReparar();
 	}
 
 	
@@ -34,7 +34,7 @@ public class Aldeano extends Unidad {
 		edificio.reparar();
 	}
 	
-	public Number recolectarOro() {
+	/*public Number recolectarOro() {
 		return turnoRecogerOro.recogerOro();
 	}
 
@@ -44,5 +44,5 @@ public class Aldeano extends Unidad {
 	
 	public boolean moverA(Celda celda) {
 		return turnoMovimiento.moverA(celda);
-	}
+	}*/
 }

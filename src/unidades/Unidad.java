@@ -1,12 +1,12 @@
 package unidades;
-import edificios.Edificio;
+import interfaces.Atacable;
 
-public abstract class Unidad {
+public abstract class Unidad implements Atacable {
 	
 	protected int vida;
 	protected int costo;
 	protected int distanciaMaximaAtaque;
-	protected TurnoMovimiento turnoMovimiento;
+	//protected TurnoMovimiento turnoMovimiento;
 
 	public int obtenerVida() {
 		return this.vida;
@@ -16,10 +16,11 @@ public abstract class Unidad {
 		return this.costo;
 	}
 	
-	public void atacarEdificio(Edificio edificio) {
-		//Aca habria que tener una interface Atacable que implemente
-		//edificios y unidades para no romper encapsulamiento y que cada
-		//unidad sepa a quien atacar.
-		//Tambien ver tema de distancias de ataque;
+	public void quitarVida(int danio) {
+		this.vida -= danio;
+	}
+	
+	public void atacar(Atacable atacable) {
+		//como se hace para que este metodo lo implemente cada Unidad a su manera?
 	}
 }

@@ -1,4 +1,6 @@
 package areaJuegTest;
+import areaJuego.Posicion;
+import interfaces.Atacable;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -6,19 +8,21 @@ import org.junit.Test;
 import areaJuego.Celda;
 
 public class CeldaTest {
-	
-	private Celda celda = new Celda();
-	
+		
 	@Test
 	public void celdaSeCreaLibre() {
-	
+		
+		Posicion posicion = new Posicion(0,0);
+		Celda celda = new Celda(posicion);
 		assertEquals(true, celda.estaLibre());
 	}
 	
 	@Test
-	public void celdaOcupadaCuandoSeColocaUnaUnidad() {
+	public void celdaOcupadaCuandoSeColocaUnaUnidadEnPosicion00() {
 		
-		celda.colocarUnidad(2,2);
+		Posicion posicion = new Posicion(0,0);
+		Celda celda = new Celda(posicion);
+		celda.colocarAtacable(null, posicion);
 		assertEquals(false, celda.estaLibre());
 	}
 
