@@ -53,7 +53,7 @@ public class ZonaDeJuego {
 	
 	
 	
-	public void colocarUnidad(int fila, int columna) {
+	public void colocarAtacable(int fila, int columna) {
 		
 		//delega a Celda
 		
@@ -62,11 +62,4 @@ public class ZonaDeJuego {
 	
 	
 	
-	public void colocarEdificio(Edificio edificio, int fila, int columna) {
-		
-		//delega a Celda
-		
-	}
-	
-	
-	}
+}

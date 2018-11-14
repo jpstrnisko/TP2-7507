@@ -27,16 +27,12 @@ public class Mapa {
 	}
 	
 	
-	public void colocarUnidad(int fila, int columna) {
+	public void colocarAtacable(int fila, int columna) {
 		
-		zonaDeJuego.colocarUnidad(fila,columna);
+		zonaDeJuego.colocarAtacable(fila,columna);
 			
 	}	
 	
-	public void colocarEdificio (Edificio edificio, int fila, int columna) {
-		
-		zonaDeJuego.colocarEdificio(edificio,fila,columna);
-	}	
 		
 	
 		

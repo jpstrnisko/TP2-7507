@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import edificios.Castillo;
+import edificios.Cuartel;
+import unidades.Aldeano;
 import unidades.ArmaDeAsedio;
 
 public class CastilloTest {
@@ -23,8 +25,22 @@ public class CastilloTest {
 	
 	@Test
 	public void alRepararUnCastilloLaVidaAumentaEn15() {
-		Castillo nuevoCasti = new Castillo();
-		nuevoCasti.reparar();
-		assertEquals(nuevoCasti.obtenerVida(), 1015);
+		castillo.reparar();
+		assertEquals(castillo.obtenerVida(), 1015);
+	}
+	
+	@Test 
+	public void alAtacarAcualquierUnidadLeResta20DeVida() {
+		Aldeano aldeano = new Aldeano();
+		int vidaActual = aldeano.obtenerVida();
+		castillo.atacar(aldeano);
+		assertEquals(vidaActual-20, aldeano.obtenerVida());
+	}
+	@Test
+	public void alAtacarACualquierEdificioLeResta20DeVida() {
+		Cuartel cuartel = new Cuartel();
+		int vidaActual = cuartel.obtenerVida();
+		castillo.atacar(cuartel);
+		assertEquals(vidaActual-20, cuartel.obtenerVida());
 	}
 }

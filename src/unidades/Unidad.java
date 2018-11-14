@@ -1,4 +1,5 @@
 package unidades;
+import edificios.Edificio;
 import interfaces.Atacable;
 
 public abstract class Unidad implements Atacable {
@@ -20,7 +21,4 @@ public abstract class Unidad implements Atacable {
 		this.vida -= danio;
 	}
 	
-	public void atacar(Atacable atacable) {
-		//como se hace para que este metodo lo implemente cada Unidad a su manera?
-	}
 }

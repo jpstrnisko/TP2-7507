@@ -27,9 +27,5 @@ public abstract class Edificio implements Atacable{
 	public int obtenerTamanio() {
 		return this.tamanio;
 	}
-	
-	public void atacar(Atacable atacable) {
-		//Como se hace para que cada Edificio implemente este mensaje a su manera?
-	}
 		
 }
