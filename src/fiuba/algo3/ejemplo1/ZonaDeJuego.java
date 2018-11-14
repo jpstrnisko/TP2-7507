@@ -1,71 +1,101 @@
 package fiuba.algo3.ejemplo1;
 
-import java.util.Hashtable;
-import edificios.Edificio;
+
 
 public class ZonaDeJuego {
 	
 	int cantidadFilas;
 	int cantidadColumnas;
+	Celda celdas[][];
 	
 	
-	
-	public void crearZonaDeJuego(Integer args[][], int filas, int columnas) {
+	public void crearZonaDeJuego(int filas, int columnas) {
 		
 		this.cantidadFilas = filas;
 		this.cantidadColumnas = columnas;
 		
-		Celda celda = new Celda();
+		celdas = new Celda[filas][columnas];
 		
-		Hashtable<Integer, Celda> mapaDeCeldas = new Hashtable<Integer, Celda>();
-		
-		for (int i=1; i <= cantidadFilas; i++) {
-			
-			for (int j=1; j <= cantidadColumnas; j++) {
-	 
-				mapaDeCeldas.put(i+j, celda);
+		for (int i= 0; i<filas; i++ ) {
+			for (int j=0; j<columnas; j++) {
+				celdas[i][j] = new Celda(i,j);
 			}
 		}
+						
 	}
-	
 	
 	public int obtenerTamanio() {
 		
 		return cantidadFilas*cantidadColumnas;
 	}
-	
-	
+		
 	
 	public boolean nollegoAlFinal(int fila, int columna) {
 		
 		return (fila >= 1 && fila <= cantidadFilas && columna >= 1 && columna <= cantidadColumnas);
 	}
+	
 		
-	
-	
-	public boolean espacioNoLLegoAlFinal(int cantidadCeldasAExplorar, int fila, int columna) {
+	public boolean estaLibre(int fila, int columna) {
 		
-		boolean espacioDesocupado = true;
+		return celdas[fila][columna].estaLibre();
+	}
 		
-		return espacioDesocupado;
-	}	
-	
-	
-	
-	public void colocarUnidad(int fila, int columna) {
+			
+	public void posicionar(int fila, int columna) {
 		
-		//delega a Celda
-		
-		
-	}	
-	
-	
-	
-	public void colocarEdificio(Edificio edificio, int fila, int columna) {
-		
-		//delega a Celda
+		celdas[fila][columna].posicionar();
 		
 	}
 	
+		
 	
+	public void posicionarEdificioIzquierdaArriba(int fila, int columna) {
+		
+		for (int i= fila-1; i<= fila; i++) {
+			for (int j= columna-1; j<= columna; j++) {
+				
+				celdas[i][j].posicionar();	
+		
+			}			
+		}
+
 	}
+	
+	
+	public void posicionarEdificioDerechaArriba(int fila, int columna) {
+		
+		for (int i= fila-1; i<= fila; i++) {
+			for (int j= columna; j<= columna+1; j++) {
+				
+				celdas[i][j].posicionar();	
+			}			
+		}
+
+	}
+	
+	
+	public void posicionarEdificioIzquierdaAbajo(int fila, int columna) {
+		
+		for (int i= fila; i<= fila+1; i++) {
+			for (int j= columna-1; j<= columna; j++) {
+				
+				celdas[i][j].posicionar();	
+			}			
+		}
+
+	}
+	
+	
+	public void posicionarEdificioDerechaAbajo(int fila, int columna) {
+		
+		for (int i= fila; i<= fila+1; i++) {
+			for (int j= columna; j<= columna+1; j++) {
+				
+				celdas[i][j].posicionar();	
+			}			
+		}
+
+	}
+	
+}

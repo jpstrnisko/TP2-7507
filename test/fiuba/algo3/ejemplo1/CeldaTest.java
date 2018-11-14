@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class CeldaTest {
 	
-	private Celda celda = new Celda();
+	private Celda celda = new Celda(2,2);
 	
 	@Test
 	public void celdaSeCreaLibre() {
@@ -16,9 +16,12 @@ public class CeldaTest {
 	@Test
 	public void celdaOcupadaCuandoSeColocaUnaUnidad() {
 		
-		celda.colocarUnidad(2,2);
+		celda.posicionar();
+		
 		assertEquals(false, celda.estaLibre());
 	}
+	
+	
 
 	
 	

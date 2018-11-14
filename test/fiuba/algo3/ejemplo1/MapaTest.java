@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 
+
 public class MapaTest {
 	
 	private Mapa mapa = new Mapa();
@@ -17,9 +18,16 @@ public class MapaTest {
 	}
 	
 	@Test	
-	public void seColocaUnaUnidadEnUnaCelda() {
+	public void sePosicionaUnaUnidad() {
 		
+		mapa.asignarTamanio(20,50);
 		
+		mapa.posicionar(2,2);
+		
+		assertEquals(false, mapa.estaLibre(2,2));
 	}
+	
+			
+	
 	
 }

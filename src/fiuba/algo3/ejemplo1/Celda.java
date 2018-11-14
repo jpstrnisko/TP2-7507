@@ -1,47 +1,35 @@
 package fiuba.algo3.ejemplo1;
 
-
-
-
 public class Celda {
 	
-	boolean libre = true;
+	boolean libre; 
 	int fila;
 	int columna;
-		
 	
 	
-	public int obtenerCelda() {
+	public Celda(int fil, int col) {
 		
-		return fila+columna;
+		fila = fil;
+		columna = col;
+		libre = true;
 		
 	}
-	
+		
 	
 	public boolean estaLibre() {
 		
 		return libre;		
 	}
 	
-	
-	public void colocarUnidad(int fil, int col) {
+		
+	public void posicionar() {
 		
 		if ( estaLibre()) {
 			
-			fila = fil;
-			columna = col;
 			libre = false;
-			
 		}
 	}	
 	
-	public void colocarEdificio(int fil, int col) {
-		
-		
-		
-	}
-		
-				
-	}
+}
 	
 		

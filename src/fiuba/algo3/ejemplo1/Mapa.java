@@ -3,21 +3,22 @@ package fiuba.algo3.ejemplo1;
 import edificios.Edificio;
 
 
+
 public class Mapa {
 	
 	ZonaDeJuego zonaDeJuego = new ZonaDeJuego();
-	Integer[][] tamanio;
+	
+	
 		
-	
-	
+		
 	public void asignarTamanio(int filas,int columnas) {
 		
-		tamanio = new Integer[filas][columnas];
-		
-		zonaDeJuego.crearZonaDeJuego(tamanio,filas,columnas);
+		zonaDeJuego.crearZonaDeJuego(filas,columnas);
 		
 				
 	}
+	
+	
 	
 	public int obtenerTamanio() {
 		
@@ -27,18 +28,26 @@ public class Mapa {
 	}
 	
 	
-	public void colocarUnidad(int fila, int columna) {
+	public boolean estaLibre(int fila, int columna) {
 		
-		zonaDeJuego.colocarUnidad(fila,columna);
+		return zonaDeJuego.estaLibre(fila, columna);
+	}
+	
+	public void posicionar(int fila, int columna) {
+		
+		zonaDeJuego.posicionar(fila,columna);
 			
 	}	
 	
-	public void colocarEdificio (Edificio edificio, int fila, int columna) {
 		
-		zonaDeJuego.colocarEdificio(edificio,fila,columna);
-	}	
 		
-	
+	public void posicionarEdificio(Edificio edificio, int fila, int columna) {
+		
+		edificio.obtenerTamanio();
+		
+		zonaDeJuego.posicionarEdificioIzquierdaArriba(fila, columna);
+		
+	}
 		
 	
 			
