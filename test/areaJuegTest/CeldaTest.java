@@ -23,6 +23,7 @@ public class CeldaTest {
 		Posicion posicion = new Posicion(0,0);
 		Celda celda = new Celda(posicion);
 		celda.colocarAtacable(null, posicion);
+		celda.posicionar();
 		assertEquals(false, celda.estaLibre());
 	}
 

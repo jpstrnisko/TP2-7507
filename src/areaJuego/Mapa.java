@@ -6,36 +6,34 @@ import edificios.Edificio;
 public class Mapa {
 	
 	ZonaDeJuego zonaDeJuego = new ZonaDeJuego();
-	Integer[][] tamanio;
+	
 		
-	
-	
 	public void asignarTamanio(int filas,int columnas) {
-		
-		tamanio = new Integer[filas][columnas];
-		
-		zonaDeJuego.crearZonaDeJuego(tamanio,filas,columnas);
-		
-				
+		zonaDeJuego.crearZonaDeJuego(filas,columnas);
 	}
-	
+		
 	public int obtenerTamanio() {
-		
 		int tamanio = zonaDeJuego.obtenerTamanio();
-		
 		return tamanio;		
 	}
+		
+	public boolean estaLibre(int fila, int columna) {
+		
+		return zonaDeJuego.estaLibre(fila, columna);
+	}
 	
+	public void posicionar(int fila, int columna) {
+		zonaDeJuego.posicionar(fila,columna);
+	}	
+			
+	public void posicionarEdificio(Edificio edificio, int fila, int columna) {
+		edificio.obtenerTamanio();
+		zonaDeJuego.posicionarEdificioIzquierdaArriba(fila, columna);
+	}
 	
 	public void colocarAtacable(int fila, int columna) {
-		
 		zonaDeJuego.colocarAtacable(fila,columna);
-			
 	}	
 	
-		
+}		
 	
-		
-	
-			
-}
