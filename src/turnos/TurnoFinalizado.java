@@ -1,7 +1,7 @@
 package turnos;
 
+import areaJuego.Celda;
 import edificios.Edificio;
-import mapa.Celda;
 
 public class TurnoFinalizado implements Turno{
 	

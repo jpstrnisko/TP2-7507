@@ -1,4 +1,4 @@
-package mapa;
+package areaJuego;
 
 import java.util.Hashtable;
 import edificios.Edificio;

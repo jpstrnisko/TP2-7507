@@ -1,7 +1,7 @@
 package unidades;
+import areaJuego.Celda;
 import edificios.Cuartel;
 import edificios.PlazaCentral;
-import mapa.Celda;
 import edificios.Edificio;
 
 public class Aldeano extends Unidad {

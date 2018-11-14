@@ -1,4 +1,4 @@
-package mapa;
+package areaJuego;
 
 import edificios.Edificio;
 

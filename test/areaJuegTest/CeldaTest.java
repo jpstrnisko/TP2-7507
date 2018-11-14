@@ -1,9 +1,9 @@
-package fiuba.algo3.ejemplo1;
+package areaJuegTest;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import mapa.Celda;
+import areaJuego.Celda;
 
 public class CeldaTest {
 	

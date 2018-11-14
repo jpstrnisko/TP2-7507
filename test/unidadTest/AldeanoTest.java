@@ -1,9 +1,10 @@
 package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import areaJuego.Celda;
 import unidades.Aldeano;
 import edificios.PlazaCentral;
-import mapa.Celda;
 import edificios.Cuartel;
 
 public class AldeanoTest {
