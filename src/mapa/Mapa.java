@@ -1,4 +1,4 @@
-package fiuba.algo3.ejemplo1;
+package mapa;
 
 import edificios.Edificio;
 

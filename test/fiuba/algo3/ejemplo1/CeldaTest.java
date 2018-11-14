@@ -3,6 +3,8 @@ package fiuba.algo3.ejemplo1;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import mapa.Celda;
+
 public class CeldaTest {
 	
 	private Celda celda = new Celda();

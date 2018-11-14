@@ -1,7 +1,7 @@
 package turnos;
 
 import edificios.Edificio;
-import fiuba.algo3.ejemplo1.Celda;
+import mapa.Celda;
 
 public class TurnoFinalizado implements Turno{
 	

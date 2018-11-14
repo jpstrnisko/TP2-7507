@@ -3,6 +3,8 @@ package fiuba.algo3.ejemplo1;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import mapa.ZonaDeJuego;
+
 public class ZonaDeJuegoTest {
 	
 	private ZonaDeJuego zonaDeJuego = new ZonaDeJuego();

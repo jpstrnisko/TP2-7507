@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import unidades.Aldeano;
 import edificios.PlazaCentral;
-import fiuba.algo3.ejemplo1.Celda;
+import mapa.Celda;
 import edificios.Cuartel;
 
 public class AldeanoTest {

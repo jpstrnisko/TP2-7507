@@ -1,7 +1,7 @@
 package unidades;
 import edificios.Cuartel;
 import edificios.PlazaCentral;
-import fiuba.algo3.ejemplo1.Celda;
+import mapa.Celda;
 import edificios.Edificio;
 
 public class Aldeano extends Unidad {
@@ -14,7 +14,7 @@ public class Aldeano extends Unidad {
 		this.vida = 50;
 		this.costo = 25;
 		this.turnoMovimiento = new TurnoMovimiento();
-		this.turnoRecolectarOro = new TurnoRecolectarOro();
+		this.turnoRecogerOro = new TurnoRecolectarOro();
 		this.turnoConstruir = new TurnoConstruir();
 		this.turnoReparar = new TurnoReparar();
 	}
