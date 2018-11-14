@@ -5,10 +5,11 @@ import unidades.Aldeano;
 public class PlazaCentral extends Edificio {
 	
 	public PlazaCentral() {
-		this.vida = 450;
 		this.costo = 100;
-		this.velocidadReparacion = 25;
 		this.tamanio = 4;
+		int velocidadReparacion = 25;
+		int vidaInicial = 450;
+		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion);
 
 	}
 	public Aldeano crearUnAldeano() {
