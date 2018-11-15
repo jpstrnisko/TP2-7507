@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import areaJuego.Celda;
+import areaJuego.Posicion;
 import unidades.Aldeano;
 import edificios.PlazaCentral;
 import edificios.Cuartel;
@@ -32,32 +33,32 @@ public class AldeanoTest {
 		assert(aldeano.construirCuartel() instanceof Cuartel);
 	}
 	
-	/*@Test
-	public void elAldeanoRecolecta25OroPorTurno() {
+	@Test
+	public void elAldeanoRecolecta20OroPorTurno() {
 		Aldeano aldeano = new Aldeano();
-		assertEquals(25, aldeano.recolectarOro());
+		assertEquals(20, aldeano.recolectarOro());
 		assertEquals(0, aldeano.recolectarOro());
 	}
-	
+	/*
 	@Test
 	public void elAldeanoPuedeRepararEdificioPorTurno() {
 		Aldeano aldeano = new Aldeano();
 		assert(aldeano.estaReparando());
 	}
-	
+	*/
 	@Test
 	public void elAldeanoPuedeMoverLaPosicionUnaVezPorTurno() {
 		Aldeano aldeano = new Aldeano();
-		Celda celda = new Celda();
-		assert(aldeano.moverA(celda));
-		assertFalse(aldeano.moverA(new Celda()));
+		assert(aldeano.moverA(new Posicion(1,1), aldeano));
+		assertFalse(aldeano.moverA(new Posicion(2,2), aldeano));
 	}
-	
+	/*
 	@Test
 	public void elAldeanoDeberiaNoRecolectarOroMientrasConstruye() {
 		Aldeano aldeano = new Aldeano();
 		assertTrue(aldeano.construirCuartel() instanceof Cuartel);
 		assertEquals(0, aldeano.recolectarOro());
 	}*/
+	
 }
 
