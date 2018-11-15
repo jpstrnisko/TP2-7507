@@ -45,10 +45,7 @@ public class Aldeano extends Unidad {
 		return turnoReparar.estaReparando();
 	}
 	*/
-	
-	public boolean moverA(Posicion posicion, Unidad unidad) {
-		return turnoMovimiento.moverUnidad(posicion, this);
-	}
+
 
 	public void finalizarTurnoRecoleccion() {
 		this.turnoRecolectarOro = new TurnoRecolectarFinalizado();	
@@ -60,4 +57,10 @@ public class Aldeano extends Unidad {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean moverA(Posicion posicion) {
+		return turnoMovimiento.moverUnidad(posicion, this);
+	}
+
 }

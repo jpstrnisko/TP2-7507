@@ -18,7 +18,7 @@ public class Espadachin extends Unidad {
 	}
 
 	@Override
-	public boolean moverA(Posicion posicion, Unidad unidad) {
+	public boolean moverA(Posicion posicion) {
 		// TODO Auto-generated method stub
 		return false;
 	}

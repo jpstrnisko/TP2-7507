@@ -25,7 +25,7 @@ public abstract class Unidad implements Atacable {
 	
 	public abstract void atacar(Atacable atacable);
 	
-	public abstract boolean moverA(Posicion posicion, Unidad unidad);
+	public abstract boolean moverA(Posicion posicion);
 	
 	public void finalizarTurnoMovimiento() {
 		this.turnoMovimiento = new TurnoMovimientoFinalizado();	
