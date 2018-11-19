@@ -6,10 +6,11 @@ import unidades.Espadachin;
 public class Cuartel extends Edificio {
 	
 	public Cuartel() {
-		this.vida = 250;
 		this.costo = 50;
-		this.velocidadReparacion = 50;
 		this.tamanio = 4;
+		int velocidadReparacion = 50;
+		int vidaInicial = 250;
+		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion);
 	}
 	
 	public Espadachin crearUnEspadachin() {

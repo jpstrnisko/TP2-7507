@@ -3,13 +3,12 @@ import interfaces.Atacable;
 
 public abstract class Edificio implements Atacable{
 	
-	protected int vida;
+	protected VidaEdificio vida;
 	protected int costo;
-	protected int velocidadReparacion;
 	protected int tamanio;
 	
 	public int obtenerVida() {
-		return this.vida;
+		return vida.obtenerVida();
 	}
 	
 	public int obtenerCosto() {
@@ -17,11 +16,11 @@ public abstract class Edificio implements Atacable{
 	}
 	
 	public void reparar() {
-		this.vida += this.velocidadReparacion;
+		vida.Reparar();
 	}
 	
 	public void quitarVida(int danio) {
-		this.vida -= danio;
+		vida.Daniar(danio);
 	}
 	
 	public int obtenerTamanio() {
