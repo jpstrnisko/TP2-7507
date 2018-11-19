@@ -1,6 +1,7 @@
 package unidades;
-
 import edificios.Edificio;
+import areaJuego.Posicion;
+import interfaces.Atacable;
 
 
 public class ArmaDeAsedio extends Unidad{
@@ -12,6 +13,7 @@ public class ArmaDeAsedio extends Unidad{
 		this.costo = 200;
 		this.distanciaMaximaAtaque = 5;
 	}
+
 	
 	@Override
 	public void atacar(Edificio edificio) {
@@ -22,5 +24,12 @@ public class ArmaDeAsedio extends Unidad{
 	public void atacar(Unidad unidad) {
 		unidad.quitarVida(0);
 	}
-	
+
+	@Override
+	public boolean moverA(Posicion posicion) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 }

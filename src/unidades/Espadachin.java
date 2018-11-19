@@ -1,6 +1,8 @@
 package unidades;
-
 import edificios.Edificio;
+import areaJuego.Posicion;
+import interfaces.Atacable;
+
 
 public class Espadachin extends Unidad {
 	
@@ -21,6 +23,18 @@ public class Espadachin extends Unidad {
 	@Override
 	public void atacar(Unidad unidad) {
 		unidad.quitarVida(this.danioAUnidades);
+	}
+
+	@Override
+	public void atacar(Atacable atacable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean moverA(Posicion posicion) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

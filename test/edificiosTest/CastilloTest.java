@@ -1,4 +1,4 @@
-package pruebas;
+package edificiosTest;
 
 import static org.junit.Assert.*;
 

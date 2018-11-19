@@ -1,6 +1,8 @@
 package unidades;
-
 import edificios.Edificio;
+import areaJuego.Posicion;
+import interfaces.Atacable;
+
 
 public class Arquero extends Unidad {
 	
@@ -12,6 +14,7 @@ public class Arquero extends Unidad {
 		this.costo = 75;
 		this.distanciaMaximaAtaque = 3;
 	}
+
 	
 	@Override
 	public void atacar(Edificio edificio) {
@@ -22,5 +25,11 @@ public class Arquero extends Unidad {
 	public void atacar(Unidad unidad) {
 		unidad.quitarVida(this.danioAUnidades);
 	}
-	
+
+	@Override
+	public boolean moverA(Posicion posicion) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
