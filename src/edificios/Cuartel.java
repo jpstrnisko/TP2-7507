@@ -13,7 +13,7 @@ public class Cuartel extends Edificio {
 		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion);
 	}
 	
-	public Espadachin crearUnEspadachin() {
+	public Espadachin crearUnidad() {
 		return new Espadachin();
 	}
 	
