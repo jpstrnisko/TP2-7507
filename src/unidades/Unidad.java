@@ -23,4 +23,12 @@ public abstract class Unidad implements Atacable {
 	public void atacar(Atacable atacable) {
 		//como se hace para que este metodo lo implemente cada Unidad a su manera?
 	}
+	
+	public void esAtacadoPor(ArmaDeAsedio armaDeAsedio) {
+		this.quitarVida(0);
+	}
+	
+	public void esAtacadoPor(Espadachin espadachin) {
+		this.quitarVida(25);
+	}
 }

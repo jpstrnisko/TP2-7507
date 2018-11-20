@@ -1,5 +1,7 @@
 package edificios;
 import interfaces.Atacable;
+import unidades.ArmaDeAsedio;
+import unidades.Espadachin;
 
 public abstract class Edificio implements Atacable{
 	
@@ -30,6 +32,14 @@ public abstract class Edificio implements Atacable{
 	
 	public void atacar(Atacable atacable) {
 		//Como se hace para que cada Edificio implemente este mensaje a su manera?
+	}
+	
+	public void esAtacadoPor(ArmaDeAsedio armaDeAsedio) {
+		this.quitarVida(75);
+	}
+	
+	public void esAtacadoPor(Espadachin espadachin) {
+		this.quitarVida(15);
 	}
 		
 }
