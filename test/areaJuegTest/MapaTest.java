@@ -3,36 +3,27 @@ package areaJuegTest;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import edificios.Cuartel;
+import unidades.Arquero;
 import areaJuego.Mapa;
+import areaJuego.Posicion;
 
 
 public class MapaTest {
 	
-private Mapa mapa = new Mapa();
 	
 	@Test	
-	public void seCreaMapaConTamanio20x50() {
-		
-		mapa.asignarTamanio(20,50);
-		assertEquals(1000, mapa.obtenerTamanio());
+	public void seCreaMapaConTamanio20x50YDevuelve1000CeldasCreados() {
+		Mapa mapa = new Mapa(20,50);
+		mapa.instalarCeldas();
+		assertEquals(mapa.obtenerCantidadCeldas(), 1000);
 	}
 	
-	@Test	
-	public void sePosicionaUnaUnidad() {
-		
-		mapa.asignarTamanio(20,50);
-		mapa.posicionar(2,2);
-		assertEquals(false, mapa.estaLibre(2,2));
-	}
-	
-	@Test
-	public void sePosicionaUnEdificio() {
-		
-		Cuartel cuartel = new Cuartel();
-		
-		mapa.asignarTamanio(20,50);
-		mapa.posicionarEdificio(cuartel,2,2);
-		assertEquals(false, mapa.estaLibre(2,2));
-	}
-	
+	/*@Test	
+	public void seColocaUnaUnidadEnPosicionF2C2DevuelveEsaPosicionOcupada() {
+		Mapa mapa = new Mapa(4,4);
+		Posicion pos = new Posicion(2,2);
+		mapa.colocarAtacable(pos, new Arquero());
+		assertEquals(mapa.celdaOcupada(pos), false);
+	}*/
 }
+	

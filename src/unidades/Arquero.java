@@ -25,11 +25,4 @@ public class Arquero extends Unidad {
 	public void atacar(Unidad unidad) {
 		unidad.quitarVida(this.danioAUnidades);
 	}
-
-	@Override
-	public boolean moverA(Posicion posicion) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

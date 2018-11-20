@@ -35,11 +35,25 @@ public class AldeanoTest {
 	}
 	
 	@Test
+	public void aldeanoSeCreaEnPosicion00DevuelvePosicionCorrecta() {
+		aldeano.establecerPosicion(new Posicion(0,0));
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionFila(), 0);
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionColumna(), 0);
+	}
+	
+	@Test
+	public void aldeanoSeCreaEnPosicion00YLuegoSeMueveA11() {
+		aldeano.establecerPosicion(new Posicion(0,0));
+		aldeano.cambiarPosicion(new Posicion(1,1));
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionColumna(), 1);
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionFila(), 1);
+	}
+	/*@Test
 	public void elAldeanoRecolecta20OroPorTurno() {
 		Aldeano aldeano = new Aldeano();
 		assertEquals(20, aldeano.recolectarOro());
 		assertEquals(0, aldeano.recolectarOro());
-	}
+	}*/
 	/*
 	@Test
 	public void elAldeanoPuedeRepararEdificioPorTurno() {

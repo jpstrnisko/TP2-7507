@@ -24,17 +24,4 @@ public class Espadachin extends Unidad {
 	public void atacar(Unidad unidad) {
 		unidad.quitarVida(this.danioAUnidades);
 	}
-
-	@Override
-	public void atacar(Atacable atacable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean moverA(Posicion posicion) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

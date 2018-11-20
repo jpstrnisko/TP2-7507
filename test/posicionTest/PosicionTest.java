@@ -16,5 +16,4 @@ public class PosicionTest {
 		assertEquals(posicion.obtenerPosicionColumna(), 0);
 		
 	}
-
 }

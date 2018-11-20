@@ -1,27 +1,14 @@
 package unidades;
-import areaJuego.Posicion;
 import edificios.Cuartel;
-import edificios.PlazaCentral;
-import interfaces.Atacable;
-import interfaces.TurnoRecolectar;
-import turnos.TurnoRecolectarOro;
-import turnos.TurnoRecolectarFinalizado;
 import edificios.Edificio;
+import edificios.PlazaCentral;
 
 public class Aldeano extends Unidad {
-	
-	private TurnoRecolectar turnoRecolectarOro;
-	//private Turno turnoConstruir;
-	//private Turno turnoReparar;
-	
+		
 	public Aldeano() {
 		this.vida = 50;
 		this.costo = 25;
-		this.turnoRecolectarOro = new TurnoRecolectarOro();
-		//this.turnoConstruir = new TurnoConstruir();
-		//this.turnoReparar = new TurnoReparar();
 	}
-
 	
 	public Cuartel construirCuartel() {
 		Cuartel nuevoCuartel = new Cuartel();
@@ -36,29 +23,15 @@ public class Aldeano extends Unidad {
 	public void repararEdificio(Edificio edificio) {
 		edificio.reparar();
 	}
+
+	@Override
+	public void atacar(Edificio edificio) {
+	}
+
+	@Override
+	public void atacar(Unidad unidad) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	public Number recolectarOro() {
-		return turnoRecolectarOro.recolectarOro(this);
-	}
-/*
-	public boolean estaReparando() {
-		return turnoReparar.estaReparando();
-	}
-	*/
-
-
-	public void finalizarTurnoRecoleccion() {
-		this.turnoRecolectarOro = new TurnoRecolectarFinalizado();	
-	}
-
-
-	@Override
-	public void atacar(Atacable atacable) {		
-	}
-
-	@Override
-	public boolean moverA(Posicion posicion) {
-		return turnoMovimiento.moverUnidad(posicion, this);
-	}
-
 }

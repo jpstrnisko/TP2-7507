@@ -1,16 +1,13 @@
 package unidades;
-import edificios.Edificio;
 import areaJuego.Posicion;
 import interfaces.Atacable;
-import interfaces.TurnoMovimiento;
-import turnos.TurnoMovimientoFinalizado;
 
 public abstract class Unidad implements Atacable {
 	
 	protected int vida;
 	protected int costo;
 	protected int distanciaMaximaAtaque;
-	protected TurnoMovimiento turnoMovimiento;
+	protected Posicion posicion;
 
 	public int obtenerVida() {
 		return this.vida;
@@ -24,11 +21,19 @@ public abstract class Unidad implements Atacable {
 		this.vida -= danio;
 	}
 	
-	public abstract void atacar(Atacable atacable);
+	public int obtenerDistanciaAtaque() {
+		return this.distanciaMaximaAtaque;
+	}
 	
-	public abstract boolean moverA(Posicion posicion);
+	public void establecerPosicion(Posicion posicion) {
+		this.posicion = posicion;
+	}
 	
-	public void finalizarTurnoMovimiento() {
-		this.turnoMovimiento = new TurnoMovimientoFinalizado();	
+	public Posicion obtenerPosicion() {
+		return this.posicion;
+	}
+	
+	public void cambiarPosicion(Posicion destino) {
+		this.posicion =  destino;
 	}
 }

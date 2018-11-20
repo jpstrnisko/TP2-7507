@@ -2,6 +2,7 @@ package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import areaJuego.Posicion;
 import edificios.PlazaCentral;
 import unidades.Aldeano;
 import unidades.Espadachin;
@@ -34,6 +35,21 @@ public class EspadachinTest {
 		int vidaActual = plaza.obtenerVida();
 		espadachin.atacar(plaza);
 		assertEquals(vidaActual-15, plaza.obtenerVida());
+	}
+	
+	@Test
+	public void espadachinSeCreaEnPosicion00DevuelvePosicionCorrecta() {
+		espadachin.establecerPosicion(new Posicion(0,0));
+		assertEquals(espadachin.obtenerPosicion().obtenerPosicionFila(), 0);
+		assertEquals(espadachin.obtenerPosicion().obtenerPosicionColumna(), 0);
+	}
+	
+	@Test
+	public void espadachinSeCreaEnPosicion00YLuegoSeMueveA11() {
+		espadachin.establecerPosicion(new Posicion(0,0));
+		espadachin.cambiarPosicion(new Posicion(1,1));
+		assertEquals(espadachin.obtenerPosicion().obtenerPosicionColumna(), 1);
+		assertEquals(espadachin.obtenerPosicion().obtenerPosicionFila(), 1);
 	}
 	
 

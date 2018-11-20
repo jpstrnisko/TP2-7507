@@ -24,12 +24,4 @@ public class ArmaDeAsedio extends Unidad{
 	public void atacar(Unidad unidad) {
 		unidad.quitarVida(0);
 	}
-
-	@Override
-	public boolean moverA(Posicion posicion) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
 }

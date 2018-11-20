@@ -5,39 +5,28 @@ import interfaces.Atacable;
 public class Celda {
 	
 	protected Posicion posicion;
-	protected boolean libre = true;
-	protected Atacable atacable = null;
-	protected int fila;
-	protected int columna;
+	protected boolean libre;
+	protected Atacable atacable;
 	
 	
 	public Celda(Posicion posicion) {
 		this.posicion = posicion;
+		this.atacable = null;
+		this.libre = true;
 	}
-	
-	public Celda(int fil, int col) {
-		fila = fil;
-		columna = col;
-	}
-			
+				
 	public boolean estaLibre() {
-		
 		return this.libre;		
 	}
 	
 	public void colocarAtacable(Atacable atacable, Posicion posicion) {
-		
-		if (this.estaLibre()){
-			this.libre = false;
-			this.atacable = atacable;
-			this.posicion = posicion;
-		}
+		this.atacable = atacable;
+		this.posicion = posicion;
+		this.libre = false;
 	}
 	
-	public void posicionar() {
-		if ( estaLibre()) {
-			libre = false;
-		}
+	public Posicion obtenerPosicion() {
+		return this.posicion;
 	}
 	
 }

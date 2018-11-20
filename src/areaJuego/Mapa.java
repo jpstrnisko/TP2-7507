@@ -1,39 +1,65 @@
 package areaJuego;
 
 import edificios.Edificio;
+import interfaces.Atacable;
+
+import java.util.ArrayList;
 
 
 public class Mapa {
 	
-	ZonaDeJuego zonaDeJuego = new ZonaDeJuego();
-	
-		
-	public void asignarTamanio(int filas,int columnas) {
-		zonaDeJuego.crearZonaDeJuego(filas,columnas);
-	}
-		
-	public int obtenerTamanio() {
-		int tamanio = zonaDeJuego.obtenerTamanio();
-		return tamanio;		
-	}
-		
-	public boolean estaLibre(int fila, int columna) {
-		
-		return zonaDeJuego.estaLibre(fila, columna);
-	}
-	
-	public void posicionar(int fila, int columna) {
-		zonaDeJuego.posicionar(fila,columna);
-	}	
+	protected int alto;
+	protected int ancho;
+	protected ArrayList<Celda> celdas = new ArrayList();
 			
-	public void posicionarEdificio(Edificio edificio, int fila, int columna) {
-		edificio.obtenerTamanio();
-		zonaDeJuego.posicionarEdificioIzquierdaArriba(fila, columna);
+	public Mapa(int alto, int ancho) {
+		this.alto = alto;
+		this.ancho = ancho;
 	}
 	
-	public void colocarAtacable(int fila, int columna) {
-		zonaDeJuego.colocarAtacable(fila,columna);
-	}	
+	public void instalarCeldas() {
+		for(int i = 0; i<this.ancho; i++) {
+			for(int j = 0; j<this.alto; j++) {
+				Celda celda = new Celda(new Posicion(i,j));
+				this.celdas.add(celda);
+			}
+		}
+	}
 	
-}		
+	public int obtenerAlto() {
+		return this.alto;
+	}
+	
+	public int obtenerAncho() {
+		return this.ancho;
+	}
+	
+	public int obtenerCantidadCeldas() {
+		return celdas.size();
+	}
+	
+	public boolean celdaOcupada(Posicion posicion) {
+		Celda celda = null;
+		for(Celda cadaCelda: celdas) {
+			if(cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
+				celda = cadaCelda;
+		}
+		return celda.estaLibre();
+	}
+	
+	public ArrayList obtenerCeldas() {
+		return celdas;
+	}
+	
+	public void colocarAtacable(Posicion posicion, Atacable atacable) { //Por ahora solo para unidades (ocupan 1 solo casillero)
+		Celda celda = null;
+		for(Celda cadaCelda: celdas) {
+			if (cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
+				celda = cadaCelda;
+		}
+		celda.colocarAtacable(atacable, posicion);
+	}
+}
+	
+			
 	

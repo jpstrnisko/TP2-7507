@@ -2,6 +2,7 @@ package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import areaJuego.Posicion;
 import edificios.Castillo;
 import edificios.Cuartel;
 import edificios.PlazaCentral;
@@ -39,5 +40,20 @@ public class ArmaDeAsedioTest {
 		PlazaCentral plaza = new PlazaCentral();
 		miArma.atacar(plaza);
 		assertEquals(375, plaza.obtenerVida());
+	}
+	
+	@Test
+	public void ASDSeCreaEnPosicion00DevuelvePosicionCorrecta() {
+		miArma.establecerPosicion(new Posicion(0,0));
+		assertEquals(miArma.obtenerPosicion().obtenerPosicionFila(), 0);
+		assertEquals(miArma.obtenerPosicion().obtenerPosicionColumna(), 0);
+	}
+	
+	@Test
+	public void ASDSeCreaEnPosicion00YLuegoSeMueveA11() {
+		miArma.establecerPosicion(new Posicion(0,0));
+		miArma.cambiarPosicion(new Posicion(1,1));
+		assertEquals(miArma.obtenerPosicion().obtenerPosicionColumna(), 1);
+		assertEquals(miArma.obtenerPosicion().obtenerPosicionFila(), 1);
 	}
 }

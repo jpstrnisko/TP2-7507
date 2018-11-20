@@ -17,5 +17,8 @@ public class Posicion {
 	public int obtenerPosicionColumna() {
 		return this.posY;
 	}
-
+	
+	public boolean posicionesSonIguales(Posicion pos2) {
+		return (this.obtenerPosicionColumna()==pos2.obtenerPosicionColumna() && this.obtenerPosicionFila()==pos2.obtenerPosicionFila());
+	}
 }
