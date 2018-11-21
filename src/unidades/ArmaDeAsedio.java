@@ -1,32 +1,31 @@
 package unidades;
 
 import interfaces.Atacable;
+import interfaces.EstadoArmaDeAsedio;
 
 public class ArmaDeAsedio extends Unidad{
-	Boolean montada;
+	EstadoArmaDeAsedio estado;
 	
 	public ArmaDeAsedio() {
 		this.vida = 150;
 		this.costo = 200;
 		this.distanciaMaximaAtaque = 5;
-		this.montada = false;
+		this.estado = new EstadoDesmontada(this);
 	}
 
 	public boolean estaMontada() {
-		return montada;
+		return estado.estaMontada();
 	}
 
 	public void montar() {
-		montada = true;
+		this.estado = new EstadoMontada(this);
 	}
 
 	public void desmontar() {
-		montada = false;
+		this.estado = new EstadoDesmontada(this);
 	}
 
 	public void atacar(Atacable objetivo) {
-		if(montada) {
-			objetivo.esAtacadoPor(this);
-		}
+		estado.atacar(objetivo);
 	}
 }
