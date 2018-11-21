@@ -10,9 +10,10 @@ public class PlazaCentral extends Edificio {
 		int velocidadReparacion = 25;
 		int vidaInicial = 450;
 		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion);
+		
 
 	}
-	public Aldeano crearUnidad() {
+	public Aldeano crearUnAldeano() {
 		return new Aldeano();
 	}
 }

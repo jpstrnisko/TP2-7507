@@ -1,8 +1,9 @@
 package poblacion;
 
-import edificios.PlazaCentral;
-import unidades.Unidad;
 import unidades.ArmaDeAsedio;
+import unidades.Unidad;
+import edificios.PlazaCentral;
+
 
 
 public class NivelPoblacion {
@@ -10,11 +11,8 @@ public class NivelPoblacion {
 	private int poblacion = 0;
 	private int limitePoblacion = 50;
 	
-	
-	
+		
 	public void crearUnidad() {
-		PlazaCentral plaza = new PlazaCentral();
-		plaza.crearUnidad();
 		poblacion += 1;
 	}
 	
@@ -29,7 +27,7 @@ public class NivelPoblacion {
 	}
 	
 	public boolean noSuperaLimitePoblacion( ) {
-		return limitePoblacion<50;
+		return poblacion<limitePoblacion;
 	}
 	
 }

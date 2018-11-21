@@ -13,7 +13,7 @@ public class PlazaCentralTest {
 	
 	@Test
 	public void laPlazaCentralCreaUnAldeano() {
-		assert(plazaCentral.crearUnidad() instanceof Aldeano);
+		assert(plazaCentral.crearUnAldeano() instanceof Aldeano);
 	}
 	
 	@Test

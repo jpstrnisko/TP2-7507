@@ -7,6 +7,7 @@ public abstract class Edificio implements Atacable{
 	protected int costo;
 	protected int tamanio;
 	
+	
 	public int obtenerVida() {
 		return vida.obtenerVida();
 	}

@@ -2,6 +2,8 @@ package poblacionTest;
 
 import poblacion.NivelPoblacion;
 import unidades.Aldeano;
+import unidades.Espadachin;
+import unidades.Arquero;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -19,13 +21,11 @@ public class NivelPoblacionTest {
 	
 	@Test
 	public void matarUnidadesBajaPoblacion() {
-		
-		Aldeano aldeano = new Aldeano();
-		
+		Espadachin espadachin = new Espadachin();
 		poblacion.crearUnidad();
 		poblacion.crearUnidad();
 		poblacion.crearUnidad();
-		poblacion.matarUnidad(aldeano);
+		poblacion.matarUnidad(espadachin);
 		assertEquals(2,poblacion.obtenerPoblacion());
 		
 		
@@ -33,8 +33,12 @@ public class NivelPoblacionTest {
 	
 	@Test
 	public void matarAldeanosBajaPoblacionYProduccionOro() {
-		
-		
+		Aldeano aldeano = new Aldeano();
+		poblacion.crearUnidad();
+		poblacion.crearUnidad();
+		poblacion.matarUnidad(aldeano);
+		assertEquals(1,poblacion.obtenerPoblacion());
+			
 	}
 	
 }
