@@ -2,10 +2,11 @@ package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import areaJuego.Celda;
 import areaJuego.Posicion;
+import areaJuego.ZonaDeJuego;
 import unidades.Aldeano;
 import unidades.AldeanoNoPuedeAtacarError;
+import unidades.Unidad;
 import edificios.PlazaCentral;
 import interfaces.Atacable;
 import edificios.Cuartel;
@@ -64,6 +65,39 @@ public class AldeanoTest {
 		assertTrue(aldeano.construirCuartel() instanceof Cuartel);
 		assertEquals(0, aldeano.recolectarOro());
 	}*/
+	
+	@Test
+	public void elAldeanoSeMueveCorrectamenteHaciaLaDerecha() {
+		Unidad aldeano = new Aldeano();
+		Posicion posicionInicial = new Posicion(20, 20);
+		
+		aldeano.moverA(posicionInicial);
+		aldeano.moverDerecha();
+		
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionFila(), 20);
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionColumna(), 21);
+	}
+	
+	@Test
+	public void elAldeanoDeberiaMantenerSuPosicionAlIntentarMoverseAUnaPosicionOcupada() {
+		Unidad aldeano1 = new Aldeano();
+		Unidad aldeano2 = new Aldeano();
+		Posicion posicion1 = new Posicion(20, 20);
+		Posicion posicion2 = new Posicion(20, 21);
+		
+		ZonaDeJuego zonaDeJuego = ZonaDeJuego.obtenerNuevaInstancia();
+		
+		zonaDeJuego.agregarUnidad(aldeano1);
+		zonaDeJuego.agregarUnidad(aldeano2);
+		
+		aldeano1.moverA(posicion1);
+		aldeano2.moverA(posicion2);
+		
+		aldeano1.moverDerecha();
+		
+		assertEquals(aldeano1.obtenerPosicion().obtenerPosicionFila(), 20);
+		assertEquals(aldeano1.obtenerPosicion().obtenerPosicionColumna(), 20);
+	}
 	
 }
 

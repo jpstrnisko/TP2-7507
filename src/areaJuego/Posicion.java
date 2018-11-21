@@ -18,4 +18,12 @@ public class Posicion {
 		return this.posY;
 	}
 
+	public Posicion obtenerNuevaPosicionVariando(int i, int j) {
+		return new Posicion(this.posX + i, this.posY + j);
+	}
+	
+	public boolean equals(Posicion otraPosicion) {
+		return (otraPosicion.obtenerPosicionColumna() == this.obtenerPosicionColumna() && otraPosicion.obtenerPosicionFila() == this.obtenerPosicionFila());
+	}
+
 }

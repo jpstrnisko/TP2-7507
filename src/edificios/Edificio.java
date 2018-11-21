@@ -1,4 +1,5 @@
 package edificios;
+import areaJuego.Posicion;
 import interfaces.Atacable;
 
 public abstract class Edificio implements Atacable{
@@ -26,6 +27,11 @@ public abstract class Edificio implements Atacable{
 	
 	public int obtenerTamanio() {
 		return this.tamanio;
+	}
+
+	public boolean estaOcupando(Posicion posicion) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 		
 }

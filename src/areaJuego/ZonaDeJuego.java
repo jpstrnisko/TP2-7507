@@ -1,92 +1,77 @@
 package areaJuego;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import edificios.Edificio;
+import unidades.Unidad;
 
 public class ZonaDeJuego {
 	
-	protected int cantidadFilas;
-	protected int cantidadColumnas;
-	Celda celdas[][];
+	private static ZonaDeJuego instanciaUnica = null; 
+	protected int cantidadFilas = 50;
+	protected int cantidadColumnas = 50;
+	protected List<Unidad> unidades = new ArrayList<Unidad>();
+	protected List<Edificio> edificios = new ArrayList<Edificio>();
 	
+	public static ZonaDeJuego obtenerInstancia() { 
+		/*Utiliza patrón Singleton para tener solo una instancia disponible*/
+        if (instanciaUnica == null) 
+        	instanciaUnica = new ZonaDeJuego(); 
+  
+        return instanciaUnica; 
+    }
 	
-	
-	public void crearZonaDeJuego(int filas, int columnas) {
-		this.cantidadFilas = filas;
-		this.cantidadColumnas = columnas;
-		celdas = new Celda[filas][columnas];
-		
-		for (int i= 0; i<filas; i++ ) {
-			for (int j=0; j<columnas; j++) {
-				celdas[i][j] = new Celda(i,j);
-			}
-		}
-	}
-	
-	public int obtenerTamanio() {
-		return cantidadFilas*cantidadColumnas;
-	}
-		
-	public boolean nollegoAlFinal(int fila, int columna) {
-		return (fila >= 1 && fila <= cantidadFilas && columna >= 1 && columna <= cantidadColumnas);
-	}
-		
-	public boolean estaLibre(int fila, int columna) {
-		return celdas[fila][columna].estaLibre();
-	}
-		
-			
-	public void posicionar(int fila, int columna) {
-		celdas[fila][columna].posicionar();
+	private ZonaDeJuego() {
 		
 	}
 	
+	public static ZonaDeJuego obtenerNuevaInstancia() {
+		/*Entrega una instancia nueva de Zona de Juego para utilizar
+		en pruebas unitarias*/
 		
-	
-	public void posicionarEdificioIzquierdaArriba(int fila, int columna) {
-		
-		for (int i= fila-1; i<= fila; i++) {
-			for (int j= columna-1; j<= columna; j++) {
-				celdas[i][j].posicionar();	
-		
-			}			
-		}
+		instanciaUnica = new ZonaDeJuego();
+		return instanciaUnica;
+	}
 
+	public void agregarUnidad(Unidad unidad) {
+		unidades.add(unidad);
 	}
-	
-	
-	public void posicionarEdificioDerechaArriba(int fila, int columna) {
-		
-		for (int i= fila-1; i<= fila; i++) {
-			for (int j= columna; j<= columna+1; j++) {
-				celdas[i][j].posicionar();	
-			}			
-		}
 
+	public List<Unidad> obtenerUnidades() {
+		return unidades;
 	}
-	
-	
-	public void posicionarEdificioIzquierdaAbajo(int fila, int columna) {
-		
-		for (int i= fila; i<= fila+1; i++) {
-			for (int j= columna-1; j<= columna; j++) {
-				celdas[i][j].posicionar();	
-			}			
-		}
 
+	public int obtenerCantidadFilas() {
+		return cantidadFilas;
 	}
-	
-	
-	public void posicionarEdificioDerechaAbajo(int fila, int columna) {
-		
-		for (int i= fila; i<= fila+1; i++) {
-			for (int j= columna; j<= columna+1; j++) {
-				celdas[i][j].posicionar();	
-			}			
+
+	public int obtenerCantidadColumnas() {
+		return cantidadColumnas;
+	}
+
+	public void agregarEdificio(Edificio edificio) {
+		edificios.add(edificio);
+	}
+
+	public List<Edificio> obtenerEdificios() {
+		return edificios;
+	}
+
+	public boolean esPosicionValida(Posicion posicion) {
+		return (posicion.obtenerPosicionFila() <= this.obtenerCantidadFilas() && posicion.obtenerPosicionColumna() <= this.obtenerCantidadColumnas());
+	}
+
+	public boolean estaDisponible(Posicion posicion) {
+		for (int i = 0; i < unidades.size(); i++) {
+			if(unidades.get(i).estaOcupando(posicion))
+				return false;
 		}
+		for (int i = 0; i < edificios.size(); i++) {
+			if(edificios.get(i).estaOcupando(posicion))
+				return false;
+		}
+		return true;
 	}
-	
-	public void colocarAtacable(int fila, int columna) {
-		
-		//delega a Celda
-	}	
-	
+
 }
