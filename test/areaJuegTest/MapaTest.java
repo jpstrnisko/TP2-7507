@@ -31,7 +31,7 @@ private Mapa mapa = new Mapa();
 		Cuartel cuartel = new Cuartel();
 		
 		mapa.asignarTamanio(20,50);
-		mapa.posicionarEdificio(cuartel,2,2);
+		mapa.posicionarEdificio(cuartel,2,2,1);
 		assertEquals(false, mapa.estaLibre(2,2));
 	}
 	

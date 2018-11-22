@@ -26,9 +26,13 @@ public class Mapa {
 		zonaDeJuego.posicionar(fila,columna);
 	}	
 			
-	public void posicionarEdificio(Edificio edificio, int fila, int columna) {
-		edificio.obtenerTamanio();
-		zonaDeJuego.posicionarEdificioIzquierdaArriba(fila, columna);
+	public void posicionarEdificio(Edificio edificio, int fila, int columna, int opcion) {
+		switch (opcion) {
+		case 1: zonaDeJuego.posicionarEdificioIzquierdaArriba(fila,columna,edificio.celdasAOcupar());
+		case 2: zonaDeJuego.posicionarEdificioDerechaArriba(fila,columna,edificio.celdasAOcupar());
+		case 3: zonaDeJuego.posicionarEdificioIzquierdaAbajo(fila,columna,edificio.celdasAOcupar());
+		case 4: zonaDeJuego.posicionarEdificioDerechaAbajo(fila,columna,edificio.celdasAOcupar());
+		}
 	}
 	
 	public void colocarAtacable(int fila, int columna) {

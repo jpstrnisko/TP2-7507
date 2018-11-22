@@ -27,5 +27,10 @@ public abstract class Edificio implements Atacable{
 	public int obtenerTamanio() {
 		return this.tamanio;
 	}
+	
+	public int celdasAOcupar() {
+		return ((this.tamanio/2)-1);
+		
+	}
 		
 }

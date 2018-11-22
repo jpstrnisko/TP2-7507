@@ -1,5 +1,6 @@
 package edificios;
 
+import interfaces.Atacable;
 import unidades.Arquero;
 import unidades.Espadachin;
 
@@ -20,6 +21,7 @@ public class Cuartel extends Edificio {
 	public Arquero crearUnArquero() {
 		return new Arquero();
 	}
-
+	
+		
 }
 

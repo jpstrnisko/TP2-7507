@@ -28,7 +28,7 @@ public class ZonaDeJuegoTest {
 	public void posicionarEdificioIzquierdaArriba() {
 		
 		zonaDeJuego.crearZonaDeJuego(5,10);
-		zonaDeJuego.posicionarEdificioIzquierdaArriba(2,4); //por ejemplo el cuartel que ocupa 4 celdas
+		zonaDeJuego.posicionarEdificioIzquierdaArriba(2,4,1); //por ejemplo el cuartel que ocupa 4 celdas y ocupo una celda a la izquierda y una hacia arriba
 		
 		assertEquals(false, zonaDeJuego.estaLibre(2,4));
 		assertEquals(false, zonaDeJuego.estaLibre(2,3));
@@ -40,7 +40,7 @@ public class ZonaDeJuegoTest {
 	public void posicionarEdificioDerechaArriba() {
 		
 		zonaDeJuego.crearZonaDeJuego(5,10);
-		zonaDeJuego.posicionarEdificioDerechaArriba(2,4); //por ejemplo el cuartel que ocupa 4 celdas
+		zonaDeJuego.posicionarEdificioDerechaArriba(2,4,1); //por ejemplo el cuartel que ocupa 4 celdas
 		
 		assertEquals(false, zonaDeJuego.estaLibre(2,4));
 		assertEquals(false, zonaDeJuego.estaLibre(2,5));
@@ -52,7 +52,7 @@ public class ZonaDeJuegoTest {
 	public void posicionarEdificioIzquierdaAbajo() {
 		
 		zonaDeJuego.crearZonaDeJuego(5,10);
-		zonaDeJuego.posicionarEdificioIzquierdaAbajo(2,4); //por ejemplo el cuartel que ocupa 4 celdas
+		zonaDeJuego.posicionarEdificioIzquierdaAbajo(2,4,1); //por ejemplo el cuartel que ocupa 4 celdas
 		
 		assertEquals(false, zonaDeJuego.estaLibre(2,4));
 		assertEquals(false, zonaDeJuego.estaLibre(2,3));
@@ -64,7 +64,7 @@ public class ZonaDeJuegoTest {
 	public void posicionarEdificioDerechaAbajo() {
 		
 		zonaDeJuego.crearZonaDeJuego(5,10);
-		zonaDeJuego.posicionarEdificioDerechaAbajo(2,4); //por ejemplo el cuartel que ocupa 4 celdas
+		zonaDeJuego.posicionarEdificioDerechaAbajo(2,4,1); //por ejemplo el cuartel que ocupa 4 celdas
 		
 		assertEquals(false, zonaDeJuego.estaLibre(2,4));
 		assertEquals(false, zonaDeJuego.estaLibre(2,5));

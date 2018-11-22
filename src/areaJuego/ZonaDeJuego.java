@@ -41,22 +41,10 @@ public class ZonaDeJuego {
 	
 		
 	
-	public void posicionarEdificioIzquierdaArriba(int fila, int columna) {
+	public void posicionarEdificioIzquierdaArriba(int fila, int columna, int celdasAOcupar) {
 		
-		for (int i= fila-1; i<= fila; i++) {
-			for (int j= columna-1; j<= columna; j++) {
-				celdas[i][j].posicionar();	
-		
-			}			
-		}
-
-	}
-	
-	
-	public void posicionarEdificioDerechaArriba(int fila, int columna) {
-		
-		for (int i= fila-1; i<= fila; i++) {
-			for (int j= columna; j<= columna+1; j++) {
+		for (int i= fila-celdasAOcupar; i<= fila; i++) {
+			for (int j= columna-celdasAOcupar; j<= columna; j++) {
 				celdas[i][j].posicionar();	
 			}			
 		}
@@ -64,10 +52,10 @@ public class ZonaDeJuego {
 	}
 	
 	
-	public void posicionarEdificioIzquierdaAbajo(int fila, int columna) {
+	public void posicionarEdificioDerechaArriba(int fila, int columna, int celdasAOcupar) {
 		
-		for (int i= fila; i<= fila+1; i++) {
-			for (int j= columna-1; j<= columna; j++) {
+		for (int i= fila-celdasAOcupar; i<= fila; i++) {
+			for (int j= columna; j<= columna+celdasAOcupar; j++) {
 				celdas[i][j].posicionar();	
 			}			
 		}
@@ -75,10 +63,21 @@ public class ZonaDeJuego {
 	}
 	
 	
-	public void posicionarEdificioDerechaAbajo(int fila, int columna) {
+	public void posicionarEdificioIzquierdaAbajo(int fila, int columna, int celdasAOcupar) {
 		
-		for (int i= fila; i<= fila+1; i++) {
-			for (int j= columna; j<= columna+1; j++) {
+		for (int i= fila; i<= fila+celdasAOcupar; i++) {
+			for (int j= columna-celdasAOcupar; j<= columna; j++) {
+				celdas[i][j].posicionar();	
+			}			
+		}
+
+	}
+	
+	
+	public void posicionarEdificioDerechaAbajo(int fila, int columna, int celdasAOcupar) {
+		
+		for (int i= fila; i<= fila+celdasAOcupar; i++) {
+			for (int j= columna; j<= columna+celdasAOcupar; j++) {
 				celdas[i][j].posicionar();	
 			}			
 		}
