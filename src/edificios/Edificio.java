@@ -16,8 +16,8 @@ public abstract class Edificio implements Atacable{
 		return this.costo;
 	}
 	
-	public void reparar() {
-		vida.Reparar();
+	public boolean reparar() {
+		return vida.Reparar();
 	}
 	
 	public void quitarVida(int danio) {

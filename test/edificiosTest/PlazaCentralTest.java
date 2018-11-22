@@ -19,7 +19,8 @@ public class PlazaCentralTest {
 	@Test
 	public void alRepararUnaPlazaSuVidaAumentaEn25() {
 		PlazaCentral plaza = new PlazaCentral();
+		plaza.quitarVida(25);
 		plaza.reparar();
-		assertEquals(plaza.obtenerVida(), 475);
+		assertEquals(plaza.obtenerVida(), 450);
 	}
 }

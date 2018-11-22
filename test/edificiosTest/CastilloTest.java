@@ -25,8 +25,9 @@ public class CastilloTest {
 	
 	@Test
 	public void alRepararUnCastilloLaVidaAumentaEn15() {
+		castillo.quitarVida(15);
 		castillo.reparar();
-		assertEquals(castillo.obtenerVida(), 1015);
+		assertEquals(castillo.obtenerVida(), 1000);
 	}
 	
 	@Test 

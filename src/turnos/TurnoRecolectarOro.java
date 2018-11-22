@@ -7,7 +7,7 @@ public class TurnoRecolectarOro implements TurnoRecolectar{
 
 	
 	public Number recolectarOro(Aldeano aldeano) {
-		aldeano.finalizarTurnoRecoleccion();
+		aldeano.finalizarAcciones();
 		return 20;
 	}
 }

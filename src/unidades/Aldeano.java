@@ -3,52 +3,47 @@ import areaJuego.Posicion;
 import edificios.Cuartel;
 import edificios.PlazaCentral;
 import interfaces.Atacable;
+import interfaces.TurnoConstruir;
 import interfaces.TurnoRecolectar;
+import interfaces.TurnoReparar;
 import turnos.TurnoRecolectarOro;
+import turnos.TurnoRepararFinalizado;
+import turnos.TurnoRepararHabilitado;
+import turnos.TurnoConstruirFinalizado;
+import turnos.TurnoConstruirHabilitado;
 import turnos.TurnoRecolectarFinalizado;
 import edificios.Edificio;
 
 public class Aldeano extends Unidad {
 	
 	private TurnoRecolectar turnoRecolectarOro;
-	//private Turno turnoConstruir;
-	//private Turno turnoReparar;
+	private TurnoConstruir turnoConstruir;
+	private TurnoReparar turnoReparar;
 	
 	public Aldeano() {
 		this.vida = 50;
 		this.costo = 25;
 		this.turnoRecolectarOro = new TurnoRecolectarOro();
-		//this.turnoConstruir = new TurnoConstruir();
-		//this.turnoReparar = new TurnoReparar();
+		this.turnoConstruir = new TurnoConstruirHabilitado();
+		this.turnoReparar = new TurnoRepararHabilitado();
 	}
 
 	
 	public Cuartel construirCuartel() {
-		Cuartel nuevoCuartel = new Cuartel();
-		return nuevoCuartel;
+		return turnoConstruir.construirCuartel(this);
 	}
 	
 	public PlazaCentral construirPlaza() {
-		PlazaCentral nuevaPlaza = new PlazaCentral();
-		return nuevaPlaza;
+		return turnoConstruir.construirPlazaCentral(this);
 	}
 	
-	public void repararEdificio(Edificio edificio) {
-		edificio.reparar();
+	public boolean repararEdificio(Edificio edificio) {
+		return turnoReparar.repararEdificio(edificio, this);
 	}
+	
 	
 	public Number recolectarOro() {
 		return turnoRecolectarOro.recolectarOro(this);
-	}
-/*
-	public boolean estaReparando() {
-		return turnoReparar.estaReparando();
-	}
-	*/
-
-
-	public void finalizarTurnoRecoleccion() {
-		this.turnoRecolectarOro = new TurnoRecolectarFinalizado();	
 	}
 
 
@@ -59,6 +54,14 @@ public class Aldeano extends Unidad {
 	@Override
 	public boolean moverA(Posicion posicion) {
 		return turnoMovimiento.moverUnidad(posicion, this);
+	}
+
+
+	public void finalizarAcciones() {
+		this.turnoRecolectarOro = new TurnoRecolectarFinalizado();	
+		this.turnoConstruir = new TurnoConstruirFinalizado();
+		this.turnoReparar = new TurnoRepararFinalizado();
+		
 	}
 
 }

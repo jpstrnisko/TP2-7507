@@ -3,13 +3,14 @@ package edificios;
 import unidades.Aldeano;
 
 public class PlazaCentral extends Edificio {
+
+	private static final int VELOCIDADREPARACION = 25;
+	private static final int VIDAINICIAL = 450;
 	
 	public PlazaCentral() {
 		this.costo = 100;
 		this.tamanio = 4;
-		int velocidadReparacion = 25;
-		int vidaInicial = 450;
-		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion);
+		this.vida = new VidaEdificio(VIDAINICIAL, VELOCIDADREPARACION);
 		
 
 	}

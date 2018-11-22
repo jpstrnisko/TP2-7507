@@ -5,14 +5,14 @@ import unidades.Unidad;
 
 public class Castillo extends Edificio {
 	
-	protected int danioGenerado = 20; //Tanto a unidades como a otros edificios.
+	private static final int VELOCIDADREPARACION = 15;
+	private static final int VIDAINICIAL = 1000;
+	private static final int DANIOGENERADO = 20; //Tanto a unidades como a otros edificios.
 	
 	public Castillo() {
 		this.costo = -1; //no se puede construir
 		this.tamanio = 8;
-		int velocidadReparacion = 15;
-		int vidaInicial = 1000;
-		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion);
+		this.vida = new VidaEdificio(VIDAINICIAL, VELOCIDADREPARACION);
 	}
 	
 	public ArmaDeAsedio crearUnArmaDeAsedio() {
@@ -21,12 +21,12 @@ public class Castillo extends Edificio {
 	
 	@Override
 	public void atacar(Edificio edificio) {
-		edificio.quitarVida(this.danioGenerado);
+		edificio.quitarVida(DANIOGENERADO);
 	}
 	
 	@Override
 	public void atacar(Unidad unidad) {
-		unidad.quitarVida(this.danioGenerado);
+		unidad.quitarVida(DANIOGENERADO);
 	}
 
 }

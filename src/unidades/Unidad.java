@@ -1,5 +1,4 @@
 package unidades;
-import edificios.Edificio;
 import areaJuego.Posicion;
 import interfaces.Atacable;
 import interfaces.TurnoMovimiento;
