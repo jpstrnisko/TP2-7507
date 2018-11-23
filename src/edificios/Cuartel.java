@@ -21,18 +21,5 @@ public class Cuartel extends Edificio {
 	public Arquero crearUnArquero() {
 		return new Arquero();
 	}
-
-	@Override
-	public void atacar(Edificio edificio) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void atacar(Unidad unidad) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
 

@@ -22,16 +22,5 @@ public class Aldeano extends Unidad {
 	
 	public void repararEdificio(Edificio edificio) {
 		edificio.reparar();
-	}
-
-	@Override
-	public void atacar(Edificio edificio) {
-	}
-
-	@Override
-	public void atacar(Unidad unidad) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	}	
 }

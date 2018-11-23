@@ -2,9 +2,10 @@ package unidades;
 import edificios.Edificio;
 import areaJuego.Posicion;
 import interfaces.Atacable;
+import interfaces.IAtacante;
 
 
-public class Espadachin extends Unidad {
+public class Espadachin extends Unidad implements IAtacante {
 	
 	protected int danioAUnidades = 25;
 	protected int danioAEdifcios = 15;

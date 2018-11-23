@@ -1,8 +1,6 @@
 package areaJuego;
-
 import edificios.Edificio;
 import interfaces.Atacable;
-
 import java.util.ArrayList;
 
 
@@ -15,6 +13,7 @@ public class Mapa {
 	public Mapa(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
+		this.instalarCeldas();
 	}
 	
 	public void instalarCeldas() {
@@ -24,6 +23,14 @@ public class Mapa {
 				this.celdas.add(celda);
 			}
 		}
+	}
+	
+	public Celda obtenerCeldaDeterminada(Posicion posicion) {
+		for(Celda cadaCelda: celdas) {
+			if(cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
+				return cadaCelda;
+		}
+		return null;
 	}
 	
 	public int obtenerAlto() {
@@ -39,12 +46,14 @@ public class Mapa {
 	}
 	
 	public boolean celdaOcupada(Posicion posicion) {
-		Celda celda = null;
-		for(Celda cadaCelda: celdas) {
-			if(cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
-				celda = cadaCelda;
-		}
+		Celda celda = this.obtenerCeldaDeterminada(posicion);
 		return celda.estaLibre();
+	}
+	
+	public boolean seSalioDelMapa(Posicion posicion) {
+		boolean salioEnAncho = Math.abs(posicion.obtenerPosicionX()) >= this.ancho;
+		boolean salioEnAlto = Math.abs(posicion.obtenerPosicionY()) >= this.alto;
+		return salioEnAncho || salioEnAlto;
 	}
 	
 	public ArrayList obtenerCeldas() {
@@ -52,12 +61,10 @@ public class Mapa {
 	}
 	
 	public void colocarAtacable(Posicion posicion, Atacable atacable) { //Por ahora solo para unidades (ocupan 1 solo casillero)
-		Celda celda = null;
 		for(Celda cadaCelda: celdas) {
 			if (cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
-				celda = cadaCelda;
+				cadaCelda.colocarAtacable(atacable, posicion);
 		}
-		celda.colocarAtacable(atacable, posicion);
 	}
 }
 	

@@ -40,15 +40,15 @@ public class ArqueroTest {
 	@Test
 	public void arqueroSeCreaEnPosicion00DevuelvePosicionCorrecta() {
 		arquero.establecerPosicion(new Posicion(0,0));
-		assertEquals(arquero.obtenerPosicion().obtenerPosicionFila(), 0);
-		assertEquals(arquero.obtenerPosicion().obtenerPosicionColumna(), 0);
+		assertEquals(arquero.obtenerPosicion().obtenerPosicionX(), 0);
+		assertEquals(arquero.obtenerPosicion().obtenerPosicionY(), 0);
 	}
 	
 	@Test
 	public void arqueroSeCreaEnPosicion00YLuegoSeMueveA11() {
 		arquero.establecerPosicion(new Posicion(0,0));
 		arquero.cambiarPosicion(new Posicion(1,1));
-		assertEquals(arquero.obtenerPosicion().obtenerPosicionColumna(), 1);
-		assertEquals(arquero.obtenerPosicion().obtenerPosicionFila(), 1);
+		assertEquals(arquero.obtenerPosicion().obtenerPosicionY(), 1);
+		assertEquals(arquero.obtenerPosicion().obtenerPosicionX(), 1);
 	}
 }

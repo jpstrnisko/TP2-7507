@@ -2,9 +2,10 @@ package unidades;
 import edificios.Edificio;
 import areaJuego.Posicion;
 import interfaces.Atacable;
+import interfaces.IAtacante;
 
 
-public class ArmaDeAsedio extends Unidad{
+public class ArmaDeAsedio extends Unidad implements IAtacante {
 	
 	protected int danioAEdificios = 75;
 	

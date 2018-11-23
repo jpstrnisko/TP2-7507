@@ -16,14 +16,4 @@ public class PlazaCentral extends Edificio {
 	public Aldeano crearUnAldeano() {
 		return new Aldeano();
 	}
-	@Override
-	public void atacar(Edificio edificio) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void atacar(Unidad unidad) {
-		// TODO Auto-generated method stub
-		
-	}
 }

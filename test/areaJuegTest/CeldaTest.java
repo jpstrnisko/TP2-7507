@@ -20,8 +20,8 @@ public class CeldaTest {
 	@Test
 	public void seCreaCeldaEnPosicionF1C1DevuelveCorrectamente() {
 		Celda celda = new Celda(new Posicion(1,1));
-		assertEquals(celda.obtenerPosicion().obtenerPosicionColumna(), 1);
-		assertEquals(celda.obtenerPosicion().obtenerPosicionFila(),1);
+		assertEquals(celda.obtenerPosicion().obtenerPosicionY(), 1);
+		assertEquals(celda.obtenerPosicion().obtenerPosicionX(),1);
 	}
 	
 	@Test
@@ -32,7 +32,5 @@ public class CeldaTest {
 		celda.colocarAtacable(null, posicion);
 		assertEquals(false, celda.estaLibre());
 	}
-
-	
-	
 }
+	

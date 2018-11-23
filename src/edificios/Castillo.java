@@ -1,9 +1,9 @@
 package edificios;
-
+import interfaces.IAtacante;
 import unidades.ArmaDeAsedio;
 import unidades.Unidad;
 
-public class Castillo extends Edificio {
+public class Castillo extends Edificio implements IAtacante {
 	
 	protected int danioGenerado = 20; //Tanto a unidades como a otros edificios.
 	
