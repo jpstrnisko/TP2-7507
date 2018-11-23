@@ -6,18 +6,18 @@ import interfaces.Atacable;
 
 public class ArmaDeAsedio extends Unidad{
 	
-	protected int danioAEdificios = 75;
+	protected EstadoArmaAsedio estado;
 	
 	public ArmaDeAsedio() {
 		this.vida = 150;
 		this.costo = 200;
 		this.distanciaMaximaAtaque = 5;
+		this.estado = new EstadoDesmontada();
 	}
 
-	
 	@Override
 	public void atacar(Edificio edificio) {
-		edificio.quitarVida(this.danioAEdificios); //Solo puede atacar edificios
+		this.estado.atacar(edificio); //Solo puede atacar edificios
 	}
 	
 	@Override
@@ -31,5 +31,25 @@ public class ArmaDeAsedio extends Unidad{
 		return false;
 	}
 
+
+	public void montar() {
+		this.estado = new EstadoMontada();
+	}
+
+
+	public void desmontar() {
+		this.estado = new EstadoDesmontada();		
+	}
+
+
+	public boolean estaMontada() {
+		return this.estado.estaMontada();
+	}
+
+	@Override
+	public void atacar(Atacable atacable) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
