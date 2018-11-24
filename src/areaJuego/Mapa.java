@@ -44,10 +44,10 @@ public class Mapa {
 	
 	public boolean posicionEstaOcupada(Posicion posicion) {
 		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
-			if (!cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
-				return false;
+			if (cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
+				return true;
 		}
-		return true;
+		return false;
 	}
 	
 	public boolean atacableColisiona(Posicion posicion, int tamanioDeAtacable) {

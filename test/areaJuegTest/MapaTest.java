@@ -41,12 +41,13 @@ public class MapaTest {
 		mapa.colocarAtacable(new Posicion(21,21), new Arquero());		
 	}
 	
-	/*@Test
+	@Test
 	public void colocarUnaUnidadDeberiaDevolverQueSuUnicaPosicionEstaOcupada() throws Exception { //Esta simple no pasa
 		Mapa mapa = new Mapa(20,20);
 		mapa.colocarAtacable(new Posicion(1,1), new Arquero());
 		assert(mapa.posicionEstaOcupada(new Posicion(1,1)));
-	}*/
+	}
+	
 	
 }
 	

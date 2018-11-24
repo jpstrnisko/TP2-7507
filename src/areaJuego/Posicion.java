@@ -19,6 +19,6 @@ public class Posicion {
 	}
 	
 	public boolean posicionesSonIguales(Posicion pos2) {
-		return this.coordenadas.equals(pos2);
+		return (this.obtenerPosicionX() == pos2.obtenerPosicionX() && this.obtenerPosicionY() == pos2.obtenerPosicionY());
 	}
 }
