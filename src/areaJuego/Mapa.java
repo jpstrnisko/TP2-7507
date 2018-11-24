@@ -55,8 +55,10 @@ public class Mapa {
 		int posX = posicion.obtenerPosicionX();
 		int posY = posicion.obtenerPosicionY();
 		for(int i = 0; i < Math.sqrt(tamanioDeAtacable); i++) {
-			if(posicionEstaOcupada(new Posicion(posX + i, posY + i)))
-				return true;
+			for(int j = 0; j < Math.sqrt(tamanioDeAtacable); j++) {
+					if(posicionEstaOcupada(new Posicion(posX + i, posY + j)))
+						return true;
+			}
 		}
 		return false;
 	}
@@ -67,11 +69,13 @@ public class Mapa {
 		int posX = posicion.obtenerPosicionX();
 		int posY = posicion.obtenerPosicionY();
 		for(int i=0; i < Math.sqrt(tamanio); i++) {
-			Posicion posicionNueva = new Posicion(posX+i, posY+i);
-			if(this.seSalioDelMapa(posicionNueva)) throw new PosicionFueraDeMapaError();
-			if(this.atacableColisiona(posicionNueva, tamanio)) throw new PosicionOcupadaError();
-			Celda celdaAGuardar = new Celda(posicionNueva);
-			this.zonaDeJuego.put(celdaAGuardar, atacable);
+			for(int j=0; j < Math.sqrt(tamanio); j++) {
+				Posicion posicionNueva = new Posicion(posX+i, posY+j);
+				if(this.seSalioDelMapa(posicionNueva)) throw new PosicionFueraDeMapaError();
+				if(this.atacableColisiona(posicionNueva, tamanio)) throw new PosicionOcupadaError();
+				Celda celdaAGuardar = new Celda(posicionNueva);
+				this.zonaDeJuego.put(celdaAGuardar, atacable);
+			}
 		}
 	}
 }
