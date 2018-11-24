@@ -8,6 +8,7 @@ public abstract class Unidad implements Atacable {
 	protected int costo;
 	protected int distanciaMaximaAtaque;
 	protected Posicion posicion;
+	protected int tamanio = 1; //1 casillero
 
 	public int obtenerVida() {
 		return this.vida;
@@ -35,5 +36,9 @@ public abstract class Unidad implements Atacable {
 	
 	public void cambiarPosicion(Posicion destino) {
 		this.posicion =  destino;
+	}
+	
+	public int obtenerTamanio() {
+		return this.tamanio;
 	}
 }

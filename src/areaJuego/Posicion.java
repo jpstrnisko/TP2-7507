@@ -1,24 +1,24 @@
 package areaJuego;
+import java.awt.Point;
 
 public class Posicion {
 	
-	protected int posX;
-	protected int posY;
+	protected Point coordenadas;
 	
-	public Posicion(int fila, int columna) {
-		this.posX = fila;
-		this.posY = columna;
+	public Posicion(int x, int y) {
+		Point posicion = new Point(x, y);
+		this.coordenadas = posicion;
 	}
 	
 	public int obtenerPosicionX() {
-		return this.posX;
+		return (int)this.coordenadas.getX();
 	}
 	
 	public int obtenerPosicionY() {
-		return this.posY;
+		return (int)this.coordenadas.getY();
 	}
 	
 	public boolean posicionesSonIguales(Posicion pos2) {
-		return (this.obtenerPosicionY()==pos2.obtenerPosicionY() && this.obtenerPosicionX()==pos2.obtenerPosicionX());
+		return this.coordenadas.equals(pos2);
 	}
 }

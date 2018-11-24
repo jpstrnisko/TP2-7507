@@ -1,5 +1,4 @@
 package edificios;
-
 import unidades.Aldeano;
 import unidades.Unidad;
 

@@ -8,8 +8,8 @@ public class Castillo extends Edificio implements IAtacante {
 	protected int danioGenerado = 20; //Tanto a unidades como a otros edificios.
 	
 	public Castillo() {
-		this.costo = -1; //no se puede construir
-		this.tamanio = 8;
+		this.costo = -1;
+		this.tamanio = 16;
 		int velocidadReparacion = 15;
 		int vidaInicial = 1000;
 		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion);

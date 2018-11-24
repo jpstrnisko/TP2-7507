@@ -2,36 +2,21 @@ package areaJuego;
 import edificios.Edificio;
 import interfaces.Atacable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Mapa {
 	
 	protected int alto;
 	protected int ancho;
-	protected ArrayList<Celda> celdas = new ArrayList();
+	protected HashMap<Celda, Atacable> zonaDeJuego;
 			
 	public Mapa(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
-		this.instalarCeldas();
+		this.zonaDeJuego = new HashMap<Celda, Atacable>();
 	}
 	
-	public void instalarCeldas() {
-		for(int i = 0; i<this.ancho; i++) {
-			for(int j = 0; j<this.alto; j++) {
-				Celda celda = new Celda(new Posicion(i,j));
-				this.celdas.add(celda);
-			}
-		}
-	}
-	
-	public Celda obtenerCeldaDeterminada(Posicion posicion) {
-		for(Celda cadaCelda: celdas) {
-			if(cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
-				return cadaCelda;
-		}
-		return null;
-	}
 	
 	public int obtenerAlto() {
 		return this.alto;
@@ -41,32 +26,57 @@ public class Mapa {
 		return this.ancho;
 	}
 	
-	public int obtenerCantidadCeldas() {
-		return celdas.size();
+	public int obtenerTamanio() {
+		return this.alto * this.ancho;
 	}
 	
-	public boolean celdaOcupada(Posicion posicion) {
-		Celda celda = this.obtenerCeldaDeterminada(posicion);
-		return celda.estaLibre();
+	public HashMap<Celda, Atacable> obtenerZonaDeJuego() {
+		return this.zonaDeJuego;
 	}
+	
 	
 	public boolean seSalioDelMapa(Posicion posicion) {
-		boolean salioEnAncho = Math.abs(posicion.obtenerPosicionX()) >= this.ancho;
-		boolean salioEnAlto = Math.abs(posicion.obtenerPosicionY()) >= this.alto;
+		
+		boolean salioEnAncho = Math.abs(posicion.obtenerPosicionX()) > this.ancho;
+		boolean salioEnAlto = Math.abs(posicion.obtenerPosicionY()) > this.alto;
 		return salioEnAncho || salioEnAlto;
 	}
 	
-	public ArrayList obtenerCeldas() {
-		return celdas;
+	public boolean posicionEstaOcupada(Posicion posicion) {
+		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
+			if (!cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
+				return false;
+		}
+		return true;
 	}
 	
-	public void colocarAtacable(Posicion posicion, Atacable atacable) { //Por ahora solo para unidades (ocupan 1 solo casillero)
-		for(Celda cadaCelda: celdas) {
-			if (cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
-				cadaCelda.colocarAtacable(atacable, posicion);
+	public boolean atacableColisiona(Posicion posicion, int tamanioDeAtacable) {
+		
+		int posX = posicion.obtenerPosicionX();
+		int posY = posicion.obtenerPosicionY();
+		for(int i = 0; i < Math.sqrt(tamanioDeAtacable); i++) {
+			if(posicionEstaOcupada(new Posicion(posX + i, posY + i)))
+				return true;
+		}
+		return false;
+	}
+
+	public void colocarAtacable(Posicion posicion, Atacable atacable) throws Exception { 
+		
+		int tamanio = atacable.obtenerTamanio();
+		int posX = posicion.obtenerPosicionX();
+		int posY = posicion.obtenerPosicionY();
+		for(int i=0; i < Math.sqrt(tamanio); i++) {
+			Posicion posicionNueva = new Posicion(posX+i, posY+i);
+			if(this.seSalioDelMapa(posicionNueva)) throw new PosicionFueraDeMapaError();
+			if(this.atacableColisiona(posicionNueva, tamanio)) throw new PosicionOcupadaError();
+			Celda celdaAGuardar = new Celda(posicionNueva);
+			this.zonaDeJuego.put(celdaAGuardar, atacable);
 		}
 	}
 }
+		
+	
 	
 			
 	
