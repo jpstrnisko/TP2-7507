@@ -1,6 +1,9 @@
 package areaJuego;
 import edificios.Edificio;
 import interfaces.Atacable;
+import unidades.Aldeano;
+import unidades.Unidad;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -78,6 +81,17 @@ public class Mapa {
 			}
 		}
 	}
+
+
+	public Posicion obtenerPosicionUnidad(Unidad unidad) {
+		for (Celda celda: this.zonaDeJuego.keySet()) {
+			if (this.zonaDeJuego.get(celda) == unidad) {
+				return celda.obtenerPosicion();
+			}
+		}
+		return null;
+	}
+
 }
 		
 	

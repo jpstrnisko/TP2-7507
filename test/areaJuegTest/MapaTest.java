@@ -94,6 +94,17 @@ public class MapaTest {
 		mapa.colocarAtacable(new Posicion(4,3), new Aldeano());
 	}
 	
+	@Test
+	public void seObtineCorrectamenteLaPosicionDeUnaUnidadColocadaEnElMapa() throws Exception {
+		Mapa mapa = new Mapa(20, 20);
+		Posicion posicion = new Posicion(2,2);
+		Aldeano aldeano = new Aldeano();
+		mapa.colocarAtacable(posicion, aldeano);
+		assert(mapa.obtenerPosicionUnidad(aldeano).posicionesSonIguales(posicion));
+	}
+	
+	
+	
 	
 }
 	
