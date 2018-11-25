@@ -1,6 +1,5 @@
 package edificios;
 
-import unidades.ArmaDeAsedio;
 import unidades.Arquero;
 import unidades.Espadachin;
 
