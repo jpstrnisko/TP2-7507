@@ -8,7 +8,6 @@ import interfaces.Atacable;
 import interfaces.EstadoArmaDeAsedio;
 
 public class ArmaDeAsedio extends Unidad{
-	EstadoArmaDeAsedio estado;
 	
 	protected EstadoArmaAsedio estado;
 	
