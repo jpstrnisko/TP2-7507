@@ -1,6 +1,7 @@
 package edificios;
 import interfaces.Atacable;
 import unidades.ArmaDeAsedio;
+import unidades.Arquero;
 import unidades.Espadachin;
 
 public abstract class Edificio implements Atacable{
@@ -41,6 +42,10 @@ public abstract class Edificio implements Atacable{
 	
 	public void esAtacadoPor(Espadachin espadachin) {
 		this.quitarVida(15);
+	}
+	
+	public void esAtacadoPor(Arquero arquero) {
+		this.quitarVida(10);
 	}
 		
 }

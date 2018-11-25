@@ -38,4 +38,8 @@ public abstract class Unidad implements Atacable {
 	public void esAtacadoPor(Espadachin espadachin) {
 		this.quitarVida(25);
 	}
+	
+	public void esAtacadoPor(Arquero arquero) {
+		this.quitarVida(15);
+	}
 }
