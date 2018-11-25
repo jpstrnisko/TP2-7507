@@ -9,7 +9,7 @@ import interfaces.EstadoArmaDeAsedio;
 
 public class ArmaDeAsedio extends Unidad{
 	
-	protected EstadoArmaAsedio estado;
+	protected EstadoArmaDeAsedio estado;
 	
 	public ArmaDeAsedio() {
 		this.vida = 150;
