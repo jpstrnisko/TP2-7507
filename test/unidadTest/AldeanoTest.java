@@ -46,7 +46,7 @@ public class AldeanoTest {
 		assert(aldeano.repararEdificio(edificio));
 	}
 	
-	
+	/*
 	@Test
 	public void elAldeanoDeberiaPoderRepararUnSoloEdificio() {
 		Aldeano aldeano = new Aldeano();
@@ -57,7 +57,7 @@ public class AldeanoTest {
 		assert(aldeano.repararEdificio(edificio));
 		assertFalse(aldeano.repararEdificio(edificio2));
 	}
-	/*@Test
+	@Test
 	public void elAldeanoPuedeMoverLaPosicionUnaVezPorTurno() {
 		Aldeano aldeano = new Aldeano();
 		assert(aldeano.moverA(new Posicion(1,1)));

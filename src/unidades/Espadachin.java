@@ -4,6 +4,8 @@ import areaJuego.Posicion;
 import interfaces.Atacable;
 
 
+import interfaces.Atacable;
+
 public class Espadachin extends Unidad {
 	
 	protected int danioAUnidades = 25;
@@ -15,25 +17,11 @@ public class Espadachin extends Unidad {
 		this.distanciaMaximaAtaque = 1; //cuerpo a cuerpo
 	}
 	
-	@Override
-	public void atacar(Edificio edificio) {
-		edificio.quitarVida(this.danioAEdifcios);
+	public void atacar(Atacable objetivo) {
+		objetivo.esAtacadoPor(this);
 	}
 	
-	@Override
-	public void atacar(Unidad unidad) {
-		unidad.quitarVida(this.danioAUnidades);
-	}
-
-	@Override
-	public void atacar(Atacable atacable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean moverA(Posicion posicion) {
-		// TODO Auto-generated method stub
+	public boolean moverA(Posicion posicion){
 		return false;
 	}
 

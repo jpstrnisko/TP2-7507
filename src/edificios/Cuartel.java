@@ -1,6 +1,7 @@
 package edificios;
 
-import interfaces.Atacable;
+
+import unidades.ArmaDeAsedio;
 import unidades.Arquero;
 import unidades.Espadachin;
 

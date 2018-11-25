@@ -19,12 +19,10 @@ public class Castillo extends Edificio {
 		return new ArmaDeAsedio();
 	}
 	
-	@Override
 	public void atacar(Edificio edificio) {
 		edificio.quitarVida(DANIOGENERADO);
 	}
 	
-	@Override
 	public void atacar(Unidad unidad) {
 		unidad.quitarVida(DANIOGENERADO);
 	}

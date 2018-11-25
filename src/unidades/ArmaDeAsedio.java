@@ -4,25 +4,30 @@ import areaJuego.Posicion;
 import interfaces.Atacable;
 
 
+import interfaces.Atacable;
+import interfaces.EstadoArmaDeAsedio;
+
 public class ArmaDeAsedio extends Unidad{
 	
-	protected EstadoArmaAsedio estado;
+	protected EstadoArmaDeAsedio estado;
 	
 	public ArmaDeAsedio() {
 		this.vida = 150;
 		this.costo = 200;
 		this.distanciaMaximaAtaque = 5;
-		this.estado = new EstadoDesmontada();
+		this.estado = new EstadoDesmontada(this);
 	}
 
-	@Override
-	public void atacar(Edificio edificio) {
-		this.estado.atacar(edificio); //Solo puede atacar edificios
+	public boolean estaMontada() {
+		return estado.estaMontada();
 	}
-	
-	@Override
-	public void atacar(Unidad unidad) {
-		unidad.quitarVida(0);
+
+	public void montar() {
+		this.estado = new EstadoMontada(this);
+	}
+
+	public void desmontar() {
+		this.estado = new EstadoDesmontada(this);
 	}
 
 	@Override
@@ -31,25 +36,7 @@ public class ArmaDeAsedio extends Unidad{
 		return false;
 	}
 
-
-	public void montar() {
-		this.estado = new EstadoMontada();
+	public void atacar(Atacable objetivo) {
+		estado.atacar(objetivo);
 	}
-
-
-	public void desmontar() {
-		this.estado = new EstadoDesmontada();		
-	}
-
-
-	public boolean estaMontada() {
-		return this.estado.estaMontada();
-	}
-
-	@Override
-	public void atacar(Atacable atacable) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

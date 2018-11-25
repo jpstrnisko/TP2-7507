@@ -1,10 +1,16 @@
 package interfaces;
-import edificios.Edificio;
-import unidades.Unidad;
+
+import areaJuego.Posicion;
+import unidades.ArmaDeAsedio;
+import unidades.Arquero;
+import unidades.Espadachin;
 
 public interface Atacable {
-	public abstract void quitarVida(int danio);
-	public abstract void atacar(Edificio edificio);
-	public abstract void atacar(Unidad unidad);
-//PATRON DOUBLE DISPATCH
+
+	void esAtacadoPor(ArmaDeAsedio armaDeAsedio);
+
+	void esAtacadoPor(Espadachin espadachin);
+
+	void esAtacadoPor(Arquero arquero);
+	
 }

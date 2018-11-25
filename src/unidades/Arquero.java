@@ -15,20 +15,13 @@ public class Arquero extends Unidad {
 		this.distanciaMaximaAtaque = 3;
 	}
 
-	
 	@Override
-	public void atacar(Edificio edificio) {
-		edificio.quitarVida(this.danioAEdificios);
+	public void atacar(Atacable atacable) {
+		atacable.esAtacadoPor(this);
 	}
 	
-	@Override
-	public void atacar(Unidad unidad) {
-		unidad.quitarVida(this.danioAUnidades);
-	}
-
 	@Override
 	public boolean moverA(Posicion posicion) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

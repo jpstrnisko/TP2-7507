@@ -2,9 +2,14 @@ package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import edificios.Cuartel;
+import edificios.Edificio;
+import interfaces.Atacable;
+import unidades.Arquero;
 import edificios.PlazaCentral;
 import unidades.Aldeano;
 import unidades.Espadachin;
+import unidades.Unidad;
 
 public class EspadachinTest {
 	
@@ -21,20 +26,18 @@ public class EspadachinTest {
 	}
 	
 	@Test
-	public void espadachinAtacaACualquierUnidadYLeResta25DeVida() { //Pruebo con aldeano
-		Aldeano aldeano = new Aldeano();
-		int vidaActual = aldeano.obtenerVida();
-		espadachin.atacar(aldeano);
-		assertEquals(vidaActual-25, aldeano.obtenerVida());
+	public void test03EspadachinDeberiaSacar25DeDanioAlAtacarOtraUnidad() {
+		Espadachin espadachin = new Espadachin();
+		Atacable arquero = new Arquero();
+		espadachin.atacar(arquero);
+		assertEquals(50, ((Unidad) arquero).obtenerVida());
 	}
 	
-	@Test
-	public void espadachinAtacaACualquierEdificioYLeResta15DeVida() {
-		PlazaCentral plaza = new PlazaCentral();
-		int vidaActual = plaza.obtenerVida();
-		espadachin.atacar(plaza);
-		assertEquals(vidaActual-15, plaza.obtenerVida());
+	public void test04EspadachinDeberiaSacar15DeDanioAlAtacarUnEdificio() {
+		Espadachin espadachin = new Espadachin();
+		Atacable cuartel = new Cuartel();
+		espadachin.atacar(cuartel);
+		assertEquals(235, ((Edificio) cuartel).obtenerVida());
 	}
-	
 
 }

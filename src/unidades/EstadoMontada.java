@@ -1,9 +1,15 @@
 package unidades;
 
-import edificios.Edificio;
+import interfaces.Atacable;
+import interfaces.EstadoArmaDeAsedio;
 
-public class EstadoMontada implements EstadoArmaAsedio {
-	protected int danioAEdificios = 75;
+public class EstadoMontada implements EstadoArmaDeAsedio {
+	
+	ArmaDeAsedio armaDeAsedio;
+
+	public EstadoMontada(ArmaDeAsedio armaDeAsedio_) {
+		this.armaDeAsedio = armaDeAsedio_;
+	}
 
 	@Override
 	public boolean estaMontada() {
@@ -11,7 +17,8 @@ public class EstadoMontada implements EstadoArmaAsedio {
 	}
 
 	@Override
-	public void atacar(Edificio edificio) {
-		edificio.quitarVida(danioAEdificios);
+	public void atacar(Atacable objetivo) {
+		objetivo.esAtacadoPor(armaDeAsedio);
 	}
+
 }

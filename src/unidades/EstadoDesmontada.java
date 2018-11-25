@@ -1,8 +1,15 @@
 package unidades;
 
-import edificios.Edificio;
+import interfaces.Atacable;
+import interfaces.EstadoArmaDeAsedio;
 
-public class EstadoDesmontada implements EstadoArmaAsedio {
+public class EstadoDesmontada implements EstadoArmaDeAsedio {
+
+	ArmaDeAsedio armaDeAsedio;
+
+	public EstadoDesmontada(ArmaDeAsedio armaDeAsedio_) {
+		this.armaDeAsedio = armaDeAsedio_;
+	}
 
 	@Override
 	public boolean estaMontada() {
@@ -10,8 +17,7 @@ public class EstadoDesmontada implements EstadoArmaAsedio {
 	}
 
 	@Override
-	public void atacar(Edificio edificio) {
-		
+	public void atacar(Atacable objetivo) {
 	}
 
 }

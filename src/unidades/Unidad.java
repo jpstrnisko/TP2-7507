@@ -30,4 +30,16 @@ public abstract class Unidad implements Atacable {
 	public void finalizarTurnoMovimiento() {
 		this.turnoMovimiento = new TurnoMovimientoFinalizado();	
 	}
+	
+	public void esAtacadoPor(ArmaDeAsedio armaDeAsedio) {
+		this.quitarVida(0);
+	}
+	
+	public void esAtacadoPor(Espadachin espadachin) {
+		this.quitarVida(25);
+	}
+	
+	public void esAtacadoPor(Arquero arquero) {
+		this.quitarVida(15);
+	}
 }
