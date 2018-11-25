@@ -1,48 +1,67 @@
 package unidades;
-import areaJuego.Celda;
+import areaJuego.Posicion;
 import edificios.Cuartel;
 import edificios.PlazaCentral;
+import interfaces.Atacable;
+import interfaces.TurnoConstruir;
+import interfaces.TurnoRecolectar;
+import interfaces.TurnoReparar;
+import turnos.TurnoRecolectarOro;
+import turnos.TurnoRepararFinalizado;
+import turnos.TurnoRepararHabilitado;
+import turnos.TurnoConstruirFinalizado;
+import turnos.TurnoConstruirHabilitado;
+import turnos.TurnoRecolectarFinalizado;
 import edificios.Edificio;
 
 public class Aldeano extends Unidad {
 	
-	//private TurnoRecogerOro turnoRecogerOro;
-	//private TurnoConstruir turnoConstruir;
-	//private TurnoReparar turnoReparar;
+	private TurnoRecolectar turnoRecolectarOro;
+	private TurnoConstruir turnoConstruir;
+	private TurnoReparar turnoReparar;
 	
 	public Aldeano() {
 		this.vida = 50;
 		this.costo = 25;
-		//this.turnoMovimiento = new TurnoMovimiento();
-		//this.turnoRecogerOro = new TurnoRecolectarOro();
-		//this.turnoConstruir = new TurnoConstruir();
-		//this.turnoReparar = new TurnoReparar();
+		this.turnoRecolectarOro = new TurnoRecolectarOro();
+		this.turnoConstruir = new TurnoConstruirHabilitado();
+		this.turnoReparar = new TurnoRepararHabilitado();
 	}
 
 	
 	public Cuartel construirCuartel() {
-		Cuartel nuevoCuartel = new Cuartel();
-		return nuevoCuartel;
+		return turnoConstruir.construirCuartel(this);
 	}
 	
 	public PlazaCentral construirPlaza() {
-		PlazaCentral nuevaPlaza = new PlazaCentral();
-		return nuevaPlaza;
+		return turnoConstruir.construirPlazaCentral(this);
 	}
 	
-	public void repararEdificio(Edificio edificio) {
-		edificio.reparar();
+	public boolean repararEdificio(Edificio edificio) {
+		return turnoReparar.repararEdificio(edificio, this);
 	}
 	
-	/*public Number recolectarOro() {
-		return turnoRecogerOro.recogerOro();
+	
+	public Number recolectarOro() {
+		return turnoRecolectarOro.recolectarOro(this);
 	}
 
-	public boolean estaReparando() {
-		return turnoReparar.estaReparando();
+
+	@Override
+	public void atacar(Atacable atacable) {		
 	}
-	
-	public boolean moverA(Celda celda) {
-		return turnoMovimiento.moverA(celda);
-	}*/
+
+	@Override
+	public boolean moverA(Posicion posicion) {
+		return turnoMovimiento.moverUnidad(posicion, this);
+	}
+
+
+	public void finalizarAcciones() {
+		this.turnoRecolectarOro = new TurnoRecolectarFinalizado();	
+		this.turnoConstruir = new TurnoConstruirFinalizado();
+		this.turnoReparar = new TurnoRepararFinalizado();
+		
+	}
+
 }

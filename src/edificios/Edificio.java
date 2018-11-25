@@ -5,33 +5,34 @@ import unidades.Espadachin;
 
 public abstract class Edificio implements Atacable{
 	
-	protected int vida;
+	protected VidaEdificio vida;
 	protected int costo;
-	protected int velocidadReparacion;
 	protected int tamanio;
 	
+	
 	public int obtenerVida() {
-		return this.vida;
+		return vida.obtenerVida();
 	}
 	
 	public int obtenerCosto() {
 		return this.costo;
 	}
 	
-	public void reparar() {
-		this.vida += this.velocidadReparacion;
+	public boolean reparar() {
+		return vida.Reparar();
 	}
 	
 	public void quitarVida(int danio) {
-		this.vida -= danio;
+		vida.Daniar(danio);
 	}
 	
 	public int obtenerTamanio() {
 		return this.tamanio;
 	}
 	
-	public void atacar(Atacable atacable) {
-		//Como se hace para que cada Edificio implemente este mensaje a su manera?
+	public int celdasAOcupar() {
+		return ((this.tamanio/2)-1);
+		
 	}
 	
 	public void esAtacadoPor(ArmaDeAsedio armaDeAsedio) {

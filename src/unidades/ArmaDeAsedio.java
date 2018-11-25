@@ -1,10 +1,16 @@
 package unidades;
+import edificios.Edificio;
+import areaJuego.Posicion;
+import interfaces.Atacable;
+
 
 import interfaces.Atacable;
 import interfaces.EstadoArmaDeAsedio;
 
 public class ArmaDeAsedio extends Unidad{
 	EstadoArmaDeAsedio estado;
+	
+	protected EstadoArmaAsedio estado;
 	
 	public ArmaDeAsedio() {
 		this.vida = 150;
@@ -23,6 +29,12 @@ public class ArmaDeAsedio extends Unidad{
 
 	public void desmontar() {
 		this.estado = new EstadoDesmontada(this);
+	}
+
+	@Override
+	public boolean moverA(Posicion posicion) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	public void atacar(Atacable objetivo) {

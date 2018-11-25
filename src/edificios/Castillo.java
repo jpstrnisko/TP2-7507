@@ -1,18 +1,32 @@
 package edificios;
 
 import unidades.ArmaDeAsedio;
+import unidades.Unidad;
 
 public class Castillo extends Edificio {
 	
+	private static final int VELOCIDADREPARACION = 15;
+	private static final int VIDAINICIAL = 1000;
+	private static final int DANIOGENERADO = 20; //Tanto a unidades como a otros edificios.
+	
 	public Castillo() {
-		this.vida = 1000;
 		this.costo = -1; //no se puede construir
-		this.velocidadReparacion = 15;
 		this.tamanio = 8;
+		this.vida = new VidaEdificio(VIDAINICIAL, VELOCIDADREPARACION);
 	}
 	
 	public ArmaDeAsedio crearUnArmaDeAsedio() {
 		return new ArmaDeAsedio();
+	}
+	
+	@Override
+	public void atacar(Edificio edificio) {
+		edificio.quitarVida(DANIOGENERADO);
+	}
+	
+	@Override
+	public void atacar(Unidad unidad) {
+		unidad.quitarVida(DANIOGENERADO);
 	}
 
 }

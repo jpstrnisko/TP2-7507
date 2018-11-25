@@ -1,72 +1,91 @@
 package areaJuego;
 
-import java.util.Hashtable;
-import edificios.Edificio;
 
 public class ZonaDeJuego {
 	
-	int cantidadFilas;
-	int cantidadColumnas;
+	protected int cantidadFilas;
+	protected int cantidadColumnas;
+	Celda celdas[][];
 	
 	
 	
-	public void crearZonaDeJuego(Integer args[][], int filas, int columnas) {
-		
+	public void crearZonaDeJuego(int filas, int columnas) {
 		this.cantidadFilas = filas;
 		this.cantidadColumnas = columnas;
+		celdas = new Celda[filas][columnas];
 		
-		
-		
-		Hashtable<Integer, Celda> mapaDeCeldas = new Hashtable<Integer, Celda>();
-		
-		for (int i=1; i <= cantidadFilas; i++) {
-			
-			for (int j=1; j <= cantidadColumnas; j++) {
-				
-				Celda celda = new Celda(new Posicion(i,j));
-				mapaDeCeldas.put(i+j, celda);
+		for (int i= 0; i<filas; i++ ) {
+			for (int j=0; j<columnas; j++) {
+				celdas[i][j] = new Celda(i,j);
 			}
 		}
 	}
 	
-	
 	public int obtenerTamanio() {
-		
 		return cantidadFilas*cantidadColumnas;
 	}
-	
-	
-	
-	public boolean nollegoAlFinal(int fila, int columna) {
 		
+	public boolean nollegoAlFinal(int fila, int columna) {
 		return (fila >= 1 && fila <= cantidadFilas && columna >= 1 && columna <= cantidadColumnas);
 	}
 		
-	
-	
-	public boolean espacioNoLLegoAlFinal(int cantidadCeldasAExplorar, int fila, int columna) {
+	public boolean estaLibre(int fila, int columna) {
+		return celdas[fila][columna].estaLibre();
+	}
 		
-		boolean espacioDesocupado = true;
-		
-		return espacioDesocupado;
-	}	
-	
-	
-	
-	public void colocarUnidad(int fila, int columna) {
-		
-		//delega a Celda
-		
-		
-	}	
-	
-	
-	
-	public void colocarEdificio(Edificio edificio, int fila, int columna) {
-		
-		//delega a Celda
+			
+	public void posicionar(int fila, int columna) {
+		celdas[fila][columna].posicionar();
 		
 	}
 	
+		
 	
+	public void posicionarEdificioIzquierdaArriba(int fila, int columna, int celdasAOcupar) {
+		
+		for (int i= fila-celdasAOcupar; i<= fila; i++) {
+			for (int j= columna-celdasAOcupar; j<= columna; j++) {
+				celdas[i][j].posicionar();	
+			}			
+		}
+
 	}
+	
+	
+	public void posicionarEdificioDerechaArriba(int fila, int columna, int celdasAOcupar) {
+		
+		for (int i= fila-celdasAOcupar; i<= fila; i++) {
+			for (int j= columna; j<= columna+celdasAOcupar; j++) {
+				celdas[i][j].posicionar();	
+			}			
+		}
+
+	}
+	
+	
+	public void posicionarEdificioIzquierdaAbajo(int fila, int columna, int celdasAOcupar) {
+		
+		for (int i= fila; i<= fila+celdasAOcupar; i++) {
+			for (int j= columna-celdasAOcupar; j<= columna; j++) {
+				celdas[i][j].posicionar();	
+			}			
+		}
+
+	}
+	
+	
+	public void posicionarEdificioDerechaAbajo(int fila, int columna, int celdasAOcupar) {
+		
+		for (int i= fila; i<= fila+celdasAOcupar; i++) {
+			for (int j= columna; j<= columna+celdasAOcupar; j++) {
+				celdas[i][j].posicionar();	
+			}			
+		}
+	}
+	
+	public void colocarAtacable(int fila, int columna) {
+		
+		//delega a Celda
+	}	
+	
+}

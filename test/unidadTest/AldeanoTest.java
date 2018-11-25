@@ -2,7 +2,6 @@ package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import areaJuego.Celda;
 import unidades.Aldeano;
 import edificios.PlazaCentral;
 import edificios.Cuartel;
@@ -32,32 +31,54 @@ public class AldeanoTest {
 		assert(aldeano.construirCuartel() instanceof Cuartel);
 	}
 	
-	/*@Test
-	public void elAldeanoRecolecta25OroPorTurno() {
+	@Test
+	public void elAldeanoRecolecta20OroPorTurno() {
 		Aldeano aldeano = new Aldeano();
-		assertEquals(25, aldeano.recolectarOro());
+		assertEquals(20, aldeano.recolectarOro());
 		assertEquals(0, aldeano.recolectarOro());
 	}
 	
 	@Test
-	public void elAldeanoPuedeRepararEdificioPorTurno() {
+	public void elAldeanoDeberiaPoderRepararEdificio() {
 		Aldeano aldeano = new Aldeano();
-		assert(aldeano.estaReparando());
+		Cuartel edificio = new Cuartel();
+		edificio.quitarVida(50);
+		assert(aldeano.repararEdificio(edificio));
 	}
 	
+	
 	@Test
+	public void elAldeanoDeberiaPoderRepararUnSoloEdificio() {
+		Aldeano aldeano = new Aldeano();
+		Cuartel edificio = new Cuartel();
+		Cuartel edificio2 = new Cuartel();
+		edificio.quitarVida(50);
+		edificio2.quitarVida(50);
+		assert(aldeano.repararEdificio(edificio));
+		assertFalse(aldeano.repararEdificio(edificio2));
+	}
+	/*@Test
 	public void elAldeanoPuedeMoverLaPosicionUnaVezPorTurno() {
 		Aldeano aldeano = new Aldeano();
-		Celda celda = new Celda();
-		assert(aldeano.moverA(celda));
-		assertFalse(aldeano.moverA(new Celda()));
-	}
+		assert(aldeano.moverA(new Posicion(1,1)));
+		assert(aldeano.moverA(new Posicion(2,2)));
+	}*/
+	
+	
 	
 	@Test
-	public void elAldeanoDeberiaNoRecolectarOroMientrasConstruye() {
+	public void elAldeanoNoDeberiaRecolectarOroMientrasConstruye() {
 		Aldeano aldeano = new Aldeano();
 		assertTrue(aldeano.construirCuartel() instanceof Cuartel);
 		assertEquals(0, aldeano.recolectarOro());
-	}*/
+	}
+	
+	@Test
+	public void elAldeanoNoDeberiaConstruirDosEdificios() {
+		Aldeano aldeano = new Aldeano();
+		assertTrue(aldeano.construirCuartel() instanceof Cuartel);
+		assertEquals(aldeano.construirPlaza(), null);
+	}
+	
 }
 

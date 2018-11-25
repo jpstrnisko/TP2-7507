@@ -9,18 +9,20 @@ import interfaces.Atacable;
 import unidades.ArmaDeAsedio;
 import unidades.Espadachin;
 import unidades.Unidad;
+import edificios.PlazaCentral;
+import unidades.ArmaDeAsedio;
+import unidades.Espadachin;
 
 public class ArmaDeAsedioTest {
-
+	
+	public static final ArmaDeAsedio miArma = new ArmaDeAsedio();
 	@Test
 	public void test01ArmaDeAsedioSeCreaCon150DeVida() {
-		ArmaDeAsedio miArma = new ArmaDeAsedio();
 		assertEquals(150, miArma.obtenerVida());
 	}
 	
 	@Test
 	public void test02ArmaDeAsedioSeCreaConUnCostoDe200() {
-		ArmaDeAsedio miArma = new ArmaDeAsedio();
 		assertEquals(200, miArma.obtenerCosto());
 	}
 	
