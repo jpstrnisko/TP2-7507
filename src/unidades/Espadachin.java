@@ -19,5 +19,6 @@ public class Espadachin extends Unidad {
 	
 	public void atacar(Atacable objetivo) {
 		objetivo.esAtacadoPor(this);
+	}
 
 }
