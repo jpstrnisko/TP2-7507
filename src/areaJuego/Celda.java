@@ -1,35 +1,30 @@
 package areaJuego;
-import interfaces.Atacable;
 
 
 public class Celda {
 	
 	protected Posicion posicion;
-	protected boolean libre = true;
-	protected Atacable atacable = null;
+	protected boolean libre;	
 	
 	public Celda(Posicion posicion) {
 		this.posicion = posicion;
+		this.libre = true;
 	}
-			
+				
 	public boolean estaLibre() {
-		
 		return this.libre;		
 	}
 	
-	public void colocarAtacable(Atacable atacable, Posicion posicion) {
-		
-		if (this.estaLibre()){
-			this.libre = false;
-			this.atacable = atacable;
-			this.posicion = posicion;
-		}
+	public Posicion obtenerPosicion() {
+		return this.posicion;
 	}
+	
+	public void ocuparCelda() {
+		this.libre = false;
+	}
+	
+	public void desocuparCelda() {
+		this.libre = true;
+	}
+	
 }
-	
-
-		
-				
-
-	
-		
