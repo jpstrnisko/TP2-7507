@@ -29,14 +29,18 @@ public class EspadachinTest {
 	@Test
 	public void espadachinDeberiaSacar25DeDanioAlAtacarOtraUnidad() {
 		Espadachin espadachin = new Espadachin();
+		espadachin.establecerPosicion(new Posicion(0,0));
 		Unidad arquero = new Arquero();
+		arquero.establecerPosicion(new Posicion(1,1));
 		espadachin.atacar(arquero);
 		assertEquals(50, arquero.obtenerVida());
 	}
 	@Test
 	public void espadachinDeberiaSacar15DeDanioAlAtacarUnEdificio() {
 		Espadachin espadachin = new Espadachin();
+		espadachin.establecerPosicion(new Posicion(0,0));
 		Edificio cuartel = new Cuartel();
+		cuartel.establecerPosicion(new Posicion(1,0));
 		espadachin.atacar(cuartel);
 		assertEquals(235, cuartel.obtenerVida());
 	}
@@ -54,6 +58,25 @@ public class EspadachinTest {
 		espadachin.cambiarPosicion(new Posicion(1,1));
 		assertEquals(espadachin.obtenerPosicion().obtenerPosicionY(), 1);
 		assertEquals(espadachin.obtenerPosicion().obtenerPosicionX(), 1);
+	}
+	
+	@Test
+	public void espadachinNoDeberiaAtacarUnidadFueraDelRangoDeAtaque() {
+		Espadachin espadachin = new Espadachin();
+		espadachin.establecerPosicion(new Posicion(0,0));
+		Unidad arquero = new Arquero();
+		arquero.establecerPosicion(new Posicion(3,4));
+		espadachin.atacar(arquero);
+		assertEquals(75, arquero.obtenerVida());
+	}
+	@Test
+	public void espadachinNoDeberiaAtacarEdificioFueraDelRangoDeAtaque() {
+		Espadachin espadachin = new Espadachin();
+		espadachin.establecerPosicion(new Posicion(0,0));
+		Edificio cuartel = new Cuartel();
+		cuartel.establecerPosicion(new Posicion(2,6));
+		espadachin.atacar(cuartel);
+		assertEquals(250, cuartel.obtenerVida());
 	}
 
 }

@@ -1,4 +1,5 @@
 package edificios;
+import areaJuego.Posicion;
 import interfaces.Atacable;
 import unidades.ArmaDeAsedio;
 import unidades.Arquero;
@@ -9,6 +10,7 @@ public abstract class Edificio implements Atacable{
 	protected VidaEdificio vida;
 	protected int costo;
 	protected int tamanio;
+	protected Posicion posicion;
 	
 	
 	public int obtenerVida() {
@@ -31,11 +33,17 @@ public abstract class Edificio implements Atacable{
 		return this.tamanio;
 	}
 	
-	public int celdasAOcupar() {
-		return ((this.tamanio/2)-1);
-		
+	public void establecerPosicion(Posicion posicion) {
+		this.posicion = posicion;
 	}
 	
+	public Posicion obtenerPosicion() {
+		return this.posicion;
+	}
+	
+	public void cambiarPosicion(Posicion destino) {
+		this.posicion =  destino;
+	}	
 	public void esAtacadoPor(ArmaDeAsedio armaDeAsedio) {
 		this.quitarVida(75);
 	}

@@ -24,6 +24,7 @@ public class ArqueroTest {
 	@Test
 	public void arqueroAtacaACualquierUnidadYLeResta15DeVida() { //Pruebo con espadachin
 		Espadachin espadachin = new Espadachin();
+		espadachin.establecerPosicion(new Posicion(1,1));
 		int vidaActual = espadachin.obtenerVida();
 		arquero.atacar(espadachin);
 		assertEquals(vidaActual-15, espadachin.obtenerVida());
@@ -32,6 +33,7 @@ public class ArqueroTest {
 	@Test
 	public void arqueroAtacaACualquierEdificioYLeResta10DeVida() { //Pruebo con cuartel
 		Cuartel cuartel = new Cuartel();
+		cuartel.establecerPosicion(new Posicion(2,1));
 		int vidaActual = cuartel.obtenerVida();
 		arquero.atacar(cuartel);
 		assertEquals(vidaActual-10, cuartel.obtenerVida());
@@ -50,5 +52,23 @@ public class ArqueroTest {
 		arquero.cambiarPosicion(new Posicion(1,1));
 		assertEquals(arquero.obtenerPosicion().obtenerPosicionY(), 1);
 		assertEquals(arquero.obtenerPosicion().obtenerPosicionX(), 1);
+	}
+	
+	@Test
+	public void arqueroNoDeberiaAtacarUnidadFueraDelRangoDeAtaque() { //Pruebo con espadachin
+		Espadachin espadachin = new Espadachin();
+		espadachin.establecerPosicion(new Posicion(5,5));
+		int vidaActual = espadachin.obtenerVida();
+		arquero.atacar(espadachin);
+		assertEquals(vidaActual, espadachin.obtenerVida());
+	}
+	
+	@Test
+	public void arqueroNoDeberiaAtacarEdificioFueraDelRangoDeAtaque() { //Pruebo con cuartel
+		Cuartel cuartel = new Cuartel();
+		cuartel.establecerPosicion(new Posicion(4,4));
+		int vidaActual = cuartel.obtenerVida();
+		arquero.atacar(cuartel);
+		assertEquals(vidaActual, cuartel.obtenerVida());
 	}
 }
