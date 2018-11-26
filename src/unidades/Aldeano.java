@@ -9,6 +9,7 @@ import interfaces.TurnoReparar;
 import turnos.TurnoRecolectarOro;
 import turnos.TurnoRepararFinalizado;
 import turnos.TurnoRepararHabilitado;
+import turnos.Jugador;
 import turnos.TurnoConstruirFinalizado;
 import turnos.TurnoConstruirHabilitado;
 import turnos.TurnoRecolectarFinalizado;
@@ -53,4 +54,5 @@ public class Aldeano extends Unidad {
 		this.turnoReparar = new TurnoRepararFinalizado();
 		
 	}
+
 }

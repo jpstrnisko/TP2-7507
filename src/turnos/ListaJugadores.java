@@ -29,4 +29,12 @@ public class ListaJugadores {
 		indice = random.nextInt(lista.size());
 	}
 
+	public int obtenerCantidadJugadores() {
+		return lista.size();
+	}
+
+	public List<Jugador> obtenerJugadores() {
+		return lista;
+	}
+
 }

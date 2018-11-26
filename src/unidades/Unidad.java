@@ -1,6 +1,7 @@
 package unidades;
 import areaJuego.Posicion;
 import interfaces.TurnoMovimiento;
+import turnos.Jugador;
 import turnos.TurnoMovimientoFinalizado;
 import interfaces.Atacable;
 
@@ -12,6 +13,7 @@ public abstract class Unidad implements Atacable {
 	protected Posicion posicion;
 	protected int tamanio = 1; //1 casillero
 	protected TurnoMovimiento turnoMovimiento;
+	protected Jugador jugador;
 
 	public int obtenerVida() {
 		return this.vida;
@@ -47,5 +49,13 @@ public abstract class Unidad implements Atacable {
 	
 	public void finalizarTurnoMovimiento() {
 		this.turnoMovimiento = new TurnoMovimientoFinalizado();	
+	}
+
+	public Jugador obtenerJugador() {
+		return jugador;
+	}
+	
+	public void cambiarJugador(Jugador jugador) {
+		this.jugador = jugador;
 	}
 }

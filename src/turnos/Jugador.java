@@ -3,9 +3,16 @@ package turnos;
 public class Jugador {
 
 	protected String nombre;
+	protected int oro = 100;
 	
-	public Jugador(String nombre_) {
-		this.nombre = nombre_;
+	public Jugador(String nombre) {
+		this.nombre = nombre;
 	}
+
+	public int obtenerOro() {
+		return oro;
+	}
+	
+	
 
 }

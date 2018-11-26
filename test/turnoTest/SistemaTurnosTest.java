@@ -4,13 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import juego.FaltanJugadoresError;
 import turnos.Jugador;
+import turnos.MaximoJugadoresError;
 import turnos.SistemaTurnos;
 
 public class SistemaTurnosTest {
 
 	@Test
-	public void seAlternanCorrectamenteLosTurnosDeLosJugadores() {
+	public void seAlternanCorrectamenteLosTurnosDeLosJugadores() throws MaximoJugadoresError {
 		SistemaTurnos sistemaTurnos = new SistemaTurnos();
 		Jugador jugador1 = new Jugador("Jugador Rojo");
 		Jugador jugador2 = new Jugador("Jugador Azul");
@@ -36,6 +38,19 @@ public class SistemaTurnosTest {
 		
 		sistemaTurnos.avanzarTurno();
 		assertEquals(sistemaTurnos.obtenerJugadorActual(), jugadorSiguiente);
+	}
+	
+	@Test(expected = MaximoJugadoresError.class)
+	public void agregarTresJugadoresDeberiaLanzarUnaExcepcion() throws MaximoJugadoresError {
+		SistemaTurnos sistemaTurnos = new SistemaTurnos();
+		Jugador jugador1 = new Jugador("Jugador Rojo");
+		Jugador jugador2 = new Jugador("Jugador Azul");
+		Jugador jugador3 = new Jugador("Jugador Verde");
+		
+		sistemaTurnos.agregarJugador(jugador1);
+		sistemaTurnos.agregarJugador(jugador2);
+		sistemaTurnos.agregarJugador(jugador3);
+		
 	}
 
 }
