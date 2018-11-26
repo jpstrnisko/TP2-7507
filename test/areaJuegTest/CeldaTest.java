@@ -8,7 +8,7 @@ import org.junit.Test;
 import areaJuego.Celda;
 
 public class CeldaTest {
-		
+	
 	@Test
 	public void celdaSeCreaLibre() {
 		
@@ -18,15 +18,17 @@ public class CeldaTest {
 	}
 	
 	@Test
-	public void celdaOcupadaCuandoSeColocaUnaUnidadEnPosicion00() {
-		
-		Posicion posicion = new Posicion(0,0);
-		Celda celda = new Celda(posicion);
-		celda.colocarAtacable(null, posicion);
-		celda.posicionar();
-		assertEquals(false, celda.estaLibre());
+	public void seCreaCeldaEnPosicionF1C1DevuelveCorrectamente() {
+		Celda celda = new Celda(new Posicion(1,1));
+		assertEquals(celda.obtenerPosicion().obtenerPosicionY(), 1);
+		assertEquals(celda.obtenerPosicion().obtenerPosicionX(),1);
 	}
-
 	
-	
+	@Test
+	public void ocupoUnaCeldaYDeberiaDevolverOcupada() {
+		Celda celda = new Celda(new Posicion(1,1));
+		celda.ocuparCelda();
+		assert(!celda.estaLibre());
+	}
 }
+	

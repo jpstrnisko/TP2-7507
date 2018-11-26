@@ -13,13 +13,15 @@ import turnos.TurnoConstruirFinalizado;
 import turnos.TurnoConstruirHabilitado;
 import turnos.TurnoRecolectarFinalizado;
 import edificios.Edificio;
+import edificios.Edificio;
+import edificios.PlazaCentral;
 
 public class Aldeano extends Unidad {
 	
 	private TurnoRecolectar turnoRecolectarOro;
 	private TurnoConstruir turnoConstruir;
 	private TurnoReparar turnoReparar;
-	
+		
 	public Aldeano() {
 		this.vida = 50;
 		this.costo = 25;
@@ -27,7 +29,6 @@ public class Aldeano extends Unidad {
 		this.turnoConstruir = new TurnoConstruirHabilitado();
 		this.turnoReparar = new TurnoRepararHabilitado();
 	}
-
 	
 	public Cuartel construirCuartel() {
 		return turnoConstruir.construirCuartel(this);
@@ -44,24 +45,12 @@ public class Aldeano extends Unidad {
 	
 	public Number recolectarOro() {
 		return turnoRecolectarOro.recolectarOro(this);
-	}
-
-
-	@Override
-	public void atacar(Atacable atacable) {		
-	}
-
-	@Override
-	public boolean moverA(Posicion posicion) {
-		return turnoMovimiento.moverUnidad(posicion, this);
-	}
-
-
+	}	
+	
 	public void finalizarAcciones() {
 		this.turnoRecolectarOro = new TurnoRecolectarFinalizado();	
 		this.turnoConstruir = new TurnoConstruirFinalizado();
 		this.turnoReparar = new TurnoRepararFinalizado();
 		
 	}
-
 }

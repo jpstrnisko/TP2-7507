@@ -2,9 +2,10 @@ package unidades;
 import edificios.Edificio;
 import areaJuego.Posicion;
 import interfaces.Atacable;
+import interfaces.IAtacante;
 
 
-public class Arquero extends Unidad {
+public class Arquero extends Unidad implements IAtacante {
 	
 	protected int danioAEdificios = 10;
 	protected int danioAUnidades = 15;
@@ -15,14 +16,14 @@ public class Arquero extends Unidad {
 		this.distanciaMaximaAtaque = 3;
 	}
 
+	
 	@Override
-	public void atacar(Atacable atacable) {
-		atacable.esAtacadoPor(this);
+	public void atacar(Edificio edificio) {
+		edificio.quitarVida(this.danioAEdificios);
 	}
 	
 	@Override
-	public boolean moverA(Posicion posicion) {
-		return false;
+	public void atacar(Unidad unidad) {
+		unidad.quitarVida(this.danioAUnidades);
 	}
-
 }

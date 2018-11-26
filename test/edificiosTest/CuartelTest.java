@@ -32,7 +32,7 @@ public class CuartelTest {
 	public void alRepararUnCuartelLaVidaAumentaEn50() {
 		cuartel.quitarVida(50);
 		cuartel.reparar();
-		Assert.assertEquals(cuartel.obtenerVida(), 250);
+		Assert.assertEquals(cuartel.obtenerVida(),250);
 	}
 	
 }

@@ -2,6 +2,7 @@ package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import areaJuego.Posicion;
 import unidades.Aldeano;
 import edificios.PlazaCentral;
 import edificios.Cuartel;
@@ -46,24 +47,24 @@ public class AldeanoTest {
 		assert(aldeano.repararEdificio(edificio));
 	}
 	
-	/*
-	@Test
-	public void elAldeanoDeberiaPoderRepararUnSoloEdificio() {
-		Aldeano aldeano = new Aldeano();
-		Cuartel edificio = new Cuartel();
-		Cuartel edificio2 = new Cuartel();
-		edificio.quitarVida(50);
-		edificio2.quitarVida(50);
-		assert(aldeano.repararEdificio(edificio));
-		assertFalse(aldeano.repararEdificio(edificio2));
-	}
-	@Test
-	public void elAldeanoPuedeMoverLaPosicionUnaVezPorTurno() {
-		Aldeano aldeano = new Aldeano();
-		assert(aldeano.moverA(new Posicion(1,1)));
-		assert(aldeano.moverA(new Posicion(2,2)));
-	}*/
 	
+	@Test
+	public void aldeanoSeCreaEnPosicion00DevuelvePosicionCorrecta() {
+		Aldeano aldeano = new Aldeano();
+		aldeano.establecerPosicion(new Posicion(0,0));
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionX(), 0);
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionY(), 0);
+	}
+	
+	@Test
+	public void aldeanoSeCreaEnPosicion00YLuegoSeMueveA11() {
+		Aldeano aldeano =  new Aldeano();
+		
+		aldeano.establecerPosicion(new Posicion(0,0));
+		aldeano.cambiarPosicion(new Posicion(1,1));
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionY(), 1);
+		assertEquals(aldeano.obtenerPosicion().obtenerPosicionX(), 1);
+	}
 	
 	
 	@Test

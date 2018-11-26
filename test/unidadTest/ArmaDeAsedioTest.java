@@ -2,6 +2,7 @@ package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import areaJuego.Posicion;
 import edificios.Castillo;
 import edificios.Cuartel;
 import edificios.Edificio;
@@ -16,32 +17,33 @@ import unidades.Espadachin;
 public class ArmaDeAsedioTest {
 	
 	public static final ArmaDeAsedio miArma = new ArmaDeAsedio();
+	
 	@Test
-	public void test01ArmaDeAsedioSeCreaCon150DeVida() {
+	public void armaDeAsedioSeCreaCon150DeVida() {
 		assertEquals(150, miArma.obtenerVida());
 	}
 	
 	@Test
-	public void test02ArmaDeAsedioSeCreaConUnCostoDe200() {
+	public void armaDeAsedioSeCreaConUnCostoDe200() {
 		assertEquals(200, miArma.obtenerCosto());
 	}
 	
 	@Test
-	public void test03ArmaDeAsedioSeDeberiaCrearDesmontada() {
+	public void armaDeAsedioSeDeberiaCrearDesmontada() {
 		Castillo castillo = new Castillo();
 		ArmaDeAsedio miArma = castillo.crearUnArmaDeAsedio();
 		assertFalse(miArma.estaMontada());
 	}
 	
 	@Test
-	public void test04ArmaDeAsedioDeberiaEstarMontadaAlMontarla() {
+	public void armaDeAsedioDeberiaEstarMontadaAlMontarla() {
 		ArmaDeAsedio miArma = new ArmaDeAsedio();
 		miArma.montar();
 		assertTrue(miArma.estaMontada());
 	}
 	
 	@Test
-	public void test05ArmaDeAsedioDeberiaEstarDesmontadaAlDesmontarla() {
+	public void armaDeAsedioDeberiaEstarDesmontadaAlDesmontarla() {
 		ArmaDeAsedio miArma = new ArmaDeAsedio();
 		miArma.montar();
 		miArma.desmontar();
@@ -49,29 +51,44 @@ public class ArmaDeAsedioTest {
 	}
 	
 	@Test
-	public void test06ArmaDeAsedioNoDeberiaSacarDanioAlAtacarDesmontada() {
+	public void armaDeAsedioNoDeberiaSacarDanioAlAtacarDesmontada() {
 		ArmaDeAsedio miArma = new ArmaDeAsedio();
-		Atacable cuartel = new Cuartel();
+		Edificio cuartel = new Cuartel();
 		miArma.atacar(cuartel);
-		assertEquals(250, ((Edificio) cuartel).obtenerVida());
+		assertEquals(250, cuartel.obtenerVida());
 	}
 	
 	@Test
-	public void test07ArmaDeAsedioDeberiaSacar75DeDanioAlAtacarUnEdificioEstandoMontada() {
+	public void armaDeAsedioDeberiaSacar75DeDanioAlAtacarUnEdificioEstandoMontada() {
 		ArmaDeAsedio miArma = new ArmaDeAsedio();
 		miArma.montar();
-		Atacable cuartel = new Cuartel();
+		Edificio cuartel = new Cuartel();
 		miArma.atacar(cuartel);
-		assertEquals(175, ((Edificio) cuartel).obtenerVida());
+		assertEquals(175, cuartel.obtenerVida());
 	}
 	
 	@Test
-	public void test07ArmaDeAsedioNoDeberiaSacarDanioAlAtacarUnaUnidad() {
+	public void armaDeAsedioNoDeberiaSacarDanioAlAtacarUnaUnidad() {
 		ArmaDeAsedio miArma = new ArmaDeAsedio();
 		miArma.montar();
-		Atacable espadachin = new Espadachin();
+		Unidad espadachin = new Espadachin();
 		miArma.atacar(espadachin);
-		assertEquals(100, ((Unidad) espadachin).obtenerVida());
+		assertEquals(100, espadachin.obtenerVida());
+	}
+	
+	@Test
+	public void ASDSeCreaEnPosicion00DevuelvePosicionCorrecta() {
+		miArma.establecerPosicion(new Posicion(0,0));
+		assertEquals(miArma.obtenerPosicion().obtenerPosicionX(), 0);
+		assertEquals(miArma.obtenerPosicion().obtenerPosicionY(), 0);
+	}
+	
+	@Test
+	public void ASDSeCreaEnPosicion00YLuegoSeMueveA11() {
+		miArma.establecerPosicion(new Posicion(0,0));
+		miArma.cambiarPosicion(new Posicion(1,1));
+		assertEquals(miArma.obtenerPosicion().obtenerPosicionY(), 1);
+		assertEquals(miArma.obtenerPosicion().obtenerPosicionX(), 1);
 	}
 
 }

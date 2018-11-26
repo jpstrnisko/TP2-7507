@@ -2,6 +2,7 @@ package unidadTest;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import areaJuego.Posicion;
 import edificios.Cuartel;
 import unidades.Arquero;
 import unidades.Espadachin;
@@ -36,4 +37,18 @@ public class ArqueroTest {
 		assertEquals(vidaActual-10, cuartel.obtenerVida());
 	}
 
+	@Test
+	public void arqueroSeCreaEnPosicion00DevuelvePosicionCorrecta() {
+		arquero.establecerPosicion(new Posicion(0,0));
+		assertEquals(arquero.obtenerPosicion().obtenerPosicionX(), 0);
+		assertEquals(arquero.obtenerPosicion().obtenerPosicionY(), 0);
+	}
+	
+	@Test
+	public void arqueroSeCreaEnPosicion00YLuegoSeMueveA11() {
+		arquero.establecerPosicion(new Posicion(0,0));
+		arquero.cambiarPosicion(new Posicion(1,1));
+		assertEquals(arquero.obtenerPosicion().obtenerPosicionY(), 1);
+		assertEquals(arquero.obtenerPosicion().obtenerPosicionX(), 1);
+	}
 }

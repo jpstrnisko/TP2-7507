@@ -1,14 +1,16 @@
 package unidades;
 import areaJuego.Posicion;
-import interfaces.Atacable;
 import interfaces.TurnoMovimiento;
 import turnos.TurnoMovimientoFinalizado;
+import interfaces.Atacable;
 
 public abstract class Unidad implements Atacable {
 	
 	protected int vida;
 	protected int costo;
 	protected int distanciaMaximaAtaque;
+	protected Posicion posicion;
+	protected int tamanio = 1; //1 casillero
 	protected TurnoMovimiento turnoMovimiento;
 
 	public int obtenerVida() {
@@ -23,23 +25,27 @@ public abstract class Unidad implements Atacable {
 		this.vida -= danio;
 	}
 	
-	public abstract void atacar(Atacable atacable);
+	public int obtenerDistanciaAtaque() {
+		return this.distanciaMaximaAtaque;
+	}
 	
-	public abstract boolean moverA(Posicion posicion);
+	public void establecerPosicion(Posicion posicion) {
+		this.posicion = posicion;
+	}
+	
+	public Posicion obtenerPosicion() {
+		return this.posicion;
+	}
+	
+	public void cambiarPosicion(Posicion destino) {
+		this.posicion =  destino;
+	}
+	
+	public int obtenerTamanio() {
+		return this.tamanio;
+	}
 	
 	public void finalizarTurnoMovimiento() {
 		this.turnoMovimiento = new TurnoMovimientoFinalizado();	
-	}
-	
-	public void esAtacadoPor(ArmaDeAsedio armaDeAsedio) {
-		this.quitarVida(0);
-	}
-	
-	public void esAtacadoPor(Espadachin espadachin) {
-		this.quitarVida(25);
-	}
-	
-	public void esAtacadoPor(Arquero arquero) {
-		this.quitarVida(15);
 	}
 }

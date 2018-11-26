@@ -2,13 +2,13 @@ package unidades;
 import edificios.Edificio;
 import areaJuego.Posicion;
 import interfaces.Atacable;
-
-
-import interfaces.Atacable;
 import interfaces.EstadoArmaDeAsedio;
+import interfaces.IAtacante;
 
-public class ArmaDeAsedio extends Unidad{
+
+public class ArmaDeAsedio extends Unidad implements IAtacante {
 	
+	protected int danioAEdificios = 75;
 	protected EstadoArmaDeAsedio estado;
 	
 	public ArmaDeAsedio() {
@@ -17,7 +17,7 @@ public class ArmaDeAsedio extends Unidad{
 		this.distanciaMaximaAtaque = 5;
 		this.estado = new EstadoDesmontada(this);
 	}
-
+	
 	public boolean estaMontada() {
 		return estado.estaMontada();
 	}
@@ -30,13 +30,15 @@ public class ArmaDeAsedio extends Unidad{
 		this.estado = new EstadoDesmontada(this);
 	}
 
+	
 	@Override
-	public boolean moverA(Posicion posicion) {
-		// TODO Auto-generated method stub
-		return false;
+	public void atacar(Edificio edificio) {
+		if(this.estaMontada())
+			edificio.quitarVida(this.danioAEdificios); //Solo puede atacar edificios
 	}
-
-	public void atacar(Atacable objetivo) {
-		estado.atacar(objetivo);
+	
+	@Override
+	public void atacar(Unidad unidad) {
+		unidad.quitarVida(0);
 	}
 }

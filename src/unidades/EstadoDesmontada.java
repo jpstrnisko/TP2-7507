@@ -15,9 +15,4 @@ public class EstadoDesmontada implements EstadoArmaDeAsedio {
 	public boolean estaMontada() {
 		return false;
 	}
-
-	@Override
-	public void atacar(Atacable objetivo) {
-	}
-
 }

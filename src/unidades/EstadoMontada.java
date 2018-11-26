@@ -15,10 +15,4 @@ public class EstadoMontada implements EstadoArmaDeAsedio {
 	public boolean estaMontada() {
 		return true;
 	}
-
-	@Override
-	public void atacar(Atacable objetivo) {
-		objetivo.esAtacadoPor(armaDeAsedio);
-	}
-
 }

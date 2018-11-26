@@ -2,11 +2,10 @@ package unidades;
 import edificios.Edificio;
 import areaJuego.Posicion;
 import interfaces.Atacable;
+import interfaces.IAtacante;
 
 
-import interfaces.Atacable;
-
-public class Espadachin extends Unidad {
+public class Espadachin extends Unidad implements IAtacante {
 	
 	protected int danioAUnidades = 25;
 	protected int danioAEdifcios = 15;
@@ -17,12 +16,13 @@ public class Espadachin extends Unidad {
 		this.distanciaMaximaAtaque = 1; //cuerpo a cuerpo
 	}
 	
-	public void atacar(Atacable objetivo) {
-		objetivo.esAtacadoPor(this);
+	@Override
+	public void atacar(Edificio edificio) {
+		edificio.quitarVida(this.danioAEdifcios);
 	}
 	
-	public boolean moverA(Posicion posicion){
-		return false;
+	@Override
+	public void atacar(Unidad unidad) {
+		unidad.quitarVida(this.danioAUnidades);
 	}
-
 }
