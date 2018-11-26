@@ -15,6 +15,7 @@ import turnos.Jugador;
 import unidades.Aldeano;
 import unidades.Unidad;
 import juego.FaltanJugadoresError;
+import turnos.MaximoJugadoresError;
 
 public class ReglasJuegoTest {
 	
@@ -29,6 +30,18 @@ public class ReglasJuegoTest {
 		Juego juego = new Juego();
 		Jugador jugador1 = new Jugador("Jose");
 		juego.agregegarJugador(jugador1);
+		juego.comenzarJuego();
+	}
+	
+	@Test(expected = MaximoJugadoresError.class)
+	public void noSeDeberiaPoderAgregarMasDeDosJugadores() throws Exception{
+		Juego juego = new Juego();
+		Jugador jugador1 = new Jugador("Jose");
+		Jugador jugador2 = new Jugador("Pedro");
+		Jugador jugador3 = new Jugador("Lucas");
+		juego.agregegarJugador(jugador1);
+		juego.agregegarJugador(jugador2);
+		juego.agregegarJugador(jugador3);
 		juego.comenzarJuego();
 	}
 	
