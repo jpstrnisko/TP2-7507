@@ -6,6 +6,7 @@ import unidades.Unidad;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class Mapa {
@@ -82,7 +83,14 @@ public class Mapa {
 		}
 	}
 
-
+	public List<Unidad> obtenerUnidades() {
+		List<Unidad> unidades = new ArrayList<Unidad>();
+		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
+			if (this.zonaDeJuego.get(cadaCelda) instanceof Unidad)
+				unidades.add((Unidad) zonaDeJuego.get(cadaCelda));
+		}
+		return unidades;
+	}
 }
 		
 	

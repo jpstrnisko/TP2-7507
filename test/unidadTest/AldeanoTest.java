@@ -66,7 +66,6 @@ public class AldeanoTest {
 		assertEquals(aldeano.obtenerPosicion().obtenerPosicionX(), 1);
 	}
 	
-	
 	@Test
 	public void elAldeanoNoDeberiaRecolectarOroMientrasConstruye() {
 		Aldeano aldeano = new Aldeano();
@@ -80,6 +79,7 @@ public class AldeanoTest {
 		assertTrue(aldeano.construirCuartel() instanceof Cuartel);
 		assertEquals(aldeano.construirPlaza(), null);
 	}
+	
 	
 }
 
