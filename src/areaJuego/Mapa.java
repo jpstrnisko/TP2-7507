@@ -83,17 +83,6 @@ public class Mapa {
 		}
 	}
 
-
-	public Posicion obtenerPosicionUnidad(Unidad unidad) {
-		for (Celda celda: this.zonaDeJuego.keySet()) {
-			if (this.zonaDeJuego.get(celda) == unidad) {
-				return celda.obtenerPosicion();
-			}
-		}
-		return null;
-	}
-
-
 	public List<Unidad> obtenerUnidades() {
 		List<Unidad> unidades = new ArrayList<Unidad>();
 		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
@@ -102,7 +91,6 @@ public class Mapa {
 		}
 		return unidades;
 	}
-
 }
 		
 	

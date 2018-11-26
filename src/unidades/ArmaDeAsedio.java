@@ -30,10 +30,17 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 		this.estado = new EstadoDesmontada(this);
 	}
 
+	public boolean estaEnRangoDeAtaqueEnX(Posicion posicion) {
+		return this.posicion.obtenerPosicionX() + posicion.obtenerPosicionX() <= this.distanciaMaximaAtaque;
+	}
+	
+	public boolean estaEnRangoDeAtaqueEnY(Posicion posicion) {
+		return this.posicion.obtenerPosicionY() + posicion.obtenerPosicionY() <= this.distanciaMaximaAtaque;
+	}
 	
 	@Override
 	public void atacar(Edificio edificio) {
-		if(this.estaMontada())
+		if(this.estaMontada() && (this.estaEnRangoDeAtaqueEnX(edificio.obtenerPosicion()) || this.estaEnRangoDeAtaqueEnY(edificio.obtenerPosicion())))
 			edificio.quitarVida(this.danioAEdificios); //Solo puede atacar edificios
 	}
 	
