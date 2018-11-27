@@ -1,13 +1,15 @@
 package unidades;
 import areaJuego.Posicion;
+import edificios.VidaEdificio;
 import interfaces.TurnoMovimiento;
+import juego.Juego;
 import turnos.Jugador;
 import turnos.TurnoMovimientoFinalizado;
 import interfaces.Atacable;
 
 public abstract class Unidad implements Atacable {
 	
-	protected int vida;
+	protected VidaUnidad vida;
 	protected int costo;
 	protected int distanciaMaximaAtaque;
 	protected Posicion posicion;
@@ -16,7 +18,7 @@ public abstract class Unidad implements Atacable {
 	protected Jugador jugador;
 
 	public int obtenerVida() {
-		return this.vida;
+		return this.vida.obtenerVida();
 	}
 
 	public int obtenerCosto() {
@@ -24,7 +26,7 @@ public abstract class Unidad implements Atacable {
 	}
 	
 	public void quitarVida(int danio) {
-		this.vida -= danio;
+		vida.daniar(danio);
 	}
 	
 	public int obtenerDistanciaAtaque() {
@@ -57,5 +59,10 @@ public abstract class Unidad implements Atacable {
 	
 	public void cambiarJugador(Jugador jugador) {
 		this.jugador = jugador;
+	}
+
+	public void matar() {
+		Juego juego = Juego.obtenerInstancia();
+		juego.obtenerMapa().removerAtacable(this);
 	}
 }

@@ -1,5 +1,6 @@
 package edificios;
 
+import turnos.Jugador;
 import unidades.Aldeano;
 
 public class PlazaCentral extends Edificio {
@@ -10,7 +11,7 @@ public class PlazaCentral extends Edificio {
 	public PlazaCentral() {
 		this.costo = 100;
 		this.tamanio = 4;
-		this.vida = new VidaEdificio(VIDAINICIAL, VELOCIDADREPARACION);
+		this.vida = new VidaEdificio(VIDAINICIAL, VELOCIDADREPARACION, this);
 		
 
 	}

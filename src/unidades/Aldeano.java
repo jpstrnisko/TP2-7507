@@ -24,7 +24,7 @@ public class Aldeano extends Unidad {
 	private TurnoReparar turnoReparar;
 		
 	public Aldeano() {
-		this.vida = 50;
+		this.vida = new VidaUnidad(50, this);
 		this.costo = 25;
 		this.turnoRecolectarOro = new TurnoRecolectarOro();
 		this.turnoConstruir = new TurnoConstruirHabilitado();

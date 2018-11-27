@@ -14,7 +14,7 @@ public class Cuartel extends Edificio {
 	public Cuartel() {
 		this.costo = 50;
 		this.tamanio = 4;
-		this.vida = new VidaEdificio(VIDAINICIAL, VELOCIDADREPARACION);
+		this.vida = new VidaEdificio(VIDAINICIAL, VELOCIDADREPARACION, this);
 	}
 	
 	public Espadachin crearUnEspadachin() {

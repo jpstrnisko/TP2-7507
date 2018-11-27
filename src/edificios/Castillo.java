@@ -1,5 +1,6 @@
 package edificios;
 
+import juego.Juego;
 import unidades.ArmaDeAsedio;
 import unidades.Unidad;
 
@@ -14,7 +15,7 @@ public class Castillo extends Edificio {
 	public Castillo() {
 		this.costo = -1; //no se puede construir
 		this.tamanio = 16;
-		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion);
+		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion, this);
 		this.atacante = new EdificioAtacante(this, danioAEdificiosYUnidades, rango);
 	}
 	
@@ -28,6 +29,12 @@ public class Castillo extends Edificio {
 	
 	public void atacar(Unidad unidad) {
 		this.atacante.atacar(unidad);
+	}
+	
+	@Override
+	public void destruir() {
+		Juego juego = Juego.obtenerInstancia();
+		juego.esDerrotado(this.obtenerJugador());
 	}
 
 }

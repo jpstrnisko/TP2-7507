@@ -1,10 +1,12 @@
 package areaJuego;
 import edificios.Edificio;
 import interfaces.Atacable;
+import turnos.Jugador;
 import unidades.Aldeano;
 import unidades.Unidad;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -91,6 +93,30 @@ public class Mapa {
 		}
 		return unidades;
 	}
+
+
+	public Collection<Edificio> obtenerEdificios() {
+		List<Edificio> edificios = new ArrayList<Edificio>();
+		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
+			Atacable atacable = this.zonaDeJuego.get(cadaCelda);
+			if (atacable instanceof Edificio && !edificios.contains(atacable))
+				edificios.add((Edificio) zonaDeJuego.get(cadaCelda));
+		}
+		return edificios;
+	}
+
+
+	public void removerAtacable(Atacable atacable){
+		List<Celda> celdasAEliminar = new ArrayList<Celda>();
+		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
+			if (this.zonaDeJuego.get(cadaCelda) == atacable)
+				celdasAEliminar.add(cadaCelda);
+		}
+		for(Celda celda: celdasAEliminar) {
+			this.zonaDeJuego.remove(celda);
+		}
+	}
+
 }
 		
 	

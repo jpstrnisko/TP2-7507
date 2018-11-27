@@ -11,7 +11,7 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 	protected EstadoArmaDeAsedio estado;
 	
 	public ArmaDeAsedio() {
-		this.vida = 150;
+		this.vida = new VidaUnidad(150, this);
 		this.costo = 200;
 		this.distanciaMaximaAtaque = 5;
 		this.estado = new EstadoDesmontada(this);

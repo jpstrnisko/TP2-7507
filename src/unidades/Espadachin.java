@@ -15,7 +15,7 @@ public class Espadachin extends Unidad implements IAtacante {
 	protected UnidadAtacante atacante;
 	
 	public Espadachin() {
-		this.vida = 100;
+		this.vida = new VidaUnidad(100, this);
 		this.costo = 50;
 		this.distanciaMaximaAtaque = 1; //cuerpo a cuerpo
 		this.atacante = new UnidadAtacante(this, danioAEdificios, danioAUnidades, distanciaMaximaAtaque);

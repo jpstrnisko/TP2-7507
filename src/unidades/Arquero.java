@@ -15,7 +15,7 @@ public class Arquero extends Unidad implements IAtacante {
 	protected UnidadAtacante atacante;
 	
 	public Arquero() {
-		this.vida = 75;
+		this.vida = new VidaUnidad(75, this);
 		this.costo = 75;
 		this.distanciaMaximaAtaque = 3;
 		this.atacante = new UnidadAtacante(this, danioAEdificios, danioAUnidades, distanciaMaximaAtaque);
