@@ -8,7 +8,6 @@ import interfaces.IAtacante;
 
 public class ArmaDeAsedio extends Unidad implements IAtacante {
 	
-	protected int danioAEdificios = 75;
 	protected EstadoArmaDeAsedio estado;
 	
 	public ArmaDeAsedio() {
@@ -30,22 +29,13 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 		this.estado = new EstadoDesmontada(this);
 	}
 
-	public boolean estaEnRangoDeAtaqueEnX(Posicion posicion) {
-		return this.posicion.obtenerPosicionX() + posicion.obtenerPosicionX() <= this.distanciaMaximaAtaque;
-	}
-	
-	public boolean estaEnRangoDeAtaqueEnY(Posicion posicion) {
-		return this.posicion.obtenerPosicionY() + posicion.obtenerPosicionY() <= this.distanciaMaximaAtaque;
-	}
-	
 	@Override
 	public void atacar(Edificio edificio) {
-		if(this.estaMontada() && (this.estaEnRangoDeAtaqueEnX(edificio.obtenerPosicion()) || this.estaEnRangoDeAtaqueEnY(edificio.obtenerPosicion())))
-			edificio.quitarVida(this.danioAEdificios); //Solo puede atacar edificios
+		this.estado.atacar(edificio);
 	}
 	
 	@Override
 	public void atacar(Unidad unidad) {
-		unidad.quitarVida(0);
+		this.estado.atacar(unidad);
 	}
 }

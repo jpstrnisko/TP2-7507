@@ -72,8 +72,10 @@ public class ArmaDeAsedioTest {
 	@Test
 	public void armaDeAsedioNoDeberiaSacarDanioAlAtacarUnaUnidad() {
 		ArmaDeAsedio miArma = new ArmaDeAsedio();
+		miArma.establecerPosicion(new Posicion(0,0));
 		miArma.montar();
 		Unidad espadachin = new Espadachin();
+		espadachin.establecerPosicion(new Posicion(1, 1));
 		miArma.atacar(espadachin);
 		assertEquals(100, espadachin.obtenerVida());
 	}
@@ -102,5 +104,16 @@ public class ArmaDeAsedioTest {
 		cuartel.establecerPosicion(new Posicion(6,6));
 		miArma.atacar(cuartel);
 		assertEquals(250, cuartel.obtenerVida());
+	}
+	
+	@Test
+	public void armaDeAsedioDeberiaAtacarUnEdificioDentroDelRangoDeAtaque() {
+		ArmaDeAsedio miArma = new ArmaDeAsedio();
+		miArma.establecerPosicion(new Posicion(7,7));
+		miArma.montar();
+		Edificio cuartel = new Cuartel();
+		cuartel.establecerPosicion(new Posicion(1,1));
+		miArma.atacar(cuartel);
+		assertEquals(175, cuartel.obtenerVida());
 	}
 }

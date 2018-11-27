@@ -5,14 +5,17 @@ import unidades.Unidad;
 
 public class Castillo extends Edificio {
 	
-	private static final int VELOCIDADREPARACION = 15;
-	private static final int VIDAINICIAL = 1000;
-	private static final int DANIOGENERADO = 20; //Tanto a unidades como a otros edificios.
+	protected int velocidadReparacion = 15;
+	protected int vidaInicial = 1000;
+	protected int danioAEdificiosYUnidades = 20;
+	protected EdificioAtacante atacante;
+	protected int rango = 3;
 	
 	public Castillo() {
 		this.costo = -1; //no se puede construir
-		this.tamanio = 8;
-		this.vida = new VidaEdificio(VIDAINICIAL, VELOCIDADREPARACION);
+		this.tamanio = 16;
+		this.vida = new VidaEdificio(vidaInicial, velocidadReparacion);
+		this.atacante = new EdificioAtacante(this, danioAEdificiosYUnidades, rango);
 	}
 	
 	public ArmaDeAsedio crearUnArmaDeAsedio() {
@@ -20,11 +23,11 @@ public class Castillo extends Edificio {
 	}
 	
 	public void atacar(Edificio edificio) {
-		edificio.quitarVida(DANIOGENERADO);
+		this.atacante.atacar(edificio);
 	}
 	
 	public void atacar(Unidad unidad) {
-		unidad.quitarVida(DANIOGENERADO);
+		this.atacante.atacar(unidad);
 	}
 
 }

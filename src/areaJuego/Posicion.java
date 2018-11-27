@@ -21,4 +21,8 @@ public class Posicion {
 	public boolean posicionesSonIguales(Posicion pos2) {
 		return (this.obtenerPosicionX() == pos2.obtenerPosicionX() && this.obtenerPosicionY() == pos2.obtenerPosicionY());
 	}
+	
+	public Posicion obtenerNuevaPosicionVariadaEn(int x, int y) {
+		return new Posicion(this.obtenerPosicionX() + x, this.obtenerPosicionY() + y);
+	}
 }

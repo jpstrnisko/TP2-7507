@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import areaJuego.Posicion;
+import edificios.Castillo;
 import edificios.Cuartel;
 import edificios.Edificio;
 import interfaces.Atacable;
@@ -77,6 +78,16 @@ public class EspadachinTest {
 		cuartel.establecerPosicion(new Posicion(2,6));
 		espadachin.atacar(cuartel);
 		assertEquals(250, cuartel.obtenerVida());
+	}
+	
+	@Test
+	public void espadachinDeberiaAtacarEdificioDentroDelRangoDeAtaque() {
+		Espadachin espadachin = new Espadachin();
+		espadachin.establecerPosicion(new Posicion(5, 5));
+		Edificio castillo = new Castillo();
+		castillo.establecerPosicion(new Posicion(1, 1));
+		espadachin.atacar(castillo);
+		assertEquals(985, castillo.obtenerVida());
 	}
 
 }

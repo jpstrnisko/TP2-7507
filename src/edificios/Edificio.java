@@ -1,4 +1,7 @@
 package edificios;
+import java.util.ArrayList;
+import java.util.List;
+
 import areaJuego.Posicion;
 import interfaces.Atacable;
 import unidades.ArmaDeAsedio;
@@ -10,9 +13,8 @@ public abstract class Edificio implements Atacable{
 	protected VidaEdificio vida;
 	protected int costo;
 	protected int tamanio;
-	protected Posicion posicion;
-	
-	
+	protected List<Posicion> posiciones = new ArrayList<Posicion>();
+
 	public int obtenerVida() {
 		return vida.obtenerVida();
 	}
@@ -34,16 +36,17 @@ public abstract class Edificio implements Atacable{
 	}
 	
 	public void establecerPosicion(Posicion posicion) {
-		this.posicion = posicion;
+		for(int i = 0; i < Math.sqrt(tamanio); i++) {
+			for(int j = 0; j < Math.sqrt(tamanio); j++) {
+				posiciones.add(posicion.obtenerNuevaPosicionVariadaEn(i, j));
+			}
+		}
 	}
 	
-	public Posicion obtenerPosicion() {
-		return this.posicion;
+	public List<Posicion> obtenerPosiciones() {
+		return this.posiciones;
 	}
 	
-	public void cambiarPosicion(Posicion destino) {
-		this.posicion =  destino;
-	}	
 	public void esAtacadoPor(ArmaDeAsedio armaDeAsedio) {
 		this.quitarVida(75);
 	}

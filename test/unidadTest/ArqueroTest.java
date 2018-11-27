@@ -66,9 +66,20 @@ public class ArqueroTest {
 	@Test
 	public void arqueroNoDeberiaAtacarEdificioFueraDelRangoDeAtaque() { //Pruebo con cuartel
 		Cuartel cuartel = new Cuartel();
-		cuartel.establecerPosicion(new Posicion(4,4));
+		cuartel.establecerPosicion(new Posicion(5,5));
 		int vidaActual = cuartel.obtenerVida();
 		arquero.atacar(cuartel);
 		assertEquals(vidaActual, cuartel.obtenerVida());
+	}
+	
+	@Test
+	public void arqueroDeberiaAtacarEdificioDentroDelRangoDeAtaque() {
+		Arquero arquero2 = new Arquero();
+		arquero2.establecerPosicion(new Posicion(8,8));
+		Cuartel cuartel = new Cuartel();
+		cuartel.establecerPosicion(new Posicion(4,4));
+		int vidaActual = cuartel.obtenerVida();
+		arquero2.atacar(cuartel);
+		assertEquals(vidaActual - 10, cuartel.obtenerVida());
 	}
 }
