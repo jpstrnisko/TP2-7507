@@ -7,3 +7,9 @@ Norese, Florencia;
 Strnisko, Juan Pablo;
 Stroia, Lautaro;
 Suarez, Martin.
+
+
+
+
+[![codecov](https://codecov.io/gh/jpstrnisko/TP2-7507/branch/master/graph/badge.svg)](https://codecov.io/gh/jpstrnisko/TP2-7507)
+
