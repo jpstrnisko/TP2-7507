@@ -38,7 +38,7 @@ public class Juego {
 	}
 	
 	public static Juego obtenerNuevaInstancia() {
-		/*Método que crea y devuelve una instancia nueva de juego, usar
+		/*Metodo que crea y devuelve una instancia nueva de juego, usar
 		 * solo para pruebas unitarias.
 		 */
 		instancia = new Juego();
