@@ -2,6 +2,9 @@ language: java
 jdk:
   - oraclejdk8
 
+install: ant
+script: ant test
+
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
   
@@ -11,5 +14,6 @@ notifications:
       - martinsua24@gmail.com
       - lautaro.stroia@gmail.com
       - jpstrnisko@gmail.com
+    on_success: always
     on failure: always
  
