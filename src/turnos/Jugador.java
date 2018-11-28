@@ -12,6 +12,11 @@ public class Jugador {
 	public int obtenerOro() {
 		return oro;
 	}
+
+	public void aumentarOro(int cantidadDeOro) {
+		if(cantidadDeOro > 0)
+			this.oro += cantidadDeOro;	
+	}
 	
 	
 

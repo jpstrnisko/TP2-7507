@@ -7,6 +7,8 @@ public class PlazaCentral extends Edificio {
 
 	private static final int VELOCIDADREPARACION = 25;
 	private static final int VIDAINICIAL = 450;
+	private final int TURNOSPARACONSTRUCCION = 3;
+
 	
 	public PlazaCentral() {
 		this.costo = 100;

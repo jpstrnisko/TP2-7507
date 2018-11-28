@@ -1,5 +1,7 @@
 package unidades;
 import edificios.Edificio;
+import acciones.Desmontar;
+import acciones.Montar;
 import areaJuego.Posicion;
 import interfaces.Atacable;
 import interfaces.EstadoArmaDeAsedio;
@@ -37,5 +39,29 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 	@Override
 	public void atacar(Unidad unidad) {
 		this.estado.atacar(unidad);
+	}
+	
+	public void montarArma() {
+		this.accion = new Montar(this);
+	}
+	
+	public void desmontarArma() {
+		this.accion = new Desmontar(this);
+	}
+
+	@Override
+	protected void reiniciarAccion() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void seleccionarObjetivo(Atacable objetivo) {
+		
+	}
+
+	@Override
+	public int obtenerRangoAtaque() {
+		return distanciaMaximaAtaque;
 	}
 }

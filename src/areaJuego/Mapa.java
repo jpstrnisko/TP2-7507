@@ -50,7 +50,7 @@ public class Mapa {
 	
 	public boolean posicionEstaOcupada(Posicion posicion) {
 		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
-			if (cadaCelda.obtenerPosicion().posicionesSonIguales(posicion))
+			if (cadaCelda.obtenerPosicion().equals(posicion))
 				return true;
 		}
 		return false;
@@ -115,6 +115,11 @@ public class Mapa {
 		for(Celda celda: celdasAEliminar) {
 			this.zonaDeJuego.remove(celda);
 		}
+	}
+
+
+	public boolean posicionEsValida(Posicion posicion) {
+		return !(this.posicionEstaOcupada(posicion) || this.seSalioDelMapa(posicion));
 	}
 
 }

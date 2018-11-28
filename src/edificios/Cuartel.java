@@ -24,6 +24,6 @@ public class Cuartel extends Edificio {
 	public Arquero crearUnArquero() {
 		return new Arquero();
 	}
-	
+
 }
 
