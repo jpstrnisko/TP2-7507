@@ -27,16 +27,6 @@ public class AldeanoTest {
 		assertEquals(25, aldeano.obtenerCosto());
 	}
 	
-	@Test
-	public void elAldeanoDeberiaPoderRepararEdificio() {
-		Aldeano aldeano = new Aldeano();
-		Cuartel edificio = new Cuartel();
-		int vidaInicial = edificio.obtenerVida();
-		edificio.quitarVida(50);
-		aldeano.repararEdificio(edificio);
-		assertEquals(edificio.obtenerVida(), vidaInicial);
-	}
-	
 	
 	@Test
 	public void aldeanoSeCreaEnPosicion00DevuelvePosicionCorrecta() {
@@ -56,12 +46,12 @@ public class AldeanoTest {
 		assertEquals(aldeano.obtenerPosicion().obtenerPosicionX(), 1);
 	}
 	
-	@Test
+	/*@Test
 	public void elAldeanoNoDeberiaConstruirDosEdificios() {
 		Aldeano aldeano = new Aldeano();
 		aldeano.construirCuartel(new Posicion(1,1));
 		aldeano.construirPlazaCentral(new Posicion(1,1));
-	}
+	}*/
 	
 	
 }
