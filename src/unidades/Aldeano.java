@@ -13,7 +13,7 @@ public class Aldeano extends Unidad {
 	public Aldeano() {
 		this.vida = new VidaUnidad(50, this);
 		this.costo = 25;
-		this.accion = new RecolectarOro();
+		this.accion = new RecolectarOro(this);
 	}
 	
 	public void construirCuartel(Posicion posicion) {
@@ -25,12 +25,12 @@ public class Aldeano extends Unidad {
 	}
 	
 	public void repararEdificio(Edificio edificio) {
-		this.accion = new RepararEdificio(edificio);
+		this.accion = new RepararEdificio(edificio, this);
 	}
 	
 	
 	public void recolectarOro() {
-		this.accion = new RecolectarOro();
+		this.accion = new RecolectarOro(this);
 	}	
 	
 }

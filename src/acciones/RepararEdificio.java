@@ -3,7 +3,6 @@ package acciones;
 import edificios.Edificio;
 import interfaces.Accion;
 import unidades.Aldeano;
-import unidades.Unidad;
 
 public class RepararEdificio implements Accion {
 	private Edificio edificio;

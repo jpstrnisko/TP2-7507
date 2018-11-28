@@ -41,15 +41,17 @@ public class AldeanoTest {
 	@Test
 	public void elAldeanoRecolecta20OroPorTurno() {
 		Aldeano aldeano = new Aldeano();
-		assertEquals(20, aldeano.accion.hacer());
+		assertEquals(20, aldeano.realizarAccion());
 	}
 	
 	@Test
 	public void elAldeanoDeberiaPoderRepararEdificio() {
 		Aldeano aldeano = new Aldeano();
 		Cuartel edificio = new Cuartel();
+		int vidaInicial = edificio.obtenerVida();
 		edificio.quitarVida(50);
-		assert(aldeano.repararEdificio(edificio));
+		aldeano.repararEdificio(edificio);
+		assertEquals(edificio.obtenerVida(), vidaInicial);
 	}
 	
 	
@@ -74,15 +76,15 @@ public class AldeanoTest {
 	@Test
 	public void elAldeanoNoDeberiaRecolectarOroMientrasConstruye() {
 		Aldeano aldeano = new Aldeano();
-		assertTrue(aldeano.construirCuartel() instanceof Cuartel);
+		aldeano.construirCuartel(new Posicion(1,1));
 		assertEquals(0, aldeano.recolectarOro());
 	}
 	
 	@Test
 	public void elAldeanoNoDeberiaConstruirDosEdificios() {
 		Aldeano aldeano = new Aldeano();
-		assertTrue(aldeano.construirCuartel() instanceof Cuartel);
-		assertEquals(aldeano.construirPlaza(), null);
+		aldeano.construirCuartel(new Posicion(1,1));
+		aldeano.construirPlazaCentral(new Posicion(1,1));
 	}
 	
 	
