@@ -1,4 +1,5 @@
 package unidades;
+import areaJuego.Mapa;
 import areaJuego.Posicion;
 import edificios.VidaEdificio;
 import interfaces.TurnoMovimiento;
@@ -7,6 +8,7 @@ import turnos.Jugador;
 import turnos.TurnoMovimientoFinalizado;
 import interfaces.Accion;
 import interfaces.Atacable;
+import interfaces.IAtacante;
 
 public abstract class Unidad implements Atacable {
 	
@@ -69,7 +71,23 @@ public abstract class Unidad implements Atacable {
 		juego.obtenerMapa().removerAtacable(this);
 	}
 	
+	public void mover(Posicion posicion) throws Exception {
+		Mapa mapa = Juego.obtenerInstancia().obtenerMapa();
+		if(this.posicion.esAdyacente(posicion) && mapa.posicionEsValida(posicion)) {
+			this.posicion = posicion;
+			mapa.removerAtacable(this);
+			mapa.colocarAtacable(this.posicion, this);
+			this.reiniciarAccion();
+		}
+	}
+	
+	protected abstract void reiniciarAccion();
+
 	public void realizarAccion() {
 		this.accion.hacer();
+	}
+	
+	public boolean estaEnRangoDe(int rangoDeAtaque, IAtacante atacante) {
+		return this.obtenerPosicion().estaEnRango(atacante.obtenerPosicion(), rangoDeAtaque);
 	}
 }

@@ -9,6 +9,7 @@ public class FabricaEdificios {
 		Juego juego = Juego.obtenerInstancia();
 		Edificio edificio = (Edificio) clase.newInstance();
 		edificio.establecerPosicion(posicion);
+		edificio.establecerVida(0);
 		edificio.cambiarJugador(jugador);
 		juego.obtenerMapa().colocarAtacable(edificio.obtenerPosicionInicial(), edificio);
 		return edificio;

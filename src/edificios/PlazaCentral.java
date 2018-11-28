@@ -20,12 +20,4 @@ public class PlazaCentral extends Edificio {
 	public Aldeano crearUnAldeano() {
 		return new Aldeano();
 	}
-	@Override
-	public void continuarConstruccion() {
-		this.turnoConstruccion++;
-		if(this.turnoConstruccion > this.TURNOSPARACONSTRUCCION) {
-			this.terminarConstruccion();
-		}
-		
-	}
 }

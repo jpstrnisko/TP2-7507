@@ -31,6 +31,25 @@ public class Arquero extends Unidad implements IAtacante {
 	public void atacar(Unidad unidad) {
 		this.atacante.atacar(unidad);
 	}
+
+
+	@Override
+	protected void reiniciarAccion() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void seleccionarObjetivo(Atacable objetivo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public int obtenerRangoAtaque() {
+		return distanciaMaximaAtaque;
+	}
 	
 	
 }

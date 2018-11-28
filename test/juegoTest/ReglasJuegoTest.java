@@ -10,11 +10,13 @@ import areaJuego.Mapa;
 import areaJuego.Posicion;
 import areaJuego.PosicionOcupadaError;
 import edificios.Castillo;
+import edificios.Cuartel;
 import edificios.Edificio;
 import edificios.PlazaCentral;
 import juego.Juego;
 import turnos.Jugador;
 import unidades.Aldeano;
+import unidades.Espadachin;
 import unidades.Unidad;
 import juego.FaltanJugadoresError;
 import turnos.MaximoJugadoresError;
@@ -150,7 +152,7 @@ public class ReglasJuegoTest {
 		juego.agregegarJugador(jugador2);
 		juego.comenzarJuego();
 		
-		List<Edificio> edificios = juego.obtenerEdifciosDelJugador(jugador1);
+		List<Edificio> edificios = juego.obtenerEdificiosDelJugador(jugador1);
 		assertEquals(2, edificios.size());
 		
 		if(edificios.get(0) instanceof Castillo) {
@@ -173,7 +175,7 @@ public class ReglasJuegoTest {
 		juego.agregegarJugador(jugador2);
 		juego.comenzarJuego();
 		
-		List<Edificio> edificios = juego.obtenerEdifciosDelJugador(jugador1);
+		List<Edificio> edificios = juego.obtenerEdificiosDelJugador(jugador1);
 		Castillo castillo = null;
 		for(Edificio edificio: edificios) {
 			if(edificio instanceof Castillo)
@@ -229,6 +231,538 @@ public class ReglasJuegoTest {
 		unidadesJugador1.get(2).quitarVida(500);
 		assertEquals(juego.obtenerPoblacion(jugador1), 0);
 	}
+	
+	@Test
+	public void aldeanoDeberiaPoderConstruirPlazaCentral() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirPlazaCentral(new Posicion(1,2));
+		
+		List<Edificio> edificios = juego.obtenerEdificiosDelJugador(jugador1);
+		assertEquals(1, edificios.size());
+		assert(edificios.get(0) instanceof PlazaCentral);
+		assert(edificios.get(0).obtenerPosiciones().contains(new Posicion(1, 2)));
+		assert(edificios.get(0).obtenerPosiciones().contains(new Posicion(1, 3)));
+		assert(edificios.get(0).obtenerPosiciones().contains(new Posicion(2, 2)));
+		assert(edificios.get(0).obtenerPosiciones().contains(new Posicion(2, 3)));
+	}
+	
+	@Test
+	public void aldeanoDeberiaPoderConstruirCuartel() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirCuartel(new Posicion(1,2));
+		
+		List<Edificio> edificios = juego.obtenerEdificiosDelJugador(jugador1);
+		assertEquals(1, edificios.size());
+		assert(edificios.get(0) instanceof Cuartel);
+		assert(edificios.get(0).obtenerPosiciones().contains(new Posicion(1, 2)));
+		assert(edificios.get(0).obtenerPosiciones().contains(new Posicion(1, 3)));
+		assert(edificios.get(0).obtenerPosiciones().contains(new Posicion(2, 2)));
+		assert(edificios.get(0).obtenerPosiciones().contains(new Posicion(2, 3)));
+	}
+	
+	@Test
+	public void unEdificioDeberiaEstarEnConstruccionAlComenzarloAConstruir() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirCuartel(new Posicion(1,2));
+		
+		Edificio cuartel = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		assert(cuartel.estaEnConstruccion());
+	}
+	
+	@Test
+	public void unAldeanoNoDeberiaPoderConstruirUnEdificioEnUnaPosicionAdyacente() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirCuartel(new Posicion(6, 6));
+		
+		assertEquals(0, juego.obtenerEdificiosDelJugador(jugador1).size());
+	}
+	
+	@Test
+	public void comprueboCorrectamenteLasPosicionesDondeElAldeanoPuedeConstruirUnCuartel() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(4, 4);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(2, 2)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(2, 3)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(2, 4)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(2, 5)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(3, 2)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(3, 5)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(4, 2)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(4, 5)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(5, 2)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(5, 3)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(5, 4)));
+		assert(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(5, 5)));
+		assertFalse(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(3, 3)));
+		assertFalse(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(3, 4)));
+		assertFalse(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(4, 3)));
+		assertFalse(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(4, 4)));
+		assertFalse(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(15, 4)));
+		assertFalse(aldeano.estaAdyacenteAlEdificio(new Cuartel(), new Posicion(4, 20)));
+	}
+	
+	@Test
+	public void unCuartelDeberiaTardar3TurnosEnConstruirse() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirCuartel(new Posicion(1,2));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		
+		Edificio cuartel = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		assertFalse(cuartel.estaEnConstruccion());
+	}
+	
+	@Test
+	public void unEdificioDeberiaTener0DeVidaAlComenzarAConstruirse() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirCuartel(new Posicion(1,2));
+		
+		Edificio cuartel = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		assertEquals(0, cuartel.obtenerVida());
+	}
+	
+	@Test
+	public void unCuartelDeberiaTener250DeVidaAFinalizarLaConstruccion() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirCuartel(new Posicion(1,2));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		
+		Edificio cuartel = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		assertEquals(250, cuartel.obtenerVida());
+	}
+	
+	@Test
+	public void unaPlazaCentralDeberiaTener450DeVidaAFinalizarLaConstruccion() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirPlazaCentral(new Posicion(1,2));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		
+		Edificio plazaCentral = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		assertEquals(450, plazaCentral.obtenerVida());
+	}
+	
+	@Test
+	public void unEdificioDeberiaCorresponderAlJugadorQueLoConstruye() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirPlazaCentral(new Posicion(1,2));
+		
+		Edificio plazaCentral = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		assertEquals(jugador1, plazaCentral.obtenerJugador());
+	}
+	
+	@Test
+	public void unaUnidadNoSeDeberiaPoderMoverAUnaPosicionQueNoEsAdyacente() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+
+		aldeano.mover(new Posicion(20, 1));
+		assertEquals(posicionAldeano, aldeano.obtenerPosicion());
+		aldeano.mover(new Posicion(1, 20));
+		assertEquals(posicionAldeano, aldeano.obtenerPosicion());
+		aldeano.mover(new Posicion(3, 3));
+		assertEquals(posicionAldeano, aldeano.obtenerPosicion());
+	}
+	
+	@Test
+	public void unaUnidadSeDeberiaPoderMoverAUnaPosicionAdyacente() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(1, 1);
+		Posicion nuevaPosicionAldeano = new Posicion(2, 1);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+
+		aldeano.mover(nuevaPosicionAldeano);
+		assertEquals(nuevaPosicionAldeano, aldeano.obtenerPosicion());
+	}
+	
+	@Test
+	public void unaUnidadNoSeDeberiaPoderMoverAUnaPosicionOcupada() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		
+		Aldeano aldeano1 = new Aldeano();
+		Aldeano aldeano2 = new Aldeano();
+		aldeano1.cambiarJugador(jugador1);
+		aldeano2.cambiarJugador(jugador1);
+
+		Posicion posicionAldeano1 = new Posicion(1, 1);
+		Posicion posicionAldeano2 = new Posicion(2, 1);
+		aldeano1.cambiarPosicion(posicionAldeano1);
+		aldeano2.cambiarPosicion(posicionAldeano2);
+		
+		mapa.colocarAtacable(posicionAldeano1, aldeano1);
+		mapa.colocarAtacable(posicionAldeano2, aldeano2);
+		
+		aldeano1.mover(posicionAldeano2);
+		assertEquals(posicionAldeano1, aldeano1.obtenerPosicion());
+	}
+	
+	@Test
+	public void moverAUnAldeanoQueEstabaConstruyendoUnEdificioDeberiaDetenerLaConstruccion() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirPlazaCentral(new Posicion(5, 6));
+		aldeano.mover(new Posicion(4, 5));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		
+		Edificio plazaCentral = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		assertEquals(plazaCentral.obtenerVida(), 0);
+		assert(plazaCentral.estaEnConstruccion());
+	}
+	
+	@Test
+	public void unAldeanoDeberiaProducir20DeOroPorTurno() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		assertEquals(jugador1.obtenerOro(), 100);
+		aldeano.realizarAccion();
+		
+		assertEquals(jugador1.obtenerOro(), 120);
+	}
+	
+	@Test
+	public void unAldeanoNoDeberiaProducirOroSiEstaConstruyendoUnEdificio() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirPlazaCentral(new Posicion(5, 6));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+
+		assertEquals(jugador1.obtenerOro(), 100);
+	}
+	
+	@Test
+	public void unAldeanoNoDeberiaProducirOroSiEstaReparandoUnEdificio() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		aldeano.construirPlazaCentral(new Posicion(5, 6));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		assertEquals(jugador1.obtenerOro(), 100);
+		
+		Edificio plaza = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		plaza.quitarVida(50);
+		
+		aldeano.repararEdificio(plaza);
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		assertEquals(jugador1.obtenerOro(), 100);
+	}
+	
+	@Test
+	public void alFinalizarUnaReparacionUnAldeanoDeberiaVolverAProducirOro() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		aldeano.construirPlazaCentral(new Posicion(5, 6));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		assertEquals(jugador1.obtenerOro(), 100);
+		
+		Edificio plaza = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		plaza.quitarVida(50);
+		
+		aldeano.repararEdificio(plaza);
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		assertEquals(jugador1.obtenerOro(), 100);
+		
+		aldeano.realizarAccion();
+		assertEquals(jugador1.obtenerOro(), 120);
+	}
+	
+	@Test
+	public void unAldeanoDeberiaRepararUnEdificioAdyacenteHastaQueRecupereSuVidaMaxima() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirPlazaCentral(new Posicion(5, 6));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		
+		Edificio plazaCentral = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		
+		plazaCentral.quitarVida(50);
+		assertEquals(plazaCentral.obtenerVida(), 400);
+		
+		aldeano.repararEdificio(plazaCentral);
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		
+		assertEquals(plazaCentral.obtenerVida(), 450);
+	}
+	
+	@Test
+	public void unAldeanoNoDeberiaPoderRepararUnEdificioQueNoEsAdyacente() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirPlazaCentral(new Posicion(6, 6));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		aldeano.mover(new Posicion(4, 4));
+		
+		Edificio plazaCentral = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		
+		plazaCentral.quitarVida(250);
+		assertEquals(200, plazaCentral.obtenerVida());
+		
+		aldeano.repararEdificio(plazaCentral);
+		aldeano.realizarAccion();
+		
+		assertEquals(200, plazaCentral.obtenerVida());
+	}
+	
+	@Test
+	public void unAldeanoDeberiaProducirOroSiSeLeOrdenaConstruirEnUnaPosicionNoAdyacente() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		aldeano.construirPlazaCentral(new Posicion(10, 10));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		
+		assertEquals(140, jugador1.obtenerOro());
+	}
+	
+	@Test
+	public void unEspadchinDeberiaPoderAtacarUnaUnidadAdyacente() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		Espadachin espadachin = new Espadachin();
+		Posicion posicionEspadachin = new Posicion(6, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		espadachin.cambiarPosicion(posicionEspadachin);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		mapa.colocarAtacable(posicionEspadachin, espadachin);
+		
+		espadachin.seleccionarObjetivo(aldeano);
+		espadachin.realizarAccion();
+		
+		assertEquals(25, aldeano.obtenerVida());
+	}
+	
+	@Test
+	public void unEspadchinNoDeberiaPoderAtacarUnaUnidadFueraDeSuRango() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		Espadachin espadachin = new Espadachin();
+		Posicion posicionEspadachin = new Posicion(7, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		espadachin.cambiarPosicion(posicionEspadachin);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		mapa.colocarAtacable(posicionEspadachin, espadachin);
+		
+		espadachin.seleccionarObjetivo(aldeano);
+		espadachin.realizarAccion();
+		
+		assertEquals(50, aldeano.obtenerVida());
+	}
+	
+	/*@Test
+	public void unEspadchinDeberiaPoderAtacarUnEdificioAdyacente() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Espadachin espadachin = new Espadachin();
+		Posicion posicionEspadachin = new Posicion(5, 5);
+		Cuartel cuartel = new Cuartel();
+		Posicion posicionCuartel = new Posicion(6, 5);
+		espadachin.cambiarPosicion(posicionEspadachin);
+		cuartel.establecerPosicion(posicionCuartel);
+		espadachin.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionCuartel, cuartel);
+		mapa.colocarAtacable(posicionEspadachin, espadachin);
+		
+		espadachin.seleccionarObjetivo(cuartel);
+		espadachin.realizarAccion();
+		
+		assertEquals(235, cuartel.obtenerVida());
+	}
+	
+	@Test
+	public void unEspadchinNoDeberiaPoderAtacarUnEdificioQueNoEsteEnSuRango() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		Espadachin espadachin = new Espadachin();
+		Posicion posicionEspadachin = new Posicion(6, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		espadachin.cambiarPosicion(posicionEspadachin);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		mapa.colocarAtacable(posicionEspadachin, espadachin);
+		
+		espadachin.seleccionarObjetivo(aldeano);
+		espadachin.realizarAccion();
+		
+		assertEquals(25, aldeano.obtenerVida());
+	}*/
+	
 	
 
 }

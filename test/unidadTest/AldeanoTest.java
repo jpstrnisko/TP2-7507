@@ -1,11 +1,18 @@
 package unidadTest;
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import org.junit.Test;
 
+import areaJuego.Mapa;
 import areaJuego.Posicion;
 import unidades.Aldeano;
 import edificios.PlazaCentral;
+import juego.Juego;
+import turnos.Jugador;
 import edificios.Cuartel;
+import edificios.Edificio;
 
 public class AldeanoTest {
 
@@ -18,30 +25,6 @@ public class AldeanoTest {
 	public void aldeanoSeCreaConUnCostoDe25() {
 		Aldeano aldeano = new Aldeano();
 		assertEquals(25, aldeano.obtenerCosto());
-	}
-	
-	@Test
-	public void aldeanoConstruyePlazaCentral() {
-		Aldeano aldeano = new Aldeano();
-		aldeano.construirPlazaCentral(new Posicion(1,1));
-		assert(aldeano.construirPlaza() instanceof PlazaCentral);
-	}
-	
-	@Test
-	public void aldeanoConstruyeCuartelEn3Turnos() {
-		Aldeano aldeano = new Aldeano();
-		aldeano.construirCuartel(new Posicion(1,1));
-		for(int turno = 1; turno < 3; turno++) {
-			aldeano.realizarAccion();
-			assert();
-		}
-		assert(aldeano.realizarAccion() instanceof Cuartel);
-	}
-	
-	@Test
-	public void elAldeanoRecolecta20OroPorTurno() {
-		Aldeano aldeano = new Aldeano();
-		assertEquals(20, aldeano.realizarAccion());
 	}
 	
 	@Test
@@ -71,13 +54,6 @@ public class AldeanoTest {
 		aldeano.cambiarPosicion(new Posicion(1,1));
 		assertEquals(aldeano.obtenerPosicion().obtenerPosicionY(), 1);
 		assertEquals(aldeano.obtenerPosicion().obtenerPosicionX(), 1);
-	}
-	
-	@Test
-	public void elAldeanoNoDeberiaRecolectarOroMientrasConstruye() {
-		Aldeano aldeano = new Aldeano();
-		aldeano.construirCuartel(new Posicion(1,1));
-		assertEquals(0, aldeano.recolectarOro());
 	}
 	
 	@Test

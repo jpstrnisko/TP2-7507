@@ -3,6 +3,7 @@ import edificios.Edificio;
 
 import java.util.List;
 
+import acciones.Atacar;
 import areaJuego.Posicion;
 import interfaces.Atacable;
 import interfaces.IAtacante;
@@ -19,6 +20,7 @@ public class Espadachin extends Unidad implements IAtacante {
 		this.costo = 50;
 		this.distanciaMaximaAtaque = 1; //cuerpo a cuerpo
 		this.atacante = new UnidadAtacante(this, danioAEdificios, danioAUnidades, distanciaMaximaAtaque);
+		this.accion = new Inactivo();
 	}
 	
 	@Override
@@ -29,6 +31,21 @@ public class Espadachin extends Unidad implements IAtacante {
 	@Override
 	public void atacar(Unidad unidad) {
 		this.atacante.atacar(unidad);
+	}
+
+	@Override
+	protected void reiniciarAccion() {
+		this.accion = new Inactivo();
+	}
+
+	@Override
+	public void seleccionarObjetivo(Atacable objetivo) {
+		accion = Atacar.obtenerInstanciaAccion(objetivo, this, distanciaMaximaAtaque);
+	}
+
+	@Override
+	public int obtenerRangoAtaque() {
+		return distanciaMaximaAtaque;
 	}
 	
 	

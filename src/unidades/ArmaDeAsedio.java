@@ -48,4 +48,20 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 	public void desmontarArma() {
 		this.accion = new Desmontar(this);
 	}
+
+	@Override
+	protected void reiniciarAccion() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void seleccionarObjetivo(Atacable objetivo) {
+		
+	}
+
+	@Override
+	public int obtenerRangoAtaque() {
+		return distanciaMaximaAtaque;
+	}
 }

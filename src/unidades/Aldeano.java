@@ -9,7 +9,6 @@ import edificios.Edificio;
 
 public class Aldeano extends Unidad {
 
-		
 	public Aldeano() {
 		this.vida = new VidaUnidad(50, this);
 		this.costo = 25;
@@ -17,20 +16,28 @@ public class Aldeano extends Unidad {
 	}
 	
 	public void construirCuartel(Posicion posicion) {
-		this.accion = new Construir(new Cuartel(), posicion, this);
+		this.accion = Construir.obtenerInstanciaAccion(new Cuartel(), posicion, this);
 	}
 	
 	public void construirPlazaCentral(Posicion posicion) {
-		this.accion = new Construir(new PlazaCentral(), posicion, this);
+		this.accion = Construir.obtenerInstanciaAccion(new PlazaCentral(), posicion, this);
 	}
 	
 	public void repararEdificio(Edificio edificio) {
-		this.accion = new RepararEdificio(edificio, this);
+		this.accion = RepararEdificio.obtenerInstanciaAccion(edificio, this);
 	}
-	
 	
 	public void recolectarOro() {
 		this.accion = new RecolectarOro(this);
-	}	
+	}
+
+	public boolean estaAdyacenteAlEdificio(Edificio edificio, Posicion posicion) {
+		return this.obtenerPosicion().obtenerPosicionesDeConstruccion(edificio.obtenerTamanio()).contains(posicion);
+	}
+
+	@Override
+	protected void reiniciarAccion() {
+		this.recolectarOro();
+	}
 	
 }

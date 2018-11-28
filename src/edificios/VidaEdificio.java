@@ -2,27 +2,33 @@ package edificios;
 
 public class VidaEdificio {
 	
-	protected int vida;
-	protected int vidaMaxima;
-	protected int incrementoReparacion;
+	protected double vida;
+	protected double vidaMaxima;
+	protected double incrementoReparacion;
 	protected Edificio edificio;
+	protected double incrementoConstruccion;
 
 	public VidaEdificio(int vidaInicial, int incrementoReparacion, Edificio edificio) {
 		this.vida = vidaInicial;
 		this.vidaMaxima = vidaInicial;
 		this.incrementoReparacion = incrementoReparacion;
 		this.edificio = edificio;
+		this.incrementoConstruccion = vidaMaxima / edificio.obtenerTurnosConstruccion();
 	}
 
 	public int obtenerVida() {
-		return vida;
+		return (int) vida;
+	}
+	
+	private boolean aumentarVida(double incremento) {
+		if(vida == vidaMaxima) return false;
+		vida += incremento;
+		if(vida > vidaMaxima) vida = vidaMaxima;
+		return true;
 	}
 
 	public boolean reparar() {
-		if(vida == vidaMaxima) return false;
-		vida += incrementoReparacion;
-		if(vida > vidaMaxima) vida = vidaMaxima;
-		return true;
+		return aumentarVida(incrementoReparacion);
 	}
 
 	public void daniar(int danio) {
@@ -30,6 +36,18 @@ public class VidaEdificio {
 		if (vida <= 0) {
 			edificio.destruir();
 		}
+	}
+
+	public void aumentarVidaConstruccion() {
+		aumentarVida(incrementoConstruccion);
+	}
+
+	public void establecer(int valor) {
+		vida = valor;
+	}
+
+	public boolean esMaxima() {
+		return vida == vidaMaxima;
 	}
 
 }

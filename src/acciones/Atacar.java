@@ -8,6 +8,7 @@ import interfaces.Accion;
 import interfaces.Atacable;
 import interfaces.IAtacante;
 import unidades.Aldeano;
+import unidades.Inactivo;
 import unidades.Unidad;
 
 public class Atacar implements Accion {
@@ -22,7 +23,18 @@ public class Atacar implements Accion {
 
 	@Override
 	public void hacer() {
-		this.atacante.atacar(this.objetivo);
+		/*Se puede cambiar por double dispatch*/
+		if(this.objetivo.getClass() == Edificio.class)
+			this.atacante.atacar((Edificio) this.objetivo);
+		else
+			this.atacante.atacar((Unidad) this.objetivo);
+	}
+
+	public static Accion obtenerInstanciaAccion(Atacable objetivo, IAtacante atacante, int rangoDeAtaque) {
+		if(objetivo.estaEnRangoDe(rangoDeAtaque, atacante)) 
+			return new Atacar(objetivo, atacante);
+		
+		return new Inactivo();
 	}
 
 

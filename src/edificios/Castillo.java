@@ -37,9 +37,5 @@ public class Castillo extends Edificio {
 		juego.esDerrotado(this.obtenerJugador());
 	}
 
-	@Override
-	public void continuarConstruccion() {
-	}
-
 }
 

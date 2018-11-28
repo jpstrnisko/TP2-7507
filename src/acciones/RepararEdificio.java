@@ -9,15 +9,19 @@ public class RepararEdificio implements Accion {
 	private Aldeano aldeano;
 	
 	public RepararEdificio(Edificio edificio, Aldeano aldeano) {
-		this.edificio = edificio;
 		this.aldeano = aldeano;
+		this.edificio = edificio;
+		edificio.comenzarReparacion();
 	}
 
 	@Override
 	public void hacer() {
-		if(this.edificio.reparar()) {
-			aldeano.recolectarOro();
-		}
+		edificio.continuarReparacion(aldeano);
 	}
 
+	public static Accion obtenerInstanciaAccion(Edificio edificio, Aldeano aldeano) {
+		if (aldeano.estaAdyacenteAlEdificio(edificio, edificio.obtenerPosicionInicial())) 
+			return new RepararEdificio(edificio, aldeano);
+		return new RecolectarOro(aldeano);
+	}
 }

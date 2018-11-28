@@ -2,9 +2,13 @@ package edificios;
 import java.util.ArrayList;
 import java.util.List;
 
+import acciones.Construir;
 import areaJuego.Posicion;
 import interfaces.Atacable;
+import interfaces.EstadoEdficio;
+import interfaces.IAtacante;
 import turnos.Jugador;
+import unidades.Aldeano;
 import unidades.ArmaDeAsedio;
 import unidades.Arquero;
 import unidades.Espadachin;
@@ -16,9 +20,9 @@ public abstract class Edificio implements Atacable{
 	protected int tamanio;
 	protected List<Posicion> posiciones = new ArrayList<Posicion>();
 	protected Jugador jugador;
+	protected int turnosConstruccion = 3;
 	
-	protected boolean enConstruccion;
-	protected int turnoConstruccion;
+	protected EstadoEdficio estadoEdificio = new EdificioEnConstruccion(turnosConstruccion);
 
 	public int obtenerVida() {
 		return vida.obtenerVida();
@@ -81,13 +85,48 @@ public abstract class Edificio implements Atacable{
 	}
 	
 	public boolean estaEnConstruccion() {
-		return enConstruccion;
+		return estadoEdificio.estaEnConstruccion();
 	}
 	
-	public abstract void continuarConstruccion();
-	
-	public void terminarConstruccion() {
-		this.enConstruccion = true;
+	public void finalizarConstruccion() {
+		estadoEdificio = new EdificioConstruido();
 	}
+	
+	public void continuarConstruccion(Aldeano aldeano) {
+		estadoEdificio.continuarDesarrollo(this, aldeano);
+	}
+
+	public void aumentarVidaConstruccion() {
+		vida.aumentarVidaConstruccion();
+	}
+
+	public int obtenerTurnosConstruccion() {
+		return turnosConstruccion;
+	}
+
+	public void establecerVida(int valor) {
+		vida.establecer(valor);
+	}
+
+	public void continuarReparacion(Aldeano aldeano) {
+		estadoEdificio.continuarDesarrollo(this, aldeano);
+	}
+
+	public void comenzarReparacion() {
+		estadoEdificio = new EdificioEnReparacion();
+	}
+
+	public boolean poseeVidaMaxima() {
+		return vida.esMaxima();
+	}
+	
+	public boolean estaEnRangoDe(int rango, IAtacante atacante) {
+		for(Posicion posicion: this.obtenerPosiciones()) {
+			if(posicion.estaEnRango(atacante.obtenerPosicion(), atacante.obtenerRangoAtaque()))
+				return true;
+		}
+		return false;
+	}
+
 		
 }

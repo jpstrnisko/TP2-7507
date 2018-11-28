@@ -1,6 +1,7 @@
 package acciones;
 
 import areaJuego.Posicion;
+import edificios.Cuartel;
 import edificios.Edificio;
 import edificios.FabricaEdificios;
 import interfaces.Accion;
@@ -14,7 +15,7 @@ public class Construir implements Accion {
 		this.aldeano = aldeano;
 		FabricaEdificios fabricaEdificios = new FabricaEdificios();
 		try {
-			fabricaEdificios.crearEdificio(edificio.getClass(), posicion, aldeano.obtenerJugador());
+			this.edificio = fabricaEdificios.crearEdificio(edificio.getClass(), posicion, aldeano.obtenerJugador());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -22,10 +23,14 @@ public class Construir implements Accion {
 
 	@Override
 	public void hacer() {
-		if(this.edificio.estaEnConstruccion()) {
-			this.edificio.continuarConstruccion();
-			aldeano.recolectarOro();
+		edificio.continuarConstruccion(aldeano);
+	}
+
+	public static Accion obtenerInstanciaAccion(Edificio edificio, Posicion posicion, Aldeano aldeano) {
+		if(aldeano.estaAdyacenteAlEdificio(edificio, posicion)) {
+			return new Construir(edificio, posicion, aldeano);
 		}
+		return new RecolectarOro(aldeano);
 	}
 
 }
