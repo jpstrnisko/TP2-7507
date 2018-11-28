@@ -106,10 +106,7 @@ public class Juego {
 	}
 
 	public boolean finalizo() {
-		if(ganador == null) {
-			return false;
-		}
-		return true;
+		return ganador != null;
 	}
 
 	public Jugador obtenerGanador() {
