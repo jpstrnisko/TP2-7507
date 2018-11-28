@@ -5,6 +5,7 @@ import interfaces.TurnoMovimiento;
 import juego.Juego;
 import turnos.Jugador;
 import turnos.TurnoMovimientoFinalizado;
+import interfaces.Accion;
 import interfaces.Atacable;
 
 public abstract class Unidad implements Atacable {
@@ -16,6 +17,8 @@ public abstract class Unidad implements Atacable {
 	protected int tamanio = 1; //1 casillero
 	protected TurnoMovimiento turnoMovimiento;
 	protected Jugador jugador;
+	
+	protected Accion accion;
 
 	public int obtenerVida() {
 		return this.vida.obtenerVida();
@@ -64,5 +67,9 @@ public abstract class Unidad implements Atacable {
 	public void matar() {
 		Juego juego = Juego.obtenerInstancia();
 		juego.obtenerMapa().removerAtacable(this);
+	}
+	
+	public void realizarAccion() {
+		this.accion.hacer();
 	}
 }

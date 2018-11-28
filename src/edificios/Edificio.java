@@ -16,6 +16,9 @@ public abstract class Edificio implements Atacable{
 	protected int tamanio;
 	protected List<Posicion> posiciones = new ArrayList<Posicion>();
 	protected Jugador jugador;
+	
+	protected boolean enConstruccion;
+	protected int turnoConstruccion;
 
 	public int obtenerVida() {
 		return vida.obtenerVida();
@@ -75,6 +78,16 @@ public abstract class Edificio implements Atacable{
 
 	public void destruir() {
 		
+	}
+	
+	public boolean estaEnConstruccion() {
+		return enConstruccion;
+	}
+	
+	public abstract void continuarConstruccion();
+	
+	public void terminarConstruccion() {
+		this.enConstruccion = true;
 	}
 		
 }

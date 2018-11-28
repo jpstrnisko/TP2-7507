@@ -23,20 +23,25 @@ public class AldeanoTest {
 	@Test
 	public void aldeanoConstruyePlazaCentral() {
 		Aldeano aldeano = new Aldeano();
+		aldeano.construirPlazaCentral(new Posicion(1,1));
 		assert(aldeano.construirPlaza() instanceof PlazaCentral);
 	}
 	
 	@Test
-	public void aldeanoConstruyeCuartel() {
+	public void aldeanoConstruyeCuartelEn3Turnos() {
 		Aldeano aldeano = new Aldeano();
-		assert(aldeano.construirCuartel() instanceof Cuartel);
+		aldeano.construirCuartel(new Posicion(1,1));
+		for(int turno = 1; turno < 3; turno++) {
+			aldeano.realizarAccion();
+			assert();
+		}
+		assert(aldeano.realizarAccion() instanceof Cuartel);
 	}
 	
 	@Test
 	public void elAldeanoRecolecta20OroPorTurno() {
 		Aldeano aldeano = new Aldeano();
-		assertEquals(20, aldeano.recolectarOro());
-		assertEquals(0, aldeano.recolectarOro());
+		assertEquals(20, aldeano.accion.hacer());
 	}
 	
 	@Test
