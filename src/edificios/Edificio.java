@@ -56,18 +56,6 @@ public abstract class Edificio implements Atacable{
 	public Posicion obtenerPosicionInicial() {
 		return this.posiciones.get(0);
 	}
-	
-	public void esAtacadoPor(ArmaDeAsedio armaDeAsedio) {
-		this.quitarVida(75);
-	}
-	
-	public void esAtacadoPor(Espadachin espadachin) {
-		this.quitarVida(15);
-	}
-	
-	public void esAtacadoPor(Arquero arquero) {
-		this.quitarVida(10);
-	}
 
 	public Jugador obtenerJugador() {
 		return jugador;
