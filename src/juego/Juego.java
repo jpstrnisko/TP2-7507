@@ -99,7 +99,7 @@ public class Juego {
 		return this.obtenerUnidadesDelJugador(jugador).size();
 	}
 
-	public List<Edificio> obtenerEdifciosDelJugador(Jugador jugador) {
+	public List<Edificio> obtenerEdificiosDelJugador(Jugador jugador) {
 		List<Edificio> edificiosDelJugador = mapa.obtenerEdificios().stream()
 			    .filter(p -> p.obtenerJugador() == jugador).collect(Collectors.toList());
 		return edificiosDelJugador;

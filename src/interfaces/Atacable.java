@@ -6,4 +6,5 @@ public interface Atacable {
 	void quitarVida(int danio);
 	int obtenerTamanio();
 //PATRON DOUBLE DISPATCH
+	boolean estaEnRangoDe(int rangoDeAtaque, IAtacante atacante);
 }
