@@ -9,15 +9,17 @@ public class PlazaCentral extends Edificio {
 	private static final int VIDAINICIAL = 450;
 	private final int TURNOSPARACONSTRUCCION = 3;
 
-	
 	public PlazaCentral() {
 		this.costo = 100;
 		this.tamanio = 4;
 		this.vida = new VidaEdificio(VIDAINICIAL, VELOCIDADREPARACION, this);
 		
-
 	}
 	public Aldeano crearUnAldeano() {
 		return new Aldeano();
+	}
+	
+	public void comenzarProduccionAldeano() {
+		this.estadoEdificio.producir(new Aldeano(), this);
 	}
 }
