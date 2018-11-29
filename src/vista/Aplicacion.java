@@ -34,7 +34,7 @@ public class Aplicacion extends Application {
 
         stage.setScene(escenaSaludo);
 
-       stage.setFullScreen(true);
+        stage.setFullScreen(false);
 
         stage.show();
 

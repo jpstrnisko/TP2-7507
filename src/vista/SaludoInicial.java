@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import vistaAcciones.Entrar;
+import vistaAcciones.BotonEntrarEventHandler;
 
 public class SaludoInicial extends VBox {
 
@@ -40,8 +40,11 @@ public class SaludoInicial extends VBox {
 
         Label etiqueta = new Label();
         etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
+        
+        etiqueta.setText("Bienvenidos al videojuego AlgoEmpires II. Clickee en entrar.");
+        etiqueta.setTextFill(Color.web("#66A7C5"));
 
-        Entrar opcionEntrar = new Entrar(stage, proximaEscena);
+        BotonEntrarEventHandler opcionEntrar = new BotonEntrarEventHandler(stage, proximaEscena);
         botonEntrar.setOnAction(opcionEntrar);
 
         this.getChildren().addAll(botonEntrar);

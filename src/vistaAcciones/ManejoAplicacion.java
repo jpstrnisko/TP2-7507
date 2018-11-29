@@ -20,7 +20,8 @@ public class ManejoAplicacion implements EventHandler<KeyEvent> {
     public void handle(KeyEvent event) {
 
         if (event.getCode() == KeyCode.ESCAPE) {
-            stage.setMaximized(true);
+            stage.setMaximized(false);
+            
            
         }
     }

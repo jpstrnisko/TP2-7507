@@ -5,12 +5,12 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Entrar implements EventHandler<ActionEvent> {
+public class BotonEntrarEventHandler implements EventHandler<ActionEvent> {
 
     Stage stage;
     Scene proximaEscena;
 
-    public Entrar(Stage stage, Scene proximaEscena) {
+    public BotonEntrarEventHandler(Stage stage, Scene proximaEscena) {
         this.stage = stage;
         this.proximaEscena = proximaEscena;
     }
@@ -19,6 +19,6 @@ public class Entrar implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         stage.setScene(proximaEscena);
         stage.setFullScreenExitHint("");
-        stage.setFullScreen(true);
+        //stage.setFullScreen(true);
     }
 }
