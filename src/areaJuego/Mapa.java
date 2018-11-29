@@ -78,7 +78,7 @@ public class Mapa {
 			for(int j=0; j < Math.sqrt(tamanio); j++) {
 				Posicion posicionNueva = new Posicion(posX+i, posY+j);
 				if(this.seSalioDelMapa(posicionNueva)) throw new PosicionFueraDeMapaError();
-				if(this.atacableColisiona(posicionNueva, tamanio)) throw new PosicionOcupadaError();
+				if(this.posicionEstaOcupada(posicionNueva)) throw new PosicionOcupadaError();
 				Celda celdaAGuardar = new Celda(posicionNueva);
 				this.zonaDeJuego.put(celdaAGuardar, atacable);
 			}

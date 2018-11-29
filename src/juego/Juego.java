@@ -59,18 +59,18 @@ public class Juego {
 		FabricaAldeano fabricaAldeanos = new FabricaAldeano();
 		FabricaEdificios fabricaEdificios = new FabricaEdificios();
 		
-		fabricaAldeanos.crearAldeano(new Posicion(6, 4), jugador1);
-		fabricaAldeanos.crearAldeano(new Posicion(9, 6), jugador1);
-		fabricaAldeanos.crearAldeano(new Posicion(11, 4), jugador1);
-		fabricaAldeanos.crearAldeano(new Posicion(15, 22), jugador2);
-		fabricaAldeanos.crearAldeano(new Posicion(17, 20), jugador2);
-		fabricaAldeanos.crearAldeano(new Posicion(20, 22), jugador2);
+		fabricaAldeanos.crearAldeano(new Posicion(4, 6), jugador1);
+		fabricaAldeanos.crearAldeano(new Posicion(6, 9), jugador1);
+		fabricaAldeanos.crearAldeano(new Posicion(4, 11), jugador1);
+		fabricaAldeanos.crearAldeano(new Posicion(22, 15), jugador2);
+		fabricaAldeanos.crearAldeano(new Posicion(20, 17), jugador2);
+		fabricaAldeanos.crearAldeano(new Posicion(22, 20), jugador2);
 		
-		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(8, 2), jugador1);
-		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(17, 22), jugador2);
+		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(3, 8), jugador1);
+		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(22, 17), jugador2);
 		
-		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(13, 2), jugador1);
-		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(7, 21), jugador2);
+		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(2, 13), jugador1);
+		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(21, 10), jugador2);
 	}
 
 	public void agregegarJugador(Jugador jugador) throws MaximoJugadoresError {
@@ -106,7 +106,10 @@ public class Juego {
 	}
 
 	public boolean finalizo() {
-		return ganador != null;
+		if(ganador == null) {
+			return false;
+		}
+		return true;
 	}
 
 	public Jugador obtenerGanador() {
