@@ -3,6 +3,9 @@ package vista;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import juego.Juego;
+import turnos.Jugador;
+import turnos.MaximoJugadoresError;
 import areaJuego.Mapa;
 import vista.VentanaInicial;
 import vistaAcciones.ManejoAplicacion;
@@ -19,8 +22,10 @@ public class Aplicacion extends Application {
 
         stage.setTitle("Algo Empires II");
         Mapa mapa = new Mapa(100,100);
+        
+        Juego modelo = this.crearModelo();
 
-        VentanaInicial ventana = new VentanaInicial(stage, mapa);
+        VentanaInicial ventana = new VentanaInicial(stage, modelo);
         Scene escenaVentana = new Scene(ventana, 640, 480);
 
         ManejoAplicacion aplicacion = new ManejoAplicacion(stage, ventana.getMenuOpciones());
@@ -34,10 +39,19 @@ public class Aplicacion extends Application {
 
         stage.setScene(escenaSaludo);
 
-       stage.setFullScreen(true);
+        stage.setFullScreen(true);
 
         stage.show();
 
+    }
+    
+    private Juego crearModelo() throws Exception {
+    	Juego juego = Juego.obtenerInstancia();
+    	juego.agregegarJugador(new Jugador("1"));
+    	juego.agregegarJugador(new Jugador("2"));
+    	juego.comenzarJuego();
+		return juego;
+    	
     }
 
     
