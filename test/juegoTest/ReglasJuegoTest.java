@@ -33,7 +33,7 @@ public class ReglasJuegoTest {
 	public void elJuegoNoSePodriaComenzarConSoloUnJugador() throws Exception{
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
-		juego.agregegarJugador(jugador1);
+		juego.agregarJugador(jugador1);
 		juego.comenzarJuego();
 	}
 	
@@ -43,9 +43,9 @@ public class ReglasJuegoTest {
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
 		Jugador jugador3 = new Jugador("Lucas");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
-		juego.agregegarJugador(jugador3);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
+		juego.agregarJugador(jugador3);
 		juego.comenzarJuego();
 	}
 	
@@ -54,8 +54,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		assertEquals(juego.obtenerJugadores().get(0).obtenerOro(), 100);
 		assertEquals(juego.obtenerJugadores().get(1).obtenerOro(), 100);
@@ -66,8 +66,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		assertEquals(juego.obtenerMapa().obtenerAlto(), 25);
 		assertEquals(juego.obtenerMapa().obtenerAncho(), 25);
@@ -78,8 +78,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		assertEquals(juego.obtenerUnidades().size(), 6);
 		for(int i = 0; i < 6; i++) {
@@ -92,8 +92,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		
 		List<Unidad> unidadesJugador1 = juego.obtenerUnidadesDelJugador(jugador1);
@@ -108,8 +108,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		
 		List<Unidad> unidadesJugador2 = juego.obtenerUnidadesDelJugador(jugador2);
@@ -124,8 +124,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		
 		assertEquals(juego.obtenerPoblacion(jugador1), 3);
@@ -136,8 +136,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		
 		assertEquals(juego.obtenerPoblacion(jugador2), 3);
@@ -148,8 +148,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		
 		List<Edificio> edificios = juego.obtenerEdificiosDelJugador(jugador1);
@@ -171,8 +171,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		
 		List<Edificio> edificios = juego.obtenerEdificiosDelJugador(jugador1);
@@ -193,8 +193,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		
 		assertFalse(juego.finalizo());
@@ -205,8 +205,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		
 		assertEquals(juego.obtenerGanador(), null);
@@ -217,8 +217,8 @@ public class ReglasJuegoTest {
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregegarJugador(jugador1);
-		juego.agregegarJugador(jugador2);
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
 		
 		List<Unidad> unidadesJugador1 = juego.obtenerUnidadesDelJugador(jugador1);

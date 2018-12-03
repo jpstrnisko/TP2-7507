@@ -18,12 +18,15 @@ import unidades.Aldeano;
 import unidades.FabricaAldeano;
 import unidades.Unidad;
 
+
 public class Juego {
 	private static Juego instancia = null;
 	
 	protected SistemaTurnos sistemaTurnos;
 	protected Mapa mapa;
 	protected Jugador ganador;
+	
+	
 
 	private Juego() {
 		sistemaTurnos = new SistemaTurnos();
@@ -50,8 +53,8 @@ public class Juego {
 			throw new FaltanJugadoresError();
 		}
 		this.agregarUnidadesIniciales();
+		
 	}
-	
 	
 	private void agregarUnidadesIniciales() throws Exception {
 		Jugador jugador1 = sistemaTurnos.obtenerJugadores().get(0);
@@ -71,12 +74,14 @@ public class Juego {
 		
 		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(2, 13), jugador1);
 		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(21, 10), jugador2);
+		
 	}
 
-	public void agregegarJugador(Jugador jugador) throws MaximoJugadoresError {
+	public void agregarJugador(Jugador jugador) throws MaximoJugadoresError {
 		sistemaTurnos.agregarJugador(jugador);
 	}
-
+	
+	
 	public List<Jugador> obtenerJugadores() {
 		return sistemaTurnos.obtenerJugadores();
 	}
@@ -94,6 +99,10 @@ public class Juego {
 			    .filter(p -> p.obtenerJugador() == jugador).collect(Collectors.toList());
 		return unidadesDelJugador;
 	}
+	
+	public void moverUnidad(Jugador jugador, Posicion nuevaPosicion) {
+		this.obtenerUnidadesDelJugador(jugador).get(0).cambiarPosicion(nuevaPosicion);
+	}	
 
 	public int obtenerPoblacion(Jugador jugador) {
 		return this.obtenerUnidadesDelJugador(jugador).size();

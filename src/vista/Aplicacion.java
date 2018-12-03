@@ -50,10 +50,10 @@ public class Aplicacion extends Application {
     
     private Juego crearModelo() throws Exception {
     	Juego juego = Juego.obtenerInstancia();
-    	juego.agregegarJugador(new Jugador("1"));
-    	juego.agregegarJugador(new Jugador("2"));
+    	juego.agregarJugador(new Jugador("1"));
+    	juego.agregarJugador(new Jugador("2"));
     	juego.comenzarJuego();
-		return juego;
+    	return juego;
     	
     }
 

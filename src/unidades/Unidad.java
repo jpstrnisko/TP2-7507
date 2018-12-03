@@ -50,6 +50,7 @@ public abstract class Unidad implements Atacable {
 		this.posicion =  destino;
 	}
 	
+		
 	public int obtenerTamanio() {
 		return this.tamanio;
 	}
@@ -91,3 +92,4 @@ public abstract class Unidad implements Atacable {
 		return this.obtenerPosicion().estaEnRango(atacante.obtenerPosicion(), rangoDeAtaque);
 	}
 }
+

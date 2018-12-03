@@ -1,9 +1,15 @@
 package turnos;
 
-public class Jugador {
+import turnos.TurnoMovimientoHabilitado;
+import areaJuego.Posicion;
+import unidades.Unidad;
 
+
+public class Jugador {
+	
 	protected String nombre;
 	protected int oro = 100;
+	private TurnoMovimientoHabilitado turno;
 	
 	public Jugador(String nombre) {
 		this.nombre = nombre;
@@ -18,6 +24,4 @@ public class Jugador {
 			this.oro += cantidadDeOro;	
 	}
 	
-	
-
 }

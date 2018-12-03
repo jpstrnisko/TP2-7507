@@ -8,6 +8,7 @@ public class TurnoMovimientoHabilitado implements TurnoMovimiento{
 
 	@Override
 	public boolean moverUnidad(Posicion posicion, Unidad unidad) {
+		unidad.cambiarPosicion(posicion);
 		//Falta codear la logica
 		unidad.finalizarTurnoMovimiento();
 		return true;
