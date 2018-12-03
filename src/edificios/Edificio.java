@@ -121,6 +121,10 @@ public abstract class Edificio implements Atacable{
 		}
 		return false;
 	}
+	
+	public boolean estaOcupando(Posicion posicion) {
+		return this.posiciones.contains(posicion);
+	}
 
 	public boolean esReparable() {
 		return estadoEdificio.esReparable();

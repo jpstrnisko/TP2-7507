@@ -40,7 +40,7 @@ public class Aplicacion extends Application {
         ManejoAplicacion aplicacion = new ManejoAplicacion(stage, ventana.getMenuOpciones());
         escenaVentana.setOnKeyPressed(aplicacion);
         
-        SaludoInicial saludo = new SaludoInicial(stage, escenaVentana);
+        SaludoInicial saludo = new SaludoInicial(stage, escenaVentana, modelo);
         Scene escenaSaludo = new Scene(saludo, 640, 480);
 
 

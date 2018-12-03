@@ -24,11 +24,16 @@ public class Jugador {
 			this.oro += cantidadDeOro;	
 	}
 
+	public void cambiarNombre(String nombreJug) {
+		nombre = nombreJug;
+	}
+
 	public boolean quitarOro(int cantidad) {
 		if (oro < cantidad)
 			return false;
 		oro -= cantidad;
 		return true;
+
 	}
 	
 }

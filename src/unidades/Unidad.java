@@ -91,5 +91,9 @@ public abstract class Unidad implements Atacable {
 	public boolean estaEnRangoDe(int rangoDeAtaque, IAtacante atacante) {
 		return this.obtenerPosicion().estaEnRango(atacante.obtenerPosicion(), rangoDeAtaque);
 	}
+	
+	public boolean estaOcupando(Posicion posicion) {
+		return posicion.equals(this.posicion);
+	}
 }
 
