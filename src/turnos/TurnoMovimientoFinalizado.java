@@ -7,7 +7,7 @@ import unidades.Unidad;
 public class TurnoMovimientoFinalizado implements TurnoMovimiento{
 
 	@Override
-	public boolean moverUnidad(Posicion posicion, Unidad unidad) {
+	public boolean moverUnidad(Posicion posicion) {
 		return false;
 	}
 

@@ -73,16 +73,10 @@ public abstract class Unidad implements Atacable {
 	}
 	
 	public void mover(Posicion posicion) throws Exception {
-		Mapa mapa = Juego.obtenerInstancia().obtenerMapa();
-		if(this.posicion.esAdyacente(posicion) && mapa.posicionEsValida(posicion)) {
-			this.posicion = posicion;
-			mapa.removerAtacable(this);
-			mapa.colocarAtacable(this.posicion, this);
-			this.reiniciarAccion();
-		}
+		turnoMovimiento.moverUnidad(posicion);
 	}
 	
-	protected abstract void reiniciarAccion();
+	public abstract void reiniciarAccion();
 
 	public void realizarAccion() {
 		this.accion.hacer();

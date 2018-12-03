@@ -768,22 +768,6 @@ public class ReglasJuegoTest {
 		assertEquals(25, aldeano.obtenerVida());
 	}
 	
-	/*@Test
-	public void alAvanzarUnTurnoElJugadorDeberiaObtener20DeOroPorCadaAldeano() throws Exception {
-		Juego juego = Juego.obtenerNuevaInstancia();
-		Jugador jugador1 = new Jugador("Jose");
-		Jugador jugador2 = new Jugador("Pedro");
-		juego.agregarJugador(jugador1);
-		juego.agregarJugador(jugador2);
-		juego.comenzarJuego();
-		
-		Jugador jugadorActual = juego.obtenerJugadorActual();
-		int oroInicial = jugadorActual.obtenerOro();
-		juego.avanzarTurno();
-		
-		assertEquals(oroInicial + 60, jugadorActual.obtenerOro());
-	}*/
-	
 	@Test
 	public void unArqueroDeberiaPoderAtacarUnaUnidadEnSuRangoDeAtaque() throws Exception{
 		Juego juego = Juego.obtenerNuevaInstancia();
@@ -1094,5 +1078,39 @@ public class ReglasJuegoTest {
 		assertEquals(poblacionInicial, juego.obtenerPoblacion(jugador1));
 	}
 	
+	@Test
+	public void alAvanzarUnTurnoElJugadorDeberiaObtener20DeOroPorCadaAldeano() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jose");
+		Jugador jugador2 = new Jugador("Pedro");
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
+		juego.comenzarJuego();
+		
+		Jugador jugadorActual = juego.obtenerJugadorActual();
+		int oroInicial = jugadorActual.obtenerOro();
+		juego.avanzarTurno();
+		
+		assertEquals(oroInicial + 60, jugadorActual.obtenerOro());
+	}
+	
+	@Test
+	public void unaUnidadNoSeDeberiaPoderMoverMasDeUnaVezPorTurno() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jose");
+		Jugador jugador2 = new Jugador("Pedro");
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
+		juego.comenzarJuego();
+		
+		Jugador jugadorActual = juego.obtenerJugadorActual();
+		Unidad unidad = juego.obtenerUnidadesDelJugador(jugadorActual).get(0);
+		Posicion posicionInicial = unidad.obtenerPosicion();
+		Posicion nuevaPosicion = posicionInicial.obtenerNuevaPosicionVariadaEn(1, 0);
+		unidad.mover(nuevaPosicion);
+		unidad.mover(posicionInicial);
+		
+		assertEquals(unidad.obtenerPosicion(), nuevaPosicion);
+	}
 
 }

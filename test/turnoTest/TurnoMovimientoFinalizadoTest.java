@@ -13,7 +13,7 @@ public class TurnoMovimientoFinalizadoTest {
 	@Test
 	public void test01ElTurnoSeCreaYPuedeMoverseAUnaPosicionValida() {
 		TurnoMovimientoFinalizado turno = new TurnoMovimientoFinalizado();
-		assertFalse(turno.moverUnidad(new Posicion(1,1), new Aldeano()));
+		assertFalse(turno.moverUnidad(new Posicion(1,1)));
 	}
 
 }

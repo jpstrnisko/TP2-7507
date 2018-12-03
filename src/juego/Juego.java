@@ -137,10 +137,12 @@ public class Juego {
 		return sistemaTurnos.obtenerJugadorActual();
 	}
 
-	/*public void avanzarTurno() {
+	public void avanzarTurno() throws Exception {
 		for (Edificio edificio: obtenerEdificiosDelJugador(sistemaTurnos.obtenerJugadorActual()))
-			edificio.
+			edificio.realizarAccion();
+		for (Unidad unidad: obtenerUnidadesDelJugador(sistemaTurnos.obtenerJugadorActual()))
+			unidad.realizarAccion();
 		sistemaTurnos.avanzarTurno();
-	}*/
+	}
 
 }

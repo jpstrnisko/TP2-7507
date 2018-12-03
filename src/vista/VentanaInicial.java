@@ -6,6 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -22,6 +23,9 @@ import juego.Juego;
 import vistaAcciones.BotonMoverHandler;
 import javafx.scene.input.*;
 import areaJuego.Posicion;
+import edificios.Castillo;
+import edificios.Cuartel;
+import edificios.PlazaCentral;
 import interfaces.Atacable;
 import javafx.event.EventHandler;
 
@@ -40,6 +44,7 @@ public class VentanaInicial extends BorderPane {
         this.setMenu(stage);
         this.setCentro(modelo);
         this.setControles(modelo);
+        
     }
 
     private void setMenu(Stage stage) {
@@ -64,28 +69,49 @@ public class VentanaInicial extends BorderPane {
 			private void clickEn(double x, double y) {
 				Posicion posicionSeleccionada = new Posicion((int) x/anchoCelda, (int) y/altoCelda);
 				seleccionado = modelo.obtenerMapa().obtenerAtacableEn(posicionSeleccionada);
+				if(seleccionado == null)
+					return;
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle(seleccionado.toString());
+				setControles(modelo);
 
 				alert.showAndWait();
 			}
         });
+        
         box = new VBox(canvas);
         box.setAlignment(Pos.CENTER);
         box.setSpacing(20);
         box.setPadding(new Insets(25));
-        Image imagen = new Image("file:src/vista/imagenes/fondo-verde.jpg");
+        box.setMinHeight(canvas.getHeight());
+        box.setMinWidth(canvas.getWidth());
+        box.setMaxHeight(canvas.getHeight());
+        box.setMaxWidth(canvas.getWidth());
+        /*Image imagen = new Image("file:src/vista/imagenes/fondo-verde.jpg");
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        box.setBackground(new Background(imagenDeFondo));
-
+        box.setBackground(new Background(imagenDeFondo));*/
         this.setCenter(box);
     }
     
     private void setControles(Juego modelo) {
+    	if (seleccionado == null) {
+    		return;
+    	}
     	
-    	TextField field = new TextField("Ejemplo");
+    	if (seleccionado instanceof PlazaCentral)
+    		setControlesPlazaCentral(modelo);
+    	
+    	if (seleccionado instanceof Cuartel)
+    		setControlesPlazaCentral(modelo);
+    	
+    	if (seleccionado instanceof Castillo)
+    		setControlesPlazaCentral(modelo);
+    	
+    	
+    		
+    	/*TextField field = new TextField("Ejemplo");
     	Text txtNode = new Text("Ejemplo");
-    	txtNode.setFont(Font.font(45));
+    	txtNode.setFont(Font.font(15));
     	txtNode.setX(80);
     	txtNode.setY(80);
     	
@@ -95,7 +121,6 @@ public class VentanaInicial extends BorderPane {
     	MenuItem construir = new MenuItem("Construir");
     	MenuItem recolectar = new MenuItem("Recolectar");
     	MenuItem reparar = new MenuItem("Reparar");
-    	
     	
     	context.getItems().addAll(mover,construir,recolectar,reparar);
     	
@@ -111,15 +136,33 @@ public class VentanaInicial extends BorderPane {
         });
         
         VBox contenedorVertical = new VBox(txtNode);
-        contenedorVertical.setSpacing(10);
-        contenedorVertical.setPadding(new Insets(15));
+        contenedorVertical.setMaxWidth(200);
 
-        this.setLeft(contenedorVertical);
+        this.setLeft(contenedorVertical);*/
         
     }
 
         
-    public MenuOpciones getMenuOpciones() {
+    private void setControlesPlazaCentral(Juego modelo) {
+    	Label nombre = new Label("Plaza Central");
+    	ImageView imagen = new ImageView();
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter.png"));
+    	imagen.setFitHeight(100);
+    	imagen.setFitWidth(100);
+    	VBox contenedorVertical = new VBox(nombre, imagen);
+    	contenedorVertical.setMaxWidth(200);
+    	
+    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+    		Button crearAldeano = new Button("Crear Aldeano");
+    		contenedorVertical.getChildren().addAll(crearAldeano);
+    	}
+        
+        
+
+        this.setLeft(contenedorVertical);
+	}
+
+	public MenuOpciones getMenuOpciones() {
         return menu;
     }
 

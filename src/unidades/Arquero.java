@@ -7,6 +7,7 @@ import acciones.Atacar;
 import areaJuego.Posicion;
 import interfaces.Atacable;
 import interfaces.IAtacante;
+import turnos.TurnoMovimientoHabilitado;
 
 
 public class Arquero extends Unidad implements IAtacante {
@@ -20,6 +21,7 @@ public class Arquero extends Unidad implements IAtacante {
 		this.costo = 75;
 		this.distanciaMaximaAtaque = 3;
 		this.atacante = new UnidadAtacante(this, danioAEdificios, danioAUnidades, distanciaMaximaAtaque);
+		this.turnoMovimiento = new TurnoMovimientoHabilitado(this);
 	}
 
 	
@@ -35,7 +37,7 @@ public class Arquero extends Unidad implements IAtacante {
 
 
 	@Override
-	protected void reiniciarAccion() {
+	public void reiniciarAccion() {
 		this.accion = new Inactivo();
 	}
 

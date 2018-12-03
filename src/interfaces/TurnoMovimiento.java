@@ -5,6 +5,6 @@ import unidades.Unidad;
 
 public interface TurnoMovimiento {
 
-	boolean moverUnidad(Posicion posicion, Unidad unidad);
+	boolean moverUnidad(Posicion posicion) throws Exception;
 
 }

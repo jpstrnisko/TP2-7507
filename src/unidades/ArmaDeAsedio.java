@@ -6,6 +6,7 @@ import areaJuego.Posicion;
 import interfaces.Atacable;
 import interfaces.EstadoArmaDeAsedio;
 import interfaces.IAtacante;
+import turnos.TurnoMovimientoHabilitado;
 
 
 public class ArmaDeAsedio extends Unidad implements IAtacante {
@@ -17,6 +18,7 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 		this.costo = 200;
 		this.distanciaMaximaAtaque = 5;
 		this.estado = new EstadoDesmontada(this);
+		this.turnoMovimiento = new TurnoMovimientoHabilitado(this);
 	}
 	
 	public boolean estaMontada() {
@@ -50,7 +52,7 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 	}
 
 	@Override
-	protected void reiniciarAccion() {
+	public void reiniciarAccion() {
 		// TODO Auto-generated method stub
 		
 	}

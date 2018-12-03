@@ -14,30 +14,29 @@ public class MenuOpciones extends MenuBar {
 
       	public MenuOpciones (Stage stage) {
 
-        Menu menuArchivo = new Menu("Archivo");
-        Menu menuVer = new Menu("Ver");
-        Menu menuAyuda = new Menu("Ayuda");
-        
-        MenuItem opcionSalir = new MenuItem("Salir");
-        MenuItem opcionAbrir = new MenuItem("Abrir");
-        MenuItem opcionAcerca = new MenuItem("Acerca de...");
-        
-        
-        OpcionSalirEventHandler opcionSalirHandler = new OpcionSalirEventHandler();
-        opcionSalir.setOnAction(opcionSalirHandler);
-        
-        OpcionAcercaDeEventHandler opcionAcercaHandler = new OpcionAcercaDeEventHandler();
-        opcionAcerca.setOnAction(opcionAcercaHandler);
-        
-        OpcionPantallaCompletaEventHandler opcionPantallaCompletaHandler = new OpcionPantallaCompletaEventHandler(stage,opcionPantallaCompleta);
-        opcionPantallaCompleta.setOnAction(opcionPantallaCompletaHandler);
-        
-        opcionPantallaCompleta.setDisable(true);
-        menuArchivo.getItems().addAll(opcionSalir);
-        menuAyuda.getItems().addAll(opcionAcerca);
-        menuVer.getItems().addAll(opcionPantallaCompleta);
-        
-        this.getMenus().addAll(menuArchivo,menuVer,menuAyuda);
+	        Menu menuArchivo = new Menu("Archivo");
+	        Menu menuVer = new Menu("Ver");
+	        Menu menuAyuda = new Menu("Ayuda");
+	        
+	        MenuItem opcionSalir = new MenuItem("Salir");
+	        MenuItem opcionAbrir = new MenuItem("Abrir");
+	        MenuItem opcionAcerca = new MenuItem("Acerca de...");
+	        
+	        OpcionSalirEventHandler opcionSalirHandler = new OpcionSalirEventHandler();
+	        opcionSalir.setOnAction(opcionSalirHandler);
+	        
+	        OpcionAcercaDeEventHandler opcionAcercaHandler = new OpcionAcercaDeEventHandler();
+	        opcionAcerca.setOnAction(opcionAcercaHandler);
+	        
+	        OpcionPantallaCompletaEventHandler opcionPantallaCompletaHandler = new OpcionPantallaCompletaEventHandler(stage,opcionPantallaCompleta);
+	        opcionPantallaCompleta.setOnAction(opcionPantallaCompletaHandler);
+	        
+	        opcionPantallaCompleta.setDisable(true);
+	        menuArchivo.getItems().addAll(opcionSalir);
+	        menuAyuda.getItems().addAll(opcionAcerca);
+	        menuVer.getItems().addAll(opcionPantallaCompleta);
+	        
+	        this.getMenus().addAll(menuArchivo,menuVer,menuAyuda);
        }
        
        public void aplicacionMaximizada() {

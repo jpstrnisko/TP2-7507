@@ -35,13 +35,13 @@ public class Aplicacion extends Application {
         player.setCycleCount(1);
 
         VentanaInicial ventana = new VentanaInicial(stage, modelo);
-        Scene escenaVentana = new Scene(ventana, 640, 480);
+        Scene escenaVentana = new Scene(ventana, 1200, 800);
 
         ManejoAplicacion aplicacion = new ManejoAplicacion(stage, ventana.getMenuOpciones());
         escenaVentana.setOnKeyPressed(aplicacion);
         
         SaludoInicial saludo = new SaludoInicial(stage, escenaVentana, modelo);
-        Scene escenaSaludo = new Scene(saludo, 640, 480);
+        Scene escenaSaludo = new Scene(saludo, 1200, 800);
 
 
         stage.setScene(escenaSaludo);

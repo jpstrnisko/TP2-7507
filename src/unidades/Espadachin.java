@@ -7,6 +7,7 @@ import acciones.Atacar;
 import areaJuego.Posicion;
 import interfaces.Atacable;
 import interfaces.IAtacante;
+import turnos.TurnoMovimientoHabilitado;
 
 
 public class Espadachin extends Unidad implements IAtacante {
@@ -21,6 +22,7 @@ public class Espadachin extends Unidad implements IAtacante {
 		this.distanciaMaximaAtaque = 1; //cuerpo a cuerpo
 		this.atacante = new UnidadAtacante(this, danioAEdificios, danioAUnidades, distanciaMaximaAtaque);
 		this.accion = new Inactivo();
+		this.turnoMovimiento = new TurnoMovimientoHabilitado(this);
 	}
 	
 	@Override
@@ -34,7 +36,7 @@ public class Espadachin extends Unidad implements IAtacante {
 	}
 
 	@Override
-	protected void reiniciarAccion() {
+	public void reiniciarAccion() {
 		this.accion = new Inactivo();
 	}
 
