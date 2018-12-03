@@ -50,4 +50,8 @@ public class VidaEdificio {
 		return vida == vidaMaxima;
 	}
 
+	public int obtenerVidaMaxima() {
+		return (int) vidaMaxima;
+	}
+
 }

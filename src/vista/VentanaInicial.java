@@ -20,6 +20,8 @@ import javafx.scene.text.*;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import juego.Juego;
+import unidades.Aldeano;
+import vistaAcciones.BotonEntrarEventHandler;
 import vistaAcciones.BotonMoverHandler;
 import javafx.scene.input.*;
 import areaJuego.Posicion;
@@ -69,13 +71,7 @@ public class VentanaInicial extends BorderPane {
 			private void clickEn(double x, double y) {
 				Posicion posicionSeleccionada = new Posicion((int) x/anchoCelda, (int) y/altoCelda);
 				seleccionado = modelo.obtenerMapa().obtenerAtacableEn(posicionSeleccionada);
-				if(seleccionado == null)
-					return;
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle(seleccionado.toString());
 				setControles(modelo);
-
-				alert.showAndWait();
 			}
         });
         
@@ -94,71 +90,79 @@ public class VentanaInicial extends BorderPane {
     }
     
     private void setControles(Juego modelo) {
-    	if (seleccionado == null) {
-    		return;
-    	}
+    	VBox contenedorVertical = new VBox();
+    	contenedorVertical.setMaxWidth(200);
+    	Button botonAvanzarTurno = new Button("Avanzar turno");
+    	contenedorVertical.getChildren().addAll(botonAvanzarTurno);
+    	
+    	BotonAvanzarTurnoHandler avanzar = new BotonAvanzarTurnoHandler(vistaModelo, modelo);
+    	botonAvanzarTurno.setOnAction(avanzar);
     	
     	if (seleccionado instanceof PlazaCentral)
-    		setControlesPlazaCentral(modelo);
-    	
-    	if (seleccionado instanceof Cuartel)
-    		setControlesPlazaCentral(modelo);
+    		setControlesPlazaCentral(modelo, contenedorVertical);
     	
     	if (seleccionado instanceof Castillo)
-    		setControlesPlazaCentral(modelo);
+    		setControlesCastillo(modelo, contenedorVertical);
     	
+    	if (seleccionado instanceof Cuartel)
+    		setControlesPlazaCentral(modelo, contenedorVertical);
     	
-    		
-    	/*TextField field = new TextField("Ejemplo");
-    	Text txtNode = new Text("Ejemplo");
-    	txtNode.setFont(Font.font(15));
-    	txtNode.setX(80);
-    	txtNode.setY(80);
+    	if (seleccionado instanceof Aldeano)
+    		setControlesAldeano(modelo, contenedorVertical);
     	
-    	ContextMenu context = new ContextMenu();
-    	
-    	MenuItem mover = new MenuItem("Mover");
-    	MenuItem construir = new MenuItem("Construir");
-    	MenuItem recolectar = new MenuItem("Recolectar");
-    	MenuItem reparar = new MenuItem("Reparar");
-    	
-    	context.getItems().addAll(mover,construir,recolectar,reparar);
-    	
-    	field.setContextMenu(context);
-    	
-        txtNode.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-        	
-        	public void handle(MouseEvent t) {
-        		if (t.getButton() == MouseButton.SECONDARY)
-        			context.show(txtNode, t.getScreenX(), t.getScreenY());
-        		
-        	}
-        });
-        
-        VBox contenedorVertical = new VBox(txtNode);
-        contenedorVertical.setMaxWidth(200);
-
-        this.setLeft(contenedorVertical);*/
+    	this.setLeft(contenedorVertical);
         
     }
 
         
-    private void setControlesPlazaCentral(Juego modelo) {
+    private void setControlesAldeano(Juego modelo, VBox contenedorVertical) {
+    	Label nombre = new Label("Aldeano");
+    	ImageView imagen = new ImageView();
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/male1.png"));
+    	imagen.setFitHeight(100);
+    	imagen.setFitWidth(100);
+    	contenedorVertical.getChildren().addAll(nombre, imagen);
+    	
+    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+    		Button botonConstruir = new Button("Construir");
+    		Button botonReparar = new Button("Reparar");
+    		contenedorVertical.getChildren().addAll(botonConstruir, botonReparar);
+    	}
+        
+        this.setLeft(contenedorVertical);
+	}
+
+	private void setControlesPlazaCentral(Juego modelo, VBox contenedorVertical) {
     	Label nombre = new Label("Plaza Central");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter.png"));
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
-    	VBox contenedorVertical = new VBox(nombre, imagen);
-    	contenedorVertical.setMaxWidth(200);
+    	contenedorVertical.getChildren().addAll(nombre, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
-    		Button crearAldeano = new Button("Crear Aldeano");
-    		contenedorVertical.getChildren().addAll(crearAldeano);
+    		Button botonCrearAldeano = new Button("Crear Aldeano");
+    		BotonCrearAldeanoHandler crearAldeano = new BotonCrearAldeanoHandler(modelo, (PlazaCentral) seleccionado);
+    		botonCrearAldeano.setOnAction(crearAldeano);
+    		contenedorVertical.getChildren().addAll(botonCrearAldeano);
     	}
         
+        this.setLeft(contenedorVertical);
+	}
+    
+    private void setControlesCastillo(Juego modelo, VBox contenedorVertical) {
+    	Label nombre = new Label("Castillo");
+    	ImageView imagen = new ImageView();
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/castle.png"));
+    	imagen.setFitHeight(100);
+    	imagen.setFitWidth(100);
+    	contenedorVertical.getChildren().addAll(nombre, imagen);
+    	
+    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+    		Button crearArmaAsedio = new Button("Crear Arma de Asedio");
+    		contenedorVertical.getChildren().addAll(crearArmaAsedio);
+    	}
         
-
         this.setLeft(contenedorVertical);
 	}
 

@@ -5,6 +5,7 @@ import juego.Juego;
 import turnos.Jugador;
 
 public class FabricaEdificios {
+	
 	public Edificio crearEdificio(Class clase, Posicion posicion, Jugador jugador) throws Exception {
 		Juego juego = Juego.obtenerInstancia();
 		Edificio edificio = (Edificio) clase.newInstance();

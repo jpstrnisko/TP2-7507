@@ -149,5 +149,9 @@ public abstract class Edificio implements Atacable{
 		return posiciones;
 	}
 
+	public int obtenerVidaMaxima() {
+		return vida.obtenerVidaMaxima();
+	}
+
 		
 }

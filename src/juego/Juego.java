@@ -60,7 +60,7 @@ public class Juego {
 		Jugador jugador1 = sistemaTurnos.obtenerJugadores().get(0);
 		Jugador jugador2 = sistemaTurnos.obtenerJugadores().get(1);
 		FabricaAldeano fabricaAldeanos = new FabricaAldeano();
-		FabricaEdificios fabricaEdificios = new FabricaEdificios();
+		FabricaEdificiosConstruidos fabricaEdificios = new FabricaEdificiosConstruidos();
 		
 		fabricaAldeanos.crearAldeano(new Posicion(4, 6), jugador1);
 		fabricaAldeanos.crearAldeano(new Posicion(6, 9), jugador1);
