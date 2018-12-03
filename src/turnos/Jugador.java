@@ -25,7 +25,8 @@ public class Jugador {
 	}
 
 	public void cambiarNombre(String nombreJug) {
-		nombre = nombreJug;
+		nombre = nombreJug;}
+	}
 
 	public boolean quitarOro(int cantidad) {
 		if (oro < cantidad)
