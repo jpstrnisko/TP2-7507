@@ -6,9 +6,11 @@ import javafx.stage.Stage;
 import juego.Juego;
 import turnos.Jugador;
 import turnos.MaximoJugadoresError;
+import java.io.File;
 import areaJuego.Mapa;
 import vista.VentanaInicial;
 import vistaAcciones.ManejoAplicacion;
+import javafx.scene.media.*;
 
 
 public class Aplicacion extends Application {
@@ -24,6 +26,13 @@ public class Aplicacion extends Application {
         Mapa mapa = new Mapa(100,100);
         
         Juego modelo = this.crearModelo();
+        
+        File f = new File("aplicacion/aoe2mainmusic.mp3");
+        Media media = new Media(f.toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        player.setAutoPlay(true);
+        player.setVolume(0.8);
+        player.setCycleCount(1);
 
         VentanaInicial ventana = new VentanaInicial(stage, modelo);
         Scene escenaVentana = new Scene(ventana, 640, 480);
@@ -34,8 +43,6 @@ public class Aplicacion extends Application {
         SaludoInicial saludo = new SaludoInicial(stage, escenaVentana);
         Scene escenaSaludo = new Scene(saludo, 640, 480);
 
-        // add handler to this:
-        // stage.setOnCloseRequest()
 
         stage.setScene(escenaSaludo);
 
