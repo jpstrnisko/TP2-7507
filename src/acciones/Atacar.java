@@ -31,7 +31,7 @@ public class Atacar implements Accion {
 	}
 
 	public static Accion obtenerInstanciaAccion(Atacable objetivo, IAtacante atacante, int rangoDeAtaque) {
-		if(objetivo.estaEnRangoDe(rangoDeAtaque, atacante)) 
+		if(objetivo.estaEnRangoDe(rangoDeAtaque, atacante) && objetivo.obtenerJugador() != atacante.obtenerJugador()) 
 			return new Atacar(objetivo, atacante);
 		
 		return new Inactivo();

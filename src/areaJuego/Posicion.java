@@ -25,6 +25,15 @@ public class Posicion {
 		return (this.obtenerPosicionX() == ((Posicion) pos2).obtenerPosicionX() && this.obtenerPosicionY() == ((Posicion) pos2).obtenerPosicionY());
 	}
 	
+	@Override
+	public int hashCode() {
+        int resultado = 17;
+        resultado = 31 * resultado + this.obtenerPosicionX();
+        resultado = 31 * resultado + this.obtenerPosicionY();
+        resultado += this.obtenerPosicionX();
+        return resultado;
+	}
+	
 	public Posicion obtenerNuevaPosicionVariadaEn(int x, int y) {
 		return new Posicion(this.obtenerPosicionX() + x, this.obtenerPosicionY() + y);
 	}
@@ -58,5 +67,16 @@ public class Posicion {
 	
 	public boolean estaEnRango(Posicion posicion, int rango) {
 		return (Math.abs(this.obtenerPosicionX() - posicion.obtenerPosicionX()) <= rango && Math.abs(this.obtenerPosicionY() - posicion.obtenerPosicionY()) <= rango);
+	}
+
+	public List<Posicion> obtenerAdyacentes() {
+		List<Posicion> posicionesAdyacentes = new ArrayList<Posicion>();
+		for(int x = -1; x < 2; x++) {
+			for(int y = -1; y < 2; y++) {
+				posicionesAdyacentes.add(this.obtenerNuevaPosicionVariadaEn(x, y));
+			}
+		}
+		posicionesAdyacentes.remove(this);
+		return posicionesAdyacentes;
 	}
 }

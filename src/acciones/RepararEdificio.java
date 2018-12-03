@@ -20,7 +20,7 @@ public class RepararEdificio implements Accion {
 	}
 
 	public static Accion obtenerInstanciaAccion(Edificio edificio, Aldeano aldeano) {
-		if (aldeano.estaAdyacenteAlEdificio(edificio, edificio.obtenerPosicionInicial())) 
+		if (aldeano.estaAdyacenteAlEdificio(edificio, edificio.obtenerPosicionInicial()) && edificio.esReparable()) 
 			return new RepararEdificio(edificio, aldeano);
 		return new RecolectarOro(aldeano);
 	}

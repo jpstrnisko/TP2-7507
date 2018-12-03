@@ -10,4 +10,5 @@ public interface IAtacante {
 	public abstract void seleccionarObjetivo(Atacable objetivo);
 	public abstract int obtenerRangoAtaque();
 	public abstract Posicion obtenerPosicion();
+	public abstract Object obtenerJugador();
 }

@@ -2,7 +2,11 @@ package juegoTest;
 
 import static org.junit.Assert.*;
 
+import java.util.AbstractSet;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -16,6 +20,7 @@ import edificios.PlazaCentral;
 import juego.Juego;
 import turnos.Jugador;
 import unidades.Aldeano;
+import unidades.Arquero;
 import unidades.Espadachin;
 import unidades.Unidad;
 import juego.FaltanJugadoresError;
@@ -778,6 +783,316 @@ public class ReglasJuegoTest {
 		
 		assertEquals(oroInicial + 60, jugadorActual.obtenerOro());
 	}*/
+	
+	@Test
+	public void unArqueroDeberiaPoderAtacarUnaUnidadEnSuRangoDeAtaque() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		Arquero arquero = new Arquero();
+		Posicion posicionArquero = new Posicion(7, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		arquero.cambiarPosicion(posicionArquero);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		mapa.colocarAtacable(posicionArquero, arquero);
+		
+		arquero.seleccionarObjetivo(aldeano);
+		arquero.realizarAccion();
+		
+		assertEquals(35, aldeano.obtenerVida());
+	}
+	
+	@Test
+	public void unArqueroNoDeberiaPoderAtacarUnaUnidadFueraDeSuRangoDeAtaque() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		Arquero arquero = new Arquero();
+		Posicion posicionArquero = new Posicion(9, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		arquero.cambiarPosicion(posicionArquero);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		mapa.colocarAtacable(posicionArquero, arquero);
+		
+		arquero.seleccionarObjetivo(aldeano);
+		arquero.realizarAccion();
+		
+		assertEquals(50, aldeano.obtenerVida());
+	}
+	
+	@Test
+	public void unaUnidadQueEsMovidaLuegoDeSeleccionarObjetivoDeAtaqueNoDeberiaAtacar() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		Arquero arquero = new Arquero();
+		Posicion posicionArquero = new Posicion(6, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		arquero.cambiarPosicion(posicionArquero);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		mapa.colocarAtacable(posicionArquero, arquero);
+		
+		arquero.seleccionarObjetivo(aldeano);
+		arquero.mover(new Posicion(7, 5));
+		arquero.realizarAccion();
+		
+		assertEquals(50, aldeano.obtenerVida());
+	}
+	
+	@Test
+	public void unaUnidadNoDeberiaAtacarUnidadesDeSuMismoEquipo() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		Arquero arquero = new Arquero();
+		Posicion posicionArquero = new Posicion(6, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		arquero.cambiarPosicion(posicionArquero);
+		aldeano.cambiarJugador(jugador1);
+		arquero.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		mapa.colocarAtacable(posicionArquero, arquero);
+		
+		arquero.seleccionarObjetivo(aldeano);
+		arquero.realizarAccion();
+		
+		assertEquals(50, aldeano.obtenerVida());
+	}
+	
+	@Test
+	public void unAldeanoNoDeberiaPoderRepararUnEdificioQueYaEstaSiendoReparado() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano1 = new Aldeano();
+		Posicion posicionAldeano1 = new Posicion(5, 5);
+		aldeano1.cambiarPosicion(posicionAldeano1);
+		aldeano1.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano1, aldeano1);
+		Aldeano aldeano2 = new Aldeano();
+		Posicion posicionAldeano2 = new Posicion(4, 5);
+		aldeano2.cambiarPosicion(posicionAldeano2);
+		aldeano2.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano2, aldeano2);
+		
+		aldeano1.construirPlazaCentral(new Posicion(4, 6));
+		aldeano1.realizarAccion();
+		aldeano1.realizarAccion();
+		aldeano1.realizarAccion();
+		
+		Edificio plazaCentral = juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		
+		plazaCentral.quitarVida(50);
+		assertEquals(plazaCentral.obtenerVida(), 400);
+		
+		aldeano1.repararEdificio(plazaCentral);
+		aldeano2.repararEdificio(plazaCentral);
+		aldeano1.realizarAccion();
+		aldeano2.realizarAccion();
+		
+		assertEquals(425, plazaCentral.obtenerVida());
+		assertEquals(120, jugador1.obtenerOro());
+	}
+	
+	@Test
+	public void unEdificioDeberiaProducirUnaUnidadEnSusAdyacencias() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.finalizarConstruccion();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(new Posicion(3, 3));
+		List<Posicion> posicionesAdyacentes = new ArrayList<Posicion>();
+		posicionesAdyacentes.add(new Posicion(2, 2)); posicionesAdyacentes.add(new Posicion(2, 3));
+		posicionesAdyacentes.add(new Posicion(2, 4)); posicionesAdyacentes.add(new Posicion(2, 5));
+		posicionesAdyacentes.add(new Posicion(3, 2)); posicionesAdyacentes.add(new Posicion(3, 5));
+		posicionesAdyacentes.add(new Posicion(4, 2)); posicionesAdyacentes.add(new Posicion(4, 5));
+		posicionesAdyacentes.add(new Posicion(5, 2)); posicionesAdyacentes.add(new Posicion(5, 3));
+		posicionesAdyacentes.add(new Posicion(5, 4)); posicionesAdyacentes.add(new Posicion(5, 5));
+		
+		plaza.comenzarProduccionAldeano();
+		plaza.realizarAccion();
+		Unidad aldeano = juego.obtenerUnidadesDelJugador(jugador1).get(0);
+		
+		assert(posicionesAdyacentes.contains(aldeano.obtenerPosicion()));
+	}
+	
+	@Test
+	public void unEdificioDeberiaProducirUnaUnidadEnSusAdyacenciasQueNoEstenOcupadas() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(new Posicion(3, 3));
+		plaza.finalizarConstruccion();
+		mapa.colocarAtacable(new Posicion(3, 3), plaza);
+		mapa.colocarAtacable(new Posicion(2, 2), new Aldeano());
+		mapa.colocarAtacable(new Posicion(2, 3), new Aldeano());
+		mapa.colocarAtacable(new Posicion(2, 4), new Aldeano());
+		mapa.colocarAtacable(new Posicion(2, 5), new Aldeano());
+		mapa.colocarAtacable(new Posicion(3, 2), new Aldeano());
+		mapa.colocarAtacable(new Posicion(3, 5), new Aldeano());
+		mapa.colocarAtacable(new Posicion(4, 2), new Aldeano());
+		mapa.colocarAtacable(new Posicion(4, 5), new Aldeano());
+		mapa.colocarAtacable(new Posicion(5, 2), new Aldeano());
+		mapa.colocarAtacable(new Posicion(5, 3), new Aldeano());
+		mapa.colocarAtacable(new Posicion(5, 4), new Aldeano());
+		
+		Posicion posicionLibre = new Posicion(5, 5);
+		
+		plaza.comenzarProduccionAldeano();
+		plaza.realizarAccion();
+		Unidad aldeano = juego.obtenerUnidadesDelJugador(jugador1).get(0);
+		
+		assertEquals(posicionLibre, aldeano.obtenerPosicion());
+	}
+	
+	@Test
+	public void unEdificioQueNoTienePosicionAdyacenteLibreNoDeberiaProducirUnaUnidad() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(new Posicion(3, 3));
+		mapa.colocarAtacable(new Posicion(3, 3), plaza);
+		mapa.colocarAtacable(new Posicion(2, 2), new Aldeano());
+		mapa.colocarAtacable(new Posicion(2, 3), new Aldeano());
+		mapa.colocarAtacable(new Posicion(2, 4), new Aldeano());
+		mapa.colocarAtacable(new Posicion(2, 5), new Aldeano());
+		mapa.colocarAtacable(new Posicion(3, 2), new Aldeano());
+		mapa.colocarAtacable(new Posicion(3, 5), new Aldeano());
+		mapa.colocarAtacable(new Posicion(4, 2), new Aldeano());
+		mapa.colocarAtacable(new Posicion(4, 5), new Aldeano());
+		mapa.colocarAtacable(new Posicion(5, 2), new Aldeano());
+		mapa.colocarAtacable(new Posicion(5, 3), new Aldeano());
+		mapa.colocarAtacable(new Posicion(5, 4), new Aldeano());
+		mapa.colocarAtacable(new Posicion(5, 5), new Aldeano());
+		
+		plaza.comenzarProduccionAldeano();
+		plaza.realizarAccion();
+		
+		assertEquals(0, juego.obtenerUnidadesDelJugador(jugador1).size());
+	}
+	
+	@Test
+	public void producirUnAldeanoLeDeberiaRestar25DeOroAlJugadorProductor() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(new Posicion(3, 3));
+		plaza.finalizarConstruccion();
+		
+		int oroActual = jugador1.obtenerOro();
+		plaza.comenzarProduccionAldeano();
+		plaza.realizarAccion();
+		
+		assertEquals(oroActual - 25, jugador1.obtenerOro());
+	}
+	
+	@Test
+	public void unJugadorQueNoPosea25DeOroDisponibleNoDeberiaPoderProducirUnAldeanoYNoPerderOro() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(new Posicion(3, 3));
+		
+		jugador1.quitarOro(80);
+		int oroActual = jugador1.obtenerOro();
+		plaza.comenzarProduccionAldeano();
+		plaza.realizarAccion();
+		
+		assertEquals(oroActual, jugador1.obtenerOro());
+		assertEquals(0, juego.obtenerUnidadesDelJugador(jugador1).size());
+	}
+	
+	@Test
+	public void unaUnidadProducidaPorUnEdificioDeberiaSerDelMismoJugadorDelEdificio() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.finalizarConstruccion();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(new Posicion(3, 3));
+
+		plaza.comenzarProduccionAldeano();
+		plaza.realizarAccion();
+		
+		assertEquals(jugador1, juego.obtenerUnidadesDelJugador(jugador1).get(0).obtenerJugador());
+	}
+	
+	@Test
+	public void unCuartelDeberiaPoderProducirUnEspadachin() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Cuartel cuartel = new Cuartel();
+		cuartel.cambiarJugador(jugador1);
+		cuartel.establecerPosicion(new Posicion(3, 3));
+
+		cuartel.comenzarProduccionEspadachin();
+		cuartel.realizarAccion();
+		
+		assert(juego.obtenerUnidadesDelJugador(jugador1).get(0) instanceof Espadachin);
+	}
+	
+	@Test
+	public void unCuartelDeberiaPoderProducirUnArquero() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Cuartel cuartel = new Cuartel();
+		cuartel.cambiarJugador(jugador1);
+		cuartel.establecerPosicion(new Posicion(3, 3));
+
+		cuartel.comenzarProduccionArquero();
+		cuartel.realizarAccion();
+		
+		assert(juego.obtenerUnidadesDelJugador(jugador1).get(0) instanceof Arquero);
+	}
+	
+	@Test
+	public void unEdificioNoDeberiaPoderProducirUnidadesSiEstaEnConstruccion() throws Exception{
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		
+		int poblacionInicial = juego.obtenerPoblacion(jugador1);
+		
+		aldeano.construirPlazaCentral(new Posicion(5, 6));
+		aldeano.realizarAccion();
+		aldeano.realizarAccion();
+		
+		PlazaCentral plaza = (PlazaCentral) juego.obtenerEdificiosDelJugador(jugador1).get(0);
+		
+		plaza.comenzarProduccionAldeano();
+		plaza.realizarAccion();
+		
+		assertEquals(poblacionInicial, juego.obtenerPoblacion(jugador1));
+	}
 	
 
 }

@@ -1,12 +1,17 @@
 package edificios;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import acciones.Construir;
+import areaJuego.Mapa;
 import areaJuego.Posicion;
 import interfaces.Atacable;
 import interfaces.EstadoEdficio;
 import interfaces.IAtacante;
+import interfaces.ProductorUnidades;
+import juego.Juego;
 import turnos.Jugador;
 import unidades.Aldeano;
 import unidades.ArmaDeAsedio;
@@ -23,6 +28,7 @@ public abstract class Edificio implements Atacable{
 	protected int turnosConstruccion = 3;
 	
 	protected EstadoEdficio estadoEdificio = new EdificioEnConstruccion(turnosConstruccion);
+	protected ProductorUnidades productorUnidades = new ProduccionDisponible();
 
 	public int obtenerVida() {
 		return vida.obtenerVida();
@@ -118,6 +124,29 @@ public abstract class Edificio implements Atacable{
 	
 	public boolean estaOcupando(Posicion posicion) {
 		return this.posiciones.contains(posicion);
+	}
+
+	public boolean esReparable() {
+		return estadoEdificio.esReparable();
+	}
+	
+	public void realizarAccion() throws Exception {
+		this.productorUnidades.avanzar();
+	}
+
+	public Set<Posicion> obtenerPosicionesValidasAdyacentes() {
+		Set<Posicion> posiciones = new HashSet<Posicion>();
+		for (Posicion posicionEdificio: this.obtenerPosiciones()) {
+			posiciones.addAll(posicionEdificio.obtenerAdyacentes());
+		}
+		Mapa mapa = Juego.obtenerInstancia().obtenerMapa();
+		Set<Posicion> posicionesInvalidas = new HashSet<Posicion>();
+		for (Posicion posicion: posiciones) {
+			if(!mapa.posicionEsValida(posicion)) 
+				posicionesInvalidas.add(posicion);
+		}
+		posiciones.removeAll(posicionesInvalidas);
+		return posiciones;
 	}
 
 		
