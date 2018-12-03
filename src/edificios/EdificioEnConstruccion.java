@@ -2,6 +2,7 @@ package edificios;
 
 import interfaces.EstadoEdficio;
 import unidades.Aldeano;
+import unidades.Unidad;
 
 public class EdificioEnConstruccion implements EstadoEdficio {
 	
@@ -27,5 +28,14 @@ public class EdificioEnConstruccion implements EstadoEdficio {
 		}
 	}
 
+	@Override
+	public boolean esReparable() {
+		return false;
+	}
+
+	@Override
+	public void producir(Unidad unidadAProducir, Edificio edificio) {
+		
+	}
 
 }

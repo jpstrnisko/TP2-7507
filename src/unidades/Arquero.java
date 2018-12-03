@@ -3,6 +3,7 @@ import edificios.Edificio;
 
 import java.util.List;
 
+import acciones.Atacar;
 import areaJuego.Posicion;
 import interfaces.Atacable;
 import interfaces.IAtacante;
@@ -35,14 +36,12 @@ public class Arquero extends Unidad implements IAtacante {
 
 	@Override
 	protected void reiniciarAccion() {
-		// TODO Auto-generated method stub
-		
+		this.accion = new Inactivo();
 	}
 
 	@Override
 	public void seleccionarObjetivo(Atacable objetivo) {
-		// TODO Auto-generated method stub
-		
+		accion = Atacar.obtenerInstanciaAccion(objetivo, this, distanciaMaximaAtaque);
 	}
 
 

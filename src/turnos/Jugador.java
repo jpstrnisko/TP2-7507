@@ -23,5 +23,12 @@ public class Jugador {
 		if(cantidadDeOro > 0)
 			this.oro += cantidadDeOro;	
 	}
+
+	public boolean quitarOro(int cantidad) {
+		if (oro < cantidad)
+			return false;
+		oro -= cantidad;
+		return true;
+	}
 	
 }

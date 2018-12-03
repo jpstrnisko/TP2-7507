@@ -24,14 +24,14 @@ public class Atacar implements Accion {
 	@Override
 	public void hacer() {
 		/*Se puede cambiar por double dispatch*/
-		if(this.objetivo.getClass() == Edificio.class)
+		if(Edificio.class.isAssignableFrom(objetivo.getClass()))
 			this.atacante.atacar((Edificio) this.objetivo);
 		else
 			this.atacante.atacar((Unidad) this.objetivo);
 	}
 
 	public static Accion obtenerInstanciaAccion(Atacable objetivo, IAtacante atacante, int rangoDeAtaque) {
-		if(objetivo.estaEnRangoDe(rangoDeAtaque, atacante)) 
+		if(objetivo.estaEnRangoDe(rangoDeAtaque, atacante) && objetivo.obtenerJugador() != atacante.obtenerJugador()) 
 			return new Atacar(objetivo, atacante);
 		
 		return new Inactivo();
