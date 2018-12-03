@@ -62,15 +62,15 @@ public class ReglasJuegoTest {
 	}
 	
 	@Test
-	public void elJuegoDeberiaComenzarConUnMapaDe25x25() throws Exception{
+	public void elJuegoDeberiaComenzarConUnMapaDe30x23() throws Exception{
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
 		juego.agregarJugador(jugador1);
 		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
-		assertEquals(juego.obtenerMapa().obtenerAlto(), 25);
-		assertEquals(juego.obtenerMapa().obtenerAncho(), 25);
+		assertEquals(juego.obtenerMapa().obtenerAlto(), 23);
+		assertEquals(juego.obtenerMapa().obtenerAncho(), 30);
 	}
 	
 	@Test
@@ -721,7 +721,7 @@ public class ReglasJuegoTest {
 		assertEquals(50, aldeano.obtenerVida());
 	}
 	
-	/*@Test
+	@Test
 	public void unEspadchinDeberiaPoderAtacarUnEdificioAdyacente() throws Exception{
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jugador 1");
@@ -761,8 +761,23 @@ public class ReglasJuegoTest {
 		espadachin.realizarAccion();
 		
 		assertEquals(25, aldeano.obtenerVida());
-	}*/
+	}
 	
+	/*@Test
+	public void alAvanzarUnTurnoElJugadorDeberiaObtener20DeOroPorCadaAldeano() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jose");
+		Jugador jugador2 = new Jugador("Pedro");
+		juego.agregarJugador(jugador1);
+		juego.agregarJugador(jugador2);
+		juego.comenzarJuego();
+		
+		Jugador jugadorActual = juego.obtenerJugadorActual();
+		int oroInicial = jugadorActual.obtenerOro();
+		juego.avanzarTurno();
+		
+		assertEquals(oroInicial + 60, jugadorActual.obtenerOro());
+	}*/
 	
 
 }

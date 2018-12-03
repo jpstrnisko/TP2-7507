@@ -30,7 +30,7 @@ public class Juego {
 
 	private Juego() {
 		sistemaTurnos = new SistemaTurnos();
-		mapa = new Mapa(25, 25);
+		mapa = new Mapa(30, 23);
 		ganador = null;
 	}
 	
@@ -132,5 +132,15 @@ public class Juego {
 		else
 			ganador = jugadores.get(0);
 	}
+
+	public Jugador obtenerJugadorActual() {
+		return sistemaTurnos.obtenerJugadorActual();
+	}
+
+	/*public void avanzarTurno() {
+		for (Edificio edificio: obtenerEdificiosDelJugador(sistemaTurnos.obtenerJugadorActual()))
+			edificio.
+		sistemaTurnos.avanzarTurno();
+	}*/
 
 }

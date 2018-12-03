@@ -23,5 +23,9 @@ public class Jugador {
 		if(cantidadDeOro > 0)
 			this.oro += cantidadDeOro;	
 	}
+
+	public void cambiarNombre(String nombreJug) {
+		nombre = nombreJug;
+	}
 	
 }

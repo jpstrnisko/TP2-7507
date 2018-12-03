@@ -17,7 +17,7 @@ public class Mapa {
 	protected int ancho;
 	protected HashMap<Celda, Atacable> zonaDeJuego;
 			
-	public Mapa(int alto, int ancho) {
+	public Mapa(int ancho, int alto) {
 		this.alto = alto;
 		this.ancho = ancho;
 		this.zonaDeJuego = new HashMap<Celda, Atacable>();
@@ -120,6 +120,15 @@ public class Mapa {
 
 	public boolean posicionEsValida(Posicion posicion) {
 		return !(this.posicionEstaOcupada(posicion) || this.seSalioDelMapa(posicion));
+	}
+
+
+	public Atacable obtenerAtacableEn(Posicion posicion) {
+		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
+			if (this.zonaDeJuego.get(cadaCelda).estaOcupando(posicion))
+				return this.zonaDeJuego.get(cadaCelda);
+		}
+		return null;
 	}
 
 }

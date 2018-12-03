@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -21,6 +22,7 @@ import juego.Juego;
 import vistaAcciones.BotonMoverHandler;
 import javafx.scene.input.*;
 import areaJuego.Posicion;
+import interfaces.Atacable;
 import javafx.event.EventHandler;
 
 
@@ -32,15 +34,14 @@ public class VentanaInicial extends BorderPane {
     Juego juego;
     Canvas canvas;
     VBox box;
+    Atacable seleccionado = null;
 
     public VentanaInicial(Stage stage, Juego modelo) {
         this.setMenu(stage);
         this.setCentro(modelo);
         this.setControles(modelo);
-        
     }
 
-    
     private void setMenu(Stage stage) {
         this.menu = new MenuOpciones(stage);
         this.setTop(menu);
@@ -48,10 +49,27 @@ public class VentanaInicial extends BorderPane {
     
     private void setCentro(Juego modelo) {
 
-        canvas = new Canvas(1000, 800);
+        canvas = new Canvas(900, 690);
         vistaModelo = new VistaModelo(modelo, canvas);
         vistaModelo.dibujar();
+        int altoCelda = (int) canvas.getHeight()/(modelo.obtenerMapa().obtenerAlto());
+    	int anchoCelda = (int) canvas.getWidth()/(modelo.obtenerMapa().obtenerAncho());
+    	
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent click) {
+        		this.clickEn(click.getX(), click.getY());
+        	}
 
+			private void clickEn(double x, double y) {
+				Posicion posicionSeleccionada = new Posicion((int) x/anchoCelda, (int) y/altoCelda);
+				seleccionado = modelo.obtenerMapa().obtenerAtacableEn(posicionSeleccionada);
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle(seleccionado.toString());
+
+				alert.showAndWait();
+			}
+        });
         box = new VBox(canvas);
         box.setAlignment(Pos.CENTER);
         box.setSpacing(20);

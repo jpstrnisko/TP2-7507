@@ -24,7 +24,7 @@ public class Atacar implements Accion {
 	@Override
 	public void hacer() {
 		/*Se puede cambiar por double dispatch*/
-		if(this.objetivo.getClass() == Edificio.class)
+		if(Edificio.class.isAssignableFrom(objetivo.getClass()))
 			this.atacante.atacar((Edificio) this.objetivo);
 		else
 			this.atacante.atacar((Unidad) this.objetivo);

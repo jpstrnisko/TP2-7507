@@ -14,12 +14,14 @@ import unidades.Unidad;
 public class VistaModelo {
 	private Juego modelo;
     Canvas canvas;
-    private int anchoCelda = 35;
-    private int altoCelda = 35;
+    int altoCelda;
+    int anchoCelda;
 
     public VistaModelo(Juego modelo, Canvas canvas) {
         this.modelo = modelo;
         this.canvas = canvas;
+        altoCelda = (int) canvas.getHeight()/(modelo.obtenerMapa().obtenerAlto());
+    	anchoCelda = (int) canvas.getWidth()/(modelo.obtenerMapa().obtenerAncho());
     }
 
     public void dibujar() {
@@ -30,23 +32,14 @@ public class VistaModelo {
     }
 
     private void dibujarEdificios(List<Edificio> edificios) {
-		this.dibujarCastillos(edificios);
-		this.dibujarPlazasCentrales(edificios);
-	}
-
-	private void dibujarPlazasCentrales(List<Edificio> edificios) {
-		Image imagen = new Image("file:aplicacion/assets/PNG Format/Towncenter.png");
+		Image imagen = null;
 		for (Edificio edificio: edificios) {
-			if(edificio instanceof PlazaCentral)
-				canvas.getGraphicsContext2D().drawImage(imagen, edificio.obtenerPosicionInicial().obtenerPosicionX()*anchoCelda, edificio.obtenerPosicionInicial().obtenerPosicionY()*altoCelda, anchoCelda*2, altoCelda*2);
-		}
-	}
-
-	private void dibujarCastillos(List<Edificio> edificios) {
-		Image imagen = new Image("file:aplicacion/assets/PNG Format/castle.png");
-		for (Edificio edificio: edificios) {
+			int tamanio = (int) Math.sqrt(edificio.obtenerTamanio());
 			if(edificio instanceof Castillo)
-				canvas.getGraphicsContext2D().drawImage(imagen, edificio.obtenerPosicionInicial().obtenerPosicionX()*anchoCelda, edificio.obtenerPosicionInicial().obtenerPosicionY()*altoCelda, anchoCelda*4, altoCelda*4);
+				imagen = new Image("file:aplicacion/assets/PNG Format/castle.png");
+			if(edificio instanceof PlazaCentral)
+				imagen = new Image("file:aplicacion/assets/PNG Format/Towncenter.png");
+			canvas.getGraphicsContext2D().drawImage(imagen, edificio.obtenerPosicionInicial().obtenerPosicionX()*anchoCelda, edificio.obtenerPosicionInicial().obtenerPosicionY()*altoCelda, anchoCelda*tamanio, altoCelda*tamanio);
 		}
 	}
 
@@ -59,7 +52,7 @@ public class VistaModelo {
 
 	private void dibujarUnidad(Unidad unidad) {
 		Image imagen = new Image("file:aplicacion/assets/PNG Format/male1ed.png");
-		canvas.getGraphicsContext2D().drawImage(imagen, unidad.obtenerPosicion().obtenerPosicionY()*anchoCelda, unidad.obtenerPosicion().obtenerPosicionX()*altoCelda, anchoCelda, altoCelda);
+		canvas.getGraphicsContext2D().drawImage(imagen, unidad.obtenerPosicion().obtenerPosicionX()*anchoCelda, unidad.obtenerPosicion().obtenerPosicionY()*altoCelda, anchoCelda, altoCelda);
 	}
 
 	private void dibujarTerreno() {
