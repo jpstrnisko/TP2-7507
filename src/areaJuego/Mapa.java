@@ -85,7 +85,7 @@ public class Mapa {
 		}
 	}
 	
-	public List<Unidad> obtenerUnidades() {
+   public List<Unidad> obtenerUnidades() {
 		List<Unidad> unidades = new ArrayList<Unidad>();
 		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
 			if (this.zonaDeJuego.get(cadaCelda) instanceof Unidad)
