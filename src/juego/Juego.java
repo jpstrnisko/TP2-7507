@@ -7,14 +7,10 @@ import areaJuego.Mapa;
 import areaJuego.Posicion;
 import edificios.Castillo;
 import edificios.Edificio;
-import edificios.FabricaEdificios;
 import edificios.PlazaCentral;
-import edificios.FabricaEdificios;
-import interfaces.Atacable;
 import turnos.Jugador;
 import turnos.MaximoJugadoresError;
 import turnos.SistemaTurnos;
-import unidades.Aldeano;
 import unidades.FabricaAldeano;
 import unidades.Unidad;
 

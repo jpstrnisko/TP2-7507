@@ -4,25 +4,13 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.*;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import juego.Juego;
 import unidades.Aldeano;
-import vistaAcciones.BotonEntrarEventHandler;
-import vistaAcciones.BotonMoverHandler;
 import javafx.scene.input.*;
 import areaJuego.Posicion;
 import edificios.Castillo;
@@ -95,19 +83,16 @@ public class VentanaInicial extends BorderPane {
     	VBox contenedorVertical = new VBox();
     	contenedorVertical.setMaxWidth(200);
     	Button botonAvanzarTurno = new Button("Avanzar turno");
-    	Button botonCrearCuartel = new Button("Crear Cuartel");
-    	contenedorVertical.getChildren().addAll(botonAvanzarTurno,botonCrearCuartel);
+    	
+    	contenedorVertical.getChildren().addAll(botonAvanzarTurno);
     	contenedorVertical.setSpacing(10);
         contenedorVertical.setPadding(new Insets(15));
     	
     	BotonAvanzarTurnoHandler avanzar = new BotonAvanzarTurnoHandler(vistaModelo, modelo);
     	botonAvanzarTurno.setOnAction(avanzar);
     	
-    	Posicion posicion = (new Posicion(20,20));
-    	
-    	BotonCrearCuartelHandler nuevoCuartel = new BotonCrearCuartelHandler(vistaModelo, modelo, posicion);
-    	botonCrearCuartel.setOnAction(nuevoCuartel);
-    	
+    	   	
+    	    	
     	if (seleccionado instanceof PlazaCentral)
     		setControlesPlazaCentral(modelo, contenedorVertical);
     	
@@ -136,8 +121,40 @@ public class VentanaInicial extends BorderPane {
     	contenedorVertical.getChildren().addAll(jugador,nombreJugador, nombre, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+    		
     		Button botonConstruir = new Button("Construir");
+    		
+    		ContextMenu menuConstruir = new ContextMenu();
+    		
+    		ImageView imagenPlaza = new ImageView();
+        	imagenPlaza.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter.png"));
+        	imagenPlaza.setFitHeight(20);
+        	imagenPlaza.setFitWidth(20);
+        	
+    		MenuItem plazaCentral = new MenuItem("Plaza Central");
+    		plazaCentral.setGraphic(imagenPlaza);
+    		
+    		ImageView imagenCuartel = new ImageView();
+        	imagenCuartel.setImage(new Image("file:aplicacion/assets/PNG Format/barracks.png"));
+        	imagenCuartel.setFitHeight(20);
+        	imagenCuartel.setFitWidth(20);
+        	        	
+    		MenuItem cuartel = new MenuItem("Cuartel");
+    		cuartel.setGraphic(imagenCuartel);
+    		    		    		
+    		menuConstruir.getItems().addAll(plazaCentral,cuartel);
+    		
+    		botonConstruir.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            	@Override
+            	public void handle(MouseEvent click) {
+            		if (click.getButton() == MouseButton.SECONDARY) {
+            			menuConstruir.show(botonConstruir,click.getScreenX(), click.getScreenY());
+            		}
+            	}
+    		});	
+    		
     		Button botonReparar = new Button("Reparar");
+    		
     		contenedorVertical.getChildren().addAll(botonConstruir, botonReparar);
     	}
         
