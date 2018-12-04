@@ -4,11 +4,13 @@ import edificios.Edificio;
 
 public class VidaUnidad {
 	
+	protected int vidaMaxima;
 	protected int vida;
 	protected Unidad unidad;
 	
 	public VidaUnidad(int vidaInicial, Unidad unidad) {
 		this.vida = vidaInicial;
+		this.vidaMaxima = vidaInicial;
 		this.unidad = unidad;
 	}
 
@@ -21,5 +23,9 @@ public class VidaUnidad {
 		if (vida <= 0) {
 			unidad.matar();
 		}
+	}
+
+	public int obtenerVidaMaxima() {
+		return vidaMaxima;
 	}
 }

@@ -3,6 +3,7 @@ package vista;
 import java.util.List;
 
 import edificios.Castillo;
+import edificios.Cuartel;
 import edificios.Edificio;
 import edificios.Cuartel;
 import edificios.PlazaCentral;
@@ -10,6 +11,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import juego.Juego;
+import unidades.Aldeano;
+import unidades.ArmaDeAsedio;
+import unidades.Arquero;
+import unidades.Espadachin;
 import unidades.Unidad;
 
 public class VistaModelo {
@@ -48,8 +53,17 @@ public class VistaModelo {
 
 	private void dibujarUnidades() {
     	List <Unidad> unidades = modelo.obtenerUnidades();
+    	Image imagen = null;
     	for (Unidad unidad: unidades) {
-    		dibujarUnidad(unidad);
+    		if(unidad instanceof Aldeano)
+    			imagen = new Image("file:aplicacion/assets/PNG Format/male1ed.png");
+    		if(unidad instanceof Espadachin)
+    			imagen = new Image("file:aplicacion/assets/PNG Format/champion1.png");
+    		if(unidad instanceof Arquero)
+    			imagen = new Image("file:aplicacion/assets/PNG Format/archer1.png");
+    		if(unidad instanceof ArmaDeAsedio)
+    			imagen = new Image("file:aplicacion/assets/PNG Format/treb_pack1.png");
+    		canvas.getGraphicsContext2D().drawImage(imagen, unidad.obtenerPosicion().obtenerPosicionX()*anchoCelda, unidad.obtenerPosicion().obtenerPosicionY()*altoCelda, anchoCelda, altoCelda);
     	}
 	}
 

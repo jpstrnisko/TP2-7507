@@ -12,7 +12,12 @@ public class FabricaEdificios {
 		edificio.establecerPosicion(posicion);
 		edificio.establecerVida(0);
 		edificio.cambiarJugador(jugador);
-		juego.obtenerMapa().colocarAtacable(edificio.obtenerPosicionInicial(), edificio);
+		try {
+			juego.obtenerMapa().colocarAtacable(edificio.obtenerPosicionInicial(), edificio);
+		} catch (Exception e) {
+			juego.obtenerMapa().removerAtacable(edificio);		
+		}
+			
 		return edificio;
 	}
 }

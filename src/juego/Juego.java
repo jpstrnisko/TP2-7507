@@ -21,8 +21,7 @@ public class Juego {
 	protected SistemaTurnos sistemaTurnos;
 	protected Mapa mapa;
 	protected Jugador ganador;
-	
-	
+
 
 	private Juego() {
 		sistemaTurnos = new SistemaTurnos();
@@ -64,7 +63,6 @@ public class Juego {
 		fabricaAldeanos.crearAldeano(new Posicion(22, 15), jugador2);
 		fabricaAldeanos.crearAldeano(new Posicion(20, 17), jugador2);
 		fabricaAldeanos.crearAldeano(new Posicion(22, 20), jugador2);
-		
 		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(3, 8), jugador1);
 		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(22, 17), jugador2);
 		

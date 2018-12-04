@@ -9,5 +9,7 @@ public interface Atacable {
 	boolean estaEnRangoDe(int rangoDeAtaque, IAtacante atacante);
 	boolean estaOcupando(Posicion posicion);
 	Object obtenerJugador();
+	int obtenerVida();
+	int obtenerVidaMaxima();
 
 }
