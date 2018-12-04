@@ -25,13 +25,14 @@ public class MenuOpciones extends MenuBar {
 	        OpcionSalirEventHandler opcionSalirHandler = new OpcionSalirEventHandler();
 	        opcionSalir.setOnAction(opcionSalirHandler);
 	        
-	        OpcionAcercaDeEventHandler opcionAcercaHandler = new OpcionAcercaDeEventHandler();
+	        OpcionAcercaDeEventHandler opcionAcercaHandler = new OpcionAcercaDeEventHandler(stage);
 	        opcionAcerca.setOnAction(opcionAcercaHandler);
 	        
 	        OpcionPantallaCompletaEventHandler opcionPantallaCompletaHandler = new OpcionPantallaCompletaEventHandler(stage,opcionPantallaCompleta);
 	        opcionPantallaCompleta.setOnAction(opcionPantallaCompletaHandler);
 	        
-	        opcionPantallaCompleta.setDisable(true);
+	        opcionPantallaCompleta.setDisable(false);
+	        
 	        menuArchivo.getItems().addAll(opcionSalir);
 	        menuAyuda.getItems().addAll(opcionAcerca);
 	        menuVer.getItems().addAll(opcionPantallaCompleta);
@@ -40,7 +41,7 @@ public class MenuOpciones extends MenuBar {
        }
        
        public void aplicacionMaximizada() {
-    	   opcionPantallaCompleta.setDisable(false);
+    	   opcionPantallaCompleta.setDisable(true);
        }
        
        

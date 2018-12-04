@@ -3,6 +3,8 @@ package vistaAcciones;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import juego.Juego;
@@ -29,15 +31,23 @@ public class BotonEntrarEventHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
     	String nombreJug1 = campo1.getText();
     	String nombreJug2 = campo2.getText();
-    	/*if(nombreJug1.trim().equals("") || nombreJug2.trim().equals("")) {
-    		return;
-    	}*/
-    	
-		modelo.obtenerJugadores().get(0).cambiarNombre(nombreJug1);
-		modelo.obtenerJugadores().get(1).cambiarNombre(nombreJug2);
+    	if(nombreJug1.trim().equals("") || nombreJug2.trim().equals("")) {
+    		Alert alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("Error");
+            alert.setHeaderText("Jugador con Nombre Vacio");
+            String mensaje = "Por favor ingrese un nombre para ambos jugadores.";
+            alert.setContentText(mensaje);
+            alert.show();
+    	}else {
+    		
+    		modelo.obtenerJugadores().get(0).cambiarNombre(nombreJug1);
+    		modelo.obtenerJugadores().get(1).cambiarNombre(nombreJug2);
 
-        stage.setScene(proximaEscena);
-        stage.setFullScreenExitHint("");
-        //stage.setFullScreen(true);
+            stage.setScene(proximaEscena);
+            stage.setFullScreenExitHint("");
+            //stage.setFullScreen(true);
+    	}
+    	
+
     }
 }
