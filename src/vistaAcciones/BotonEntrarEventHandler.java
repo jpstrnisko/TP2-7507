@@ -34,7 +34,7 @@ public class BotonEntrarEventHandler implements EventHandler<ActionEvent> {
     	if(nombreJug1.trim().equals("") || nombreJug2.trim().equals("")) {
     		Alert alert = new Alert(AlertType.WARNING);
     		alert.setTitle("Error");
-            alert.setHeaderText("Jugador con Nombre Vacío");
+            alert.setHeaderText("Jugador con Nombre Vacio");
             String mensaje = "Por favor ingrese un nombre para ambos jugadores.";
             alert.setContentText(mensaje);
             alert.show();
