@@ -35,6 +35,7 @@ import edificios.PlazaCentral;
 import interfaces.Atacable;
 import javafx.event.EventHandler;
 import vistaAcciones.*;
+import turnos.Jugador;
 
 
 
@@ -128,23 +129,35 @@ public class VentanaInicial extends BorderPane {
     }
 
     public void setControles(Juego modelo) throws Exception {
-    	    	
+    	
+    	VBox contenedorHorizontal = new VBox();
+    	contenedorHorizontal.setMaxSize(200, 400);
+    	contenedorHorizontal.setSpacing(5);
+    	contenedorHorizontal.setPadding(new Insets(40));
+        
+            	
     	Label jugador = new Label("Jugador:");
     	jugador.setTextFill(Color.BLUE);
+    	jugador.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
     	Label nombreJugador = new Label(modelo.obtenerJugadorActual().obtenerNombre().toString().toUpperCase());
     	Label oro = new Label("Oro:");
     	oro.setTextFill(Color.BLUE);
+    	oro.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
     	int cantOro = modelo.obtenerJugadorActual().obtenerOro();
     	Label oroDisponible = new Label(String.valueOf(cantOro));
-    	
+    	Label unidades = new Label("Unidades:");
+    	unidades.setTextFill(Color.BLUE);
+    	unidades.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
     	    	
+    	contenedorHorizontal.getChildren().addAll(jugador,nombreJugador,oro,oroDisponible);
+    	
     	VBox contenedorVertical = new VBox();
     	contenedorVertical.setMaxWidth(200);
     	Button botonAvanzarTurno = new Button("Avanzar turno");
     	
-    	contenedorVertical.getChildren().addAll(jugador,nombreJugador,oro,oroDisponible,botonAvanzarTurno);
+    	contenedorVertical.getChildren().addAll(botonAvanzarTurno);
     	contenedorVertical.setSpacing(10);
-        contenedorVertical.setPadding(new Insets(10));
+        contenedorVertical.setPadding(new Insets(30));
                 
     	BotonAvanzarTurnoHandler avanzar = new BotonAvanzarTurnoHandler(vistaModelo, this, modelo);
     	botonAvanzarTurno.setOnAction(avanzar);
@@ -165,6 +178,7 @@ public class VentanaInicial extends BorderPane {
     		setControlesEspadachin(modelo, contenedorVertical);
 
     	this.setLeft(contenedorVertical);
+    	this.setRight(contenedorHorizontal);
 
     }
 
@@ -191,8 +205,8 @@ public class VentanaInicial extends BorderPane {
     	Label nombre = new Label("Espadachin");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/twohanded1.png"));
-    	imagen.setFitHeight(100);
-    	imagen.setFitWidth(100);
+    	imagen.setFitHeight(90);
+    	imagen.setFitWidth(90);
     	HBox vida = dibujarVida();
     	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
 
@@ -232,8 +246,8 @@ public class VentanaInicial extends BorderPane {
     	Label nombre = new Label("Aldeano");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/male1.png"));
-    	imagen.setFitHeight(100);
-    	imagen.setFitWidth(100);
+    	imagen.setFitHeight(90);
+    	imagen.setFitWidth(90);
     	HBox vida = dibujarVida();
     	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
 
@@ -295,8 +309,8 @@ public class VentanaInicial extends BorderPane {
     	Label nombre = new Label("Plaza Central");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter.png"));
-    	imagen.setFitHeight(100);
-    	imagen.setFitWidth(100);
+    	imagen.setFitHeight(90);
+    	imagen.setFitWidth(90);
     	HBox vida = dibujarVida();
     	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
 
