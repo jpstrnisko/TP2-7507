@@ -40,12 +40,15 @@ public class SaludoInicial extends VBox {
         
         Label labelJug1 = new Label("Jugador 1:");
         labelJug1.setTextFill(Color.web("#FF9922"));
+        labelJug1.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
         TextField campo1 = new TextField();
         HBox hb1 = new HBox();
         hb1.setAlignment(Pos.CENTER);
         hb1.getChildren().addAll(labelJug1, campo1);
         
         Label labelJug2 = new Label("Jugador 2:");
+        labelJug2.setTextFill(Color.web("#FF9922"));
+        labelJug2.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
         TextField campo2 = new TextField();
         HBox hb2 = new HBox();
         hb2.setAlignment(Pos.CENTER);

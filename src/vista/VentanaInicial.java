@@ -30,6 +30,7 @@ import edificios.Cuartel;
 import edificios.PlazaCentral;
 import interfaces.Atacable;
 import javafx.event.EventHandler;
+import vistaAcciones.*;
 
 
 
@@ -93,10 +94,18 @@ public class VentanaInicial extends BorderPane {
     	VBox contenedorVertical = new VBox();
     	contenedorVertical.setMaxWidth(200);
     	Button botonAvanzarTurno = new Button("Avanzar turno");
-    	contenedorVertical.getChildren().addAll(botonAvanzarTurno);
+    	Button botonCrearCuartel = new Button("Crear Cuartel");
+    	contenedorVertical.getChildren().addAll(botonAvanzarTurno,botonCrearCuartel);
+    	contenedorVertical.setSpacing(10);
+        contenedorVertical.setPadding(new Insets(15));
     	
     	BotonAvanzarTurnoHandler avanzar = new BotonAvanzarTurnoHandler(vistaModelo, modelo);
     	botonAvanzarTurno.setOnAction(avanzar);
+    	
+    	Posicion posicion = (new Posicion(20,20));
+    	
+    	BotonCrearCuartelHandler nuevoCuartel = new BotonCrearCuartelHandler(vistaModelo, modelo, posicion);
+    	botonCrearCuartel.setOnAction(nuevoCuartel);
     	
     	if (seleccionado instanceof PlazaCentral)
     		setControlesPlazaCentral(modelo, contenedorVertical);
@@ -105,7 +114,7 @@ public class VentanaInicial extends BorderPane {
     		setControlesCastillo(modelo, contenedorVertical);
     	
     	if (seleccionado instanceof Cuartel)
-    		setControlesPlazaCentral(modelo, contenedorVertical);
+    		setControlesCuartel(modelo, contenedorVertical);
     	
     	if (seleccionado instanceof Aldeano)
     		setControlesAldeano(modelo, contenedorVertical);
@@ -116,12 +125,14 @@ public class VentanaInicial extends BorderPane {
 
         
     private void setControlesAldeano(Juego modelo, VBox contenedorVertical) {
+    	Label jugador = new Label("Jugador");
+    	Label nombreJugador = new Label(modelo.obtenerJugadorActual().obtenerNombre().toString().toUpperCase());
     	Label nombre = new Label("Aldeano");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/male1.png"));
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
-    	contenedorVertical.getChildren().addAll(nombre, imagen);
+    	contenedorVertical.getChildren().addAll(jugador,nombreJugador, nombre, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button botonConstruir = new Button("Construir");
@@ -133,12 +144,14 @@ public class VentanaInicial extends BorderPane {
 	}
 
 	private void setControlesPlazaCentral(Juego modelo, VBox contenedorVertical) {
+		Label jugador = new Label("Jugador");
+    	Label nombreJugador = new Label(modelo.obtenerJugadorActual().obtenerNombre().toString().toUpperCase());
     	Label nombre = new Label("Plaza Central");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter.png"));
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
-    	contenedorVertical.getChildren().addAll(nombre, imagen);
+    	contenedorVertical.getChildren().addAll(jugador,nombreJugador,nombre, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button botonCrearAldeano = new Button("Crear Aldeano");
@@ -151,16 +164,37 @@ public class VentanaInicial extends BorderPane {
 	}
     
     private void setControlesCastillo(Juego modelo, VBox contenedorVertical) {
+    	Label jugador = new Label("Jugador");
+    	Label nombreJugador = new Label(modelo.obtenerJugadorActual().obtenerNombre().toString().toUpperCase());
     	Label nombre = new Label("Castillo");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/castle.png"));
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
-    	contenedorVertical.getChildren().addAll(nombre, imagen);
+    	contenedorVertical.getChildren().addAll(jugador,nombreJugador,nombre, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button crearArmaAsedio = new Button("Crear Arma de Asedio");
     		contenedorVertical.getChildren().addAll(crearArmaAsedio);
+    	}
+        
+        this.setLeft(contenedorVertical);
+	}
+    
+    private void setControlesCuartel(Juego modelo, VBox contenedorVertical) {
+    	Label jugador = new Label("Jugador");
+    	Label nombreJugador = new Label(modelo.obtenerJugadorActual().obtenerNombre().toString().toUpperCase());
+    	Label nombre = new Label("Cuartel");
+    	ImageView imagen = new ImageView();
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/barracks.png"));
+    	imagen.setFitHeight(100);
+    	imagen.setFitWidth(100);
+    	contenedorVertical.getChildren().addAll(jugador,nombreJugador,nombre, imagen);
+    	
+    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+    		Button crearEspadachin = new Button("Crear Espadachín");
+    		Button crearArquero = new Button("Crear Arquero");
+    		contenedorVertical.getChildren().addAll(crearEspadachin,crearArquero);
     	}
         
         this.setLeft(contenedorVertical);

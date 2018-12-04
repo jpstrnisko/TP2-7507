@@ -1,10 +1,8 @@
 package areaJuego;
+
 import edificios.Edificio;
 import interfaces.Atacable;
-import turnos.Jugador;
-import unidades.Aldeano;
 import unidades.Unidad;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;

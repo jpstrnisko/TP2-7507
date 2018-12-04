@@ -1,6 +1,5 @@
 package edificios;
 
-import turnos.Jugador;
 import unidades.Aldeano;
 
 public class PlazaCentral extends Edificio {

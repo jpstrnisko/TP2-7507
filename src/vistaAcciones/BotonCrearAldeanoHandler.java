@@ -1,7 +1,6 @@
-package vista;
+package vistaAcciones;
 
 import edificios.PlazaCentral;
-import interfaces.Atacable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import juego.Juego;

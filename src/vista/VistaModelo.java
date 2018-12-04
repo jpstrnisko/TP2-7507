@@ -4,6 +4,7 @@ import java.util.List;
 
 import edificios.Castillo;
 import edificios.Edificio;
+import edificios.Cuartel;
 import edificios.PlazaCentral;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -39,6 +40,8 @@ public class VistaModelo {
 				imagen = new Image("file:aplicacion/assets/PNG Format/castle.png");
 			if(edificio instanceof PlazaCentral)
 				imagen = new Image("file:aplicacion/assets/PNG Format/Towncenter.png");
+			if(edificio instanceof Cuartel)
+				imagen = new Image("file:aplicacion/assets/PNG Format/barracks.png");
 			canvas.getGraphicsContext2D().drawImage(imagen, edificio.obtenerPosicionInicial().obtenerPosicionX()*anchoCelda, edificio.obtenerPosicionInicial().obtenerPosicionY()*altoCelda, anchoCelda*tamanio, altoCelda*tamanio);
 		}
 	}
