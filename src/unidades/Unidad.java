@@ -6,6 +6,7 @@ import interfaces.TurnoMovimiento;
 import juego.Juego;
 import turnos.Jugador;
 import turnos.TurnoMovimientoFinalizado;
+import turnos.TurnoMovimientoHabilitado;
 import interfaces.Accion;
 import interfaces.Atacable;
 import interfaces.IAtacante;
@@ -80,6 +81,7 @@ public abstract class Unidad implements Atacable {
 
 	public void realizarAccion() {
 		this.accion.hacer();
+		this.turnoMovimiento = new TurnoMovimientoHabilitado(this);
 	}
 	
 	public boolean estaEnRangoDe(int rangoDeAtaque, IAtacante atacante) {
@@ -88,6 +90,10 @@ public abstract class Unidad implements Atacable {
 	
 	public boolean estaOcupando(Posicion posicion) {
 		return posicion.equals(this.posicion);
+	}
+	
+	public int obtenerVidaMaxima() {
+		return vida.obtenerVidaMaxima();
 	}
 }
 

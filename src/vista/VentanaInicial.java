@@ -3,6 +3,7 @@ package vista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -13,6 +14,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -21,12 +23,14 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import juego.Juego;
 import unidades.Aldeano;
+import unidades.Espadachin;
 import vistaAcciones.BotonEntrarEventHandler;
 import vistaAcciones.BotonMoverHandler;
 import javafx.scene.input.*;
 import areaJuego.Posicion;
 import edificios.Castillo;
 import edificios.Cuartel;
+import edificios.Edificio;
 import edificios.PlazaCentral;
 import interfaces.Atacable;
 import javafx.event.EventHandler;
@@ -40,13 +44,16 @@ public class VentanaInicial extends BorderPane {
     Juego juego;
     Canvas canvas;
     VBox box;
+    Posicion posicionPrimaria = null;
     Atacable seleccionado = null;
+    Posicion posicionSecundaria = null;
+    Atacable seleccionadoSecundario = null;
+    Edificio edificioConstruir = null;
 
-    public VentanaInicial(Stage stage, Juego modelo) {
+    public VentanaInicial(Stage stage, Juego modelo) throws Exception {
         this.setMenu(stage);
         this.setCentro(modelo);
         this.setControles(modelo);
-        
     }
 
     private void setMenu(Stage stage) {
@@ -54,7 +61,7 @@ public class VentanaInicial extends BorderPane {
         this.setTop(menu);
     }
     
-    private void setCentro(Juego modelo) {
+    public void setCentro(Juego modelo) {
 
         canvas = new Canvas(900, 690);
         vistaModelo = new VistaModelo(modelo, canvas);
@@ -65,12 +72,42 @@ public class VentanaInicial extends BorderPane {
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         	@Override
         	public void handle(MouseEvent click) {
-        		this.clickEn(click.getX(), click.getY());
+        		if(click.getButton().equals(MouseButton.PRIMARY))
+					try {
+						this.clickIzquierdoEn(click.getX(), click.getY());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+        		if(click.getButton().equals(MouseButton.SECONDARY))
+					try {
+						this.clickDerechoEn(click.getX(), click.getY());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
         	}
 
-			private void clickEn(double x, double y) {
-				Posicion posicionSeleccionada = new Posicion((int) x/anchoCelda, (int) y/altoCelda);
-				seleccionado = modelo.obtenerMapa().obtenerAtacableEn(posicionSeleccionada);
+			private void clickIzquierdoEn(double x, double y) throws Exception {
+				posicionPrimaria = new Posicion((int) x/anchoCelda, (int) y/altoCelda);
+				if(edificioConstruir != null) {
+					this.controlConstruccionEdificio();
+					edificioConstruir = null;
+				}
+				seleccionado = modelo.obtenerMapa().obtenerAtacableEn(posicionPrimaria);
+				posicionSecundaria = null;
+				seleccionadoSecundario = null;
+				setControles(modelo);
+			}
+			
+			private void controlConstruccionEdificio() {
+				if(edificioConstruir instanceof Cuartel)
+					((Aldeano) seleccionado).construirCuartel(posicionPrimaria);
+			}
+
+			private void clickDerechoEn(double x, double y) throws Exception {
+				posicionSecundaria = new Posicion((int) x/anchoCelda, (int) y/altoCelda);
+				seleccionadoSecundario = modelo.obtenerMapa().obtenerAtacableEn(posicionSecundaria);
 				setControles(modelo);
 			}
         });
@@ -89,13 +126,13 @@ public class VentanaInicial extends BorderPane {
         this.setCenter(box);
     }
     
-    private void setControles(Juego modelo) {
+    public void setControles(Juego modelo) throws Exception {
     	VBox contenedorVertical = new VBox();
     	contenedorVertical.setMaxWidth(200);
     	Button botonAvanzarTurno = new Button("Avanzar turno");
     	contenedorVertical.getChildren().addAll(botonAvanzarTurno);
     	
-    	BotonAvanzarTurnoHandler avanzar = new BotonAvanzarTurnoHandler(vistaModelo, modelo);
+    	BotonAvanzarTurnoHandler avanzar = new BotonAvanzarTurnoHandler(vistaModelo, this, modelo);
     	botonAvanzarTurno.setOnAction(avanzar);
     	
     	if (seleccionado instanceof PlazaCentral)
@@ -105,40 +142,110 @@ public class VentanaInicial extends BorderPane {
     		setControlesCastillo(modelo, contenedorVertical);
     	
     	if (seleccionado instanceof Cuartel)
-    		setControlesPlazaCentral(modelo, contenedorVertical);
+    		setControlesCuartel(modelo, contenedorVertical);
     	
     	if (seleccionado instanceof Aldeano)
     		setControlesAldeano(modelo, contenedorVertical);
     	
+    	if (seleccionado instanceof Espadachin)
+    		setControlesEspadachin(modelo, contenedorVertical);
+    	
     	this.setLeft(contenedorVertical);
         
     }
-
-        
-    private void setControlesAldeano(Juego modelo, VBox contenedorVertical) {
-    	Label nombre = new Label("Aldeano");
+    
+    private void setControlesCuartel(Juego modelo, VBox contenedorVertical) {
+    	Label nombre = new Label("Cuartel");
     	ImageView imagen = new ImageView();
-    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/male1.png"));
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/barracks.png"));
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
-    	contenedorVertical.getChildren().addAll(nombre, imagen);
+    	HBox vida = dibujarVida();
+    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
-    		Button botonConstruir = new Button("Construir");
-    		Button botonReparar = new Button("Reparar");
-    		contenedorVertical.getChildren().addAll(botonConstruir, botonReparar);
+    		Button botonCrearEspadachin = new Button("Crear Espadachin");
+    		BotonCrearEspadachinHandler crearEspadachin = new BotonCrearEspadachinHandler(modelo, (Cuartel) seleccionado);
+    		botonCrearEspadachin.setOnAction(crearEspadachin);
+    		contenedorVertical.getChildren().addAll(botonCrearEspadachin);
+    	}
+        
+        this.setLeft(contenedorVertical);
+    }
+    
+    private void setControlesEspadachin(Juego modelo, VBox contenedorVertical) throws Exception {
+    	Label nombre = new Label("Espadachin");
+    	ImageView imagen = new ImageView();
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/twohanded1.png"));
+    	imagen.setFitHeight(100);
+    	imagen.setFitWidth(100);
+    	HBox vida = dibujarVida();
+    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
+    	
+    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+    		if (seleccionadoSecundario != null) {
+    			((Espadachin)seleccionado).seleccionarObjetivo(seleccionadoSecundario);
+    		}
+    		else if (posicionSecundaria != null) {
+        		((Espadachin)seleccionado).mover(posicionSecundaria);
+        		this.vistaModelo.dibujar();
+        	}
     	}
         
         this.setLeft(contenedorVertical);
 	}
 
+	private HBox dibujarVida() {
+		int vida = seleccionado.obtenerVida();
+		int vidaMaxima = seleccionado.obtenerVidaMaxima();
+		double porcentajeVida = (double)vida / (double)vidaMaxima; 
+		Canvas canvas = new Canvas(80, 10);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		gc.setFill(Color.RED);
+		gc.fillRect(80 * porcentajeVida, 0, 80 * (1 - porcentajeVida), 10);
+		gc.setFill(Color.GREEN);
+		gc.fillRect(0, 0, 80 * porcentajeVida, 10);
+		Label lVida = new Label(String.valueOf(vida) + "/");
+		Label lVidaMax = new Label(String.valueOf(vidaMaxima));
+		HBox box = new HBox(canvas, lVida, lVidaMax);
+		box.setAlignment(Pos.CENTER);
+		return box;
+	}
+
+        
+    private void setControlesAldeano(Juego modelo, VBox contenedorVertical) throws Exception {
+    	Label nombre = new Label("Aldeano");
+    	ImageView imagen = new ImageView();
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/male1.png"));
+    	imagen.setFitHeight(100);
+    	imagen.setFitWidth(100);
+    	HBox vida = dibujarVida();
+    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
+    	
+    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+    		if (posicionSecundaria != null) {
+        		((Aldeano)seleccionado).mover(posicionSecundaria);
+        		this.vistaModelo.dibujar();
+        	}
+    		Button botonConstruirCuartel = new Button("Construir cuartel");
+    		BotonConstruirCuartelHandler construirCuartel = new BotonConstruirCuartelHandler(this, modelo, (Aldeano)seleccionado);
+    		botonConstruirCuartel.setOnAction(construirCuartel);
+    		Button botonReparar = new Button("Reparar");
+    		contenedorVertical.getChildren().addAll(botonConstruirCuartel, botonReparar);
+    	}
+        
+        this.setLeft(contenedorVertical);
+	}
+
+	
 	private void setControlesPlazaCentral(Juego modelo, VBox contenedorVertical) {
     	Label nombre = new Label("Plaza Central");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter.png"));
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
-    	contenedorVertical.getChildren().addAll(nombre, imagen);
+    	HBox vida = dibujarVida();
+    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button botonCrearAldeano = new Button("Crear Aldeano");
@@ -156,7 +263,8 @@ public class VentanaInicial extends BorderPane {
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/castle.png"));
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
-    	contenedorVertical.getChildren().addAll(nombre, imagen);
+    	HBox vida = dibujarVida();
+    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button crearArmaAsedio = new Button("Crear Arma de Asedio");

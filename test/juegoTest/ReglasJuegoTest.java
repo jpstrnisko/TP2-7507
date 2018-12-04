@@ -1024,11 +1024,12 @@ public class ReglasJuegoTest {
 	}
 	
 	@Test
-	public void unCuartelDeberiaPoderProducirUnEspadachin() throws Exception{
+	public void unCuartelYaConstruidoDeberiaPoderProducirUnEspadachin() throws Exception{
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jugador 1");
 		Mapa mapa = juego.obtenerMapa();
 		Cuartel cuartel = new Cuartel();
+		cuartel.finalizarConstruccion();
 		cuartel.cambiarJugador(jugador1);
 		cuartel.establecerPosicion(new Posicion(3, 3));
 
@@ -1039,13 +1040,14 @@ public class ReglasJuegoTest {
 	}
 	
 	@Test
-	public void unCuartelDeberiaPoderProducirUnArquero() throws Exception{
+	public void unCuartelYaConstruidoDeberiaPoderProducirUnArquero() throws Exception{
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jugador 1");
 		Mapa mapa = juego.obtenerMapa();
 		Cuartel cuartel = new Cuartel();
 		cuartel.cambiarJugador(jugador1);
 		cuartel.establecerPosicion(new Posicion(3, 3));
+		cuartel.finalizarConstruccion();
 
 		cuartel.comenzarProduccionArquero();
 		cuartel.realizarAccion();

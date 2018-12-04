@@ -8,10 +8,12 @@ public class BotonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 	
 	Juego modelo;
 	VistaModelo ventanaAActualizar;
+	VentanaInicial ventana;
 
-	public BotonAvanzarTurnoHandler(VistaModelo vistaModelo, Juego modelo) {
+	public BotonAvanzarTurnoHandler(VistaModelo vistaModelo, VentanaInicial ventana, Juego modelo) {
 		ventanaAActualizar = vistaModelo;
 		this.modelo = modelo;
+		this.ventana = ventana;
 	}
 
 	@Override
@@ -21,6 +23,16 @@ public class BotonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		ventana.seleccionado = null;
+		ventana.seleccionadoSecundario = null;
+		ventana.posicionPrimaria = null;
+		ventana.posicionSecundaria = null;
+		try {
+			ventana.setControles(modelo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		ventanaAActualizar.dibujar();
 	}
 

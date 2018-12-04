@@ -27,11 +27,11 @@ public class Cuartel extends Edificio {
 	}
 
 	public void comenzarProduccionEspadachin() {
-		this.productorUnidades.producir(new Espadachin(), this);
+		this.estadoEdificio.producir(new Espadachin(), this);
 	}
 
 	public void comenzarProduccionArquero() {
-		this.productorUnidades.producir(new Arquero(), this);
+		this.estadoEdificio.producir(new Arquero(), this);
 	}
 
 }
