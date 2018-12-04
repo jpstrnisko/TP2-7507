@@ -3,6 +3,7 @@ package vistaAcciones;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import juego.Juego;
+import vista.VentanaInicial;
 import vista.VistaModelo;
 
 public class BotonAvanzarTurnoHandler implements EventHandler<ActionEvent> {

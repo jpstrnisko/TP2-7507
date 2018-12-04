@@ -21,6 +21,7 @@ public class Arquero extends Unidad implements IAtacante {
 		this.costo = 75;
 		this.distanciaMaximaAtaque = 3;
 		this.atacante = new UnidadAtacante(this, danioAEdificios, danioAUnidades, distanciaMaximaAtaque);
+		this.accion = new Inactivo();
 		this.turnoMovimiento = new TurnoMovimientoHabilitado(this);
 	}
 
@@ -45,7 +46,6 @@ public class Arquero extends Unidad implements IAtacante {
 	public void seleccionarObjetivo(Atacable objetivo) {
 		accion = Atacar.obtenerInstanciaAccion(objetivo, this, distanciaMaximaAtaque);
 	}
-
 
 	@Override
 	public int obtenerRangoAtaque() {
