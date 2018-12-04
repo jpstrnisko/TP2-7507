@@ -1,13 +1,9 @@
 package acciones;
 
-import areaJuego.Posicion;
 import edificios.Edificio;
-import edificios.FabricaEdificios;
-import edificios.PlazaCentral;
 import interfaces.Accion;
 import interfaces.Atacable;
 import interfaces.IAtacante;
-import unidades.Aldeano;
 import unidades.Inactivo;
 import unidades.Unidad;
 

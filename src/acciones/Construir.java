@@ -1,7 +1,6 @@
 package acciones;
 
 import areaJuego.Posicion;
-import edificios.Cuartel;
 import edificios.Edificio;
 import edificios.FabricaEdificios;
 import interfaces.Accion;

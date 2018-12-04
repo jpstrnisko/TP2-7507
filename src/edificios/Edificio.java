@@ -1,10 +1,9 @@
 package edificios;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import acciones.Construir;
 import areaJuego.Mapa;
 import areaJuego.Posicion;
 import interfaces.Atacable;
@@ -14,9 +13,7 @@ import interfaces.ProductorUnidades;
 import juego.Juego;
 import turnos.Jugador;
 import unidades.Aldeano;
-import unidades.ArmaDeAsedio;
-import unidades.Arquero;
-import unidades.Espadachin;
+
 
 public abstract class Edificio implements Atacable{
 	

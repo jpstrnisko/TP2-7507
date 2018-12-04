@@ -5,6 +5,7 @@ import java.util.List;
 import edificios.Castillo;
 import edificios.Cuartel;
 import edificios.Edificio;
+import edificios.Cuartel;
 import edificios.PlazaCentral;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;

@@ -15,6 +15,10 @@ public class Jugador {
 		this.nombre = nombre;
 	}
 
+	public String obtenerNombre() {
+		return nombre;
+	}
+	
 	public int obtenerOro() {
 		return oro;
 	}
