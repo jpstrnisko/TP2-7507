@@ -192,9 +192,8 @@ public class VentanaInicial extends BorderPane {
     	contenedorVertical.getChildren().addAll(jugador,nombreJugador,nombre, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
-    		Button crearEspadachin = new Button("Crear Espadachín");
     		Button crearArquero = new Button("Crear Arquero");
-    		contenedorVertical.getChildren().addAll(crearEspadachin,crearArquero);
+    		contenedorVertical.getChildren().addAll(crearArquero);
     	}
         
         this.setLeft(contenedorVertical);
