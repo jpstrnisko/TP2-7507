@@ -91,6 +91,7 @@ public class VentanaInicial extends BorderPane {
     }
     
     private void setControles(Juego modelo) {
+    	
     	VBox contenedorVertical = new VBox();
     	contenedorVertical.setMaxWidth(200);
     	Button botonAvanzarTurno = new Button("Avanzar turno");
@@ -174,8 +175,10 @@ public class VentanaInicial extends BorderPane {
     	contenedorVertical.getChildren().addAll(jugador,nombreJugador,nombre, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
-    		Button crearArmaAsedio = new Button("Crear Arma de Asedio");
-    		contenedorVertical.getChildren().addAll(crearArmaAsedio);
+    		Button botonCrearArmaDeAsedio = new Button("Crear Arma de Asedio");
+    		BotonCrearArmaDeAsedioHandler crearArma = new BotonCrearArmaDeAsedioHandler(modelo, (Castillo) seleccionado);
+    		botonCrearArmaDeAsedio.setOnAction(crearArma);
+    		contenedorVertical.getChildren().addAll(botonCrearArmaDeAsedio);
     	}
         
         this.setLeft(contenedorVertical);
@@ -189,11 +192,20 @@ public class VentanaInicial extends BorderPane {
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/barracks.png"));
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
+    	
     	contenedorVertical.getChildren().addAll(jugador,nombreJugador,nombre, imagen);
     	
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
-    		Button crearArquero = new Button("Crear Arquero");
-    		contenedorVertical.getChildren().addAll(crearArquero);
+    		
+    		Button botonCrearArquero = new Button("Crear Arquero");
+    		BotonCrearArqueroHandler crearArquero = new BotonCrearArqueroHandler(modelo, (Cuartel) seleccionado);
+    		botonCrearArquero.setOnAction(crearArquero);
+    		
+    		Button botonCrearEspadachin = new Button("Crear Espadachin");
+    		BotonCrearEspadachinHandler crearEspadachin = new BotonCrearEspadachinHandler(modelo, (Cuartel) seleccionado);
+    		botonCrearEspadachin.setOnAction(crearEspadachin);
+    		
+    		contenedorVertical.getChildren().addAll(botonCrearArquero,botonCrearEspadachin);
     	}
         
         this.setLeft(contenedorVertical);
