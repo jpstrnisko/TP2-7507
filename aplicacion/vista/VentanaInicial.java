@@ -155,18 +155,32 @@ public class VentanaInicial extends BorderPane {
             	
     	Label jugador = new Label("Jugador:");
     	jugador.setTextFill(Color.BLUE);
-    	jugador.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
+    	jugador.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 10));
     	Label nombreJugador = new Label(modelo.obtenerJugadorActual().obtenerNombre().toString().toUpperCase());
+    	
     	Label oro = new Label("Oro:");
-    	oro.setTextFill(Color.BLUE);
-    	oro.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
+       	oro.setTextFill(Color.BLUE);
+    	oro.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 10));
+    	ImageView imagenOro = new ImageView();
+    	imagenOro.setImage(new Image("file:aplicacion/assets/PNG Format/oro.png"));
+    	imagenOro.setFitHeight(25);
+    	imagenOro.setFitWidth(25);
+    	oro.setGraphic(imagenOro);
     	int cantOro = modelo.obtenerJugadorActual().obtenerOro();
     	Label oroDisponible = new Label(String.valueOf(cantOro));
-    	Label unidades = new Label("Unidades:");
-    	unidades.setTextFill(Color.BLUE);
-    	unidades.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
+    	
+    	Label nivelPoblacion = new Label("Poblacion:");
+    	nivelPoblacion.setTextFill(Color.BLUE);
+    	nivelPoblacion.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 10));
+    	ImageView imagen = new ImageView();
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/poblacion2.png"));
+    	imagen.setFitHeight(25);
+    	imagen.setFitWidth(25);
+    	nivelPoblacion.setGraphic(imagen);
+    	int cantPoblacion = modelo.obtenerPoblacion(modelo.obtenerJugadorActual());
+    	Label poblacion = new Label(String.valueOf(cantPoblacion));
     	    	
-    	contenedorHorizontal.getChildren().addAll(jugador,nombreJugador,oro,oroDisponible);
+    	contenedorHorizontal.getChildren().addAll(jugador,nombreJugador,oro,oroDisponible,nivelPoblacion,poblacion);
     	
     	VBox contenedorVertical = new VBox();
     	contenedorVertical.setMaxWidth(200);
@@ -178,6 +192,7 @@ public class VentanaInicial extends BorderPane {
                 
     	BotonAvanzarTurnoHandler avanzar = new BotonAvanzarTurnoHandler(vistaModelo, this, modelo);
     	botonAvanzarTurno.setOnAction(avanzar);
+    	
 
     	if (seleccionado instanceof PlazaCentral)
     		setControlesPlazaCentral(modelo, contenedorVertical);
@@ -199,6 +214,8 @@ public class VentanaInicial extends BorderPane {
     	
     	if (seleccionado instanceof ArmaDeAsedio)
     		setControlesArmaDeAsedio(modelo, contenedorVertical);
+    	
+    	
 
     	this.setLeft(contenedorVertical);
     	this.setRight(contenedorHorizontal);
