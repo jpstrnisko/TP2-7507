@@ -1,6 +1,7 @@
 package interfaces;
 import areaJuego.Posicion;
 import edificios.Edificio;
+import turnos.Jugador;
 import unidades.Unidad;
 
 public interface Atacable {
@@ -8,7 +9,7 @@ public interface Atacable {
 	int obtenerTamanio();
 	boolean estaEnRangoDe(int rangoDeAtaque, IAtacante atacante);
 	boolean estaOcupando(Posicion posicion);
-	Object obtenerJugador();
+	Jugador obtenerJugador();
 	int obtenerVida();
 	int obtenerVidaMaxima();
 

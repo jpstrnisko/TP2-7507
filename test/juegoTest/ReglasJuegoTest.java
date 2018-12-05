@@ -67,15 +67,15 @@ public class ReglasJuegoTest {
 	}
 	
 	@Test
-	public void elJuegoDeberiaComenzarConUnMapaDe30x23() throws Exception{
+	public void elJuegoDeberiaComenzarConUnMapaDe26x20() throws Exception{
 		Juego juego = Juego.obtenerNuevaInstancia();
 		Jugador jugador1 = new Jugador("Jose");
 		Jugador jugador2 = new Jugador("Pedro");
 		juego.agregarJugador(jugador1);
 		juego.agregarJugador(jugador2);
 		juego.comenzarJuego();
-		assertEquals(juego.obtenerMapa().obtenerAlto(), 23);
-		assertEquals(juego.obtenerMapa().obtenerAncho(), 30);
+		assertEquals(juego.obtenerMapa().obtenerAlto(), 20);
+		assertEquals(juego.obtenerMapa().obtenerAncho(), 26);
 	}
 	
 	@Test

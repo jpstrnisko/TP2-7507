@@ -206,12 +206,13 @@ public class VentanaInicial extends BorderPane {
 
     private void setControlesEspadachin(Juego modelo, VBox contenedorVertical) throws Exception {
     	Label nombre = new Label("Espadachin");
+    	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/twohanded1.png"));
     	imagen.setFitHeight(90);
     	imagen.setFitWidth(90);
     	HBox vida = dibujarVida();
-    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		if (seleccionadoSecundario != null) {
@@ -245,14 +246,14 @@ public class VentanaInicial extends BorderPane {
 
 
     private void setControlesAldeano(Juego modelo, VBox contenedorVertical) throws Exception{
-    	   	
     	Label nombre = new Label("Aldeano");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/male1.png"));
     	imagen.setFitHeight(90);
     	imagen.setFitWidth(90);
     	HBox vida = dibujarVida();
-    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
+    	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		
@@ -315,7 +316,8 @@ public class VentanaInicial extends BorderPane {
     	imagen.setFitHeight(90);
     	imagen.setFitWidth(90);
     	HBox vida = dibujarVida();
-    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
+    	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button botonCrearAldeano = new Button("Crear Aldeano");
@@ -335,7 +337,8 @@ public class VentanaInicial extends BorderPane {
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
     	HBox vida = dibujarVida();
-    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
+    	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button botonCrearArmaDeAsedio = new Button("Crear Arma de Asedio");
@@ -355,7 +358,8 @@ public class VentanaInicial extends BorderPane {
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
     	HBox vida = dibujarVida();
-    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
+    	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
 
