@@ -26,7 +26,7 @@ public class Construir implements Accion {
 	}
 
 	public static Accion obtenerInstanciaAccion(Edificio edificio, Posicion posicion, Aldeano aldeano) {
-		if(aldeano.estaAdyacenteAlEdificio(edificio, posicion)) {
+		if(aldeano.estaAdyacenteAlEdificio(edificio, posicion) && aldeano.obtenerJugador().quitarOro(edificio.obtenerCosto())) {
 			return new Construir(edificio, posicion, aldeano);
 		}
 		return new RecolectarOro(aldeano);

@@ -548,11 +548,14 @@ public class ReglasJuegoTest {
 		aldeano.cambiarJugador(jugador1);
 		mapa.colocarAtacable(posicionAldeano, aldeano);
 		
+		int oroInicial = jugador1.obtenerOro();
+		oroInicial -= (new PlazaCentral()).obtenerCosto();
+		
 		aldeano.construirPlazaCentral(new Posicion(5, 6));
 		aldeano.realizarAccion();
 		aldeano.realizarAccion();
 
-		assertEquals(jugador1.obtenerOro(), 100);
+		assertEquals(jugador1.obtenerOro(), oroInicial);
 	}
 	
 	@Test
@@ -570,7 +573,7 @@ public class ReglasJuegoTest {
 		aldeano.realizarAccion();
 		aldeano.realizarAccion();
 		aldeano.realizarAccion();
-		assertEquals(jugador1.obtenerOro(), 100);
+		int oroInicial = jugador1.obtenerOro();
 		
 		Edificio plaza = juego.obtenerEdificiosDelJugador(jugador1).get(0);
 		plaza.quitarVida(50);
@@ -578,7 +581,7 @@ public class ReglasJuegoTest {
 		aldeano.repararEdificio(plaza);
 		aldeano.realizarAccion();
 		aldeano.realizarAccion();
-		assertEquals(jugador1.obtenerOro(), 100);
+		assertEquals(jugador1.obtenerOro(), oroInicial);
 	}
 	
 	@Test
@@ -596,7 +599,7 @@ public class ReglasJuegoTest {
 		aldeano.realizarAccion();
 		aldeano.realizarAccion();
 		aldeano.realizarAccion();
-		assertEquals(jugador1.obtenerOro(), 100);
+		int oroInicial =  jugador1.obtenerOro();
 		
 		Edificio plaza = juego.obtenerEdificiosDelJugador(jugador1).get(0);
 		plaza.quitarVida(50);
@@ -604,10 +607,10 @@ public class ReglasJuegoTest {
 		aldeano.repararEdificio(plaza);
 		aldeano.realizarAccion();
 		aldeano.realizarAccion();
-		assertEquals(jugador1.obtenerOro(), 100);
+		assertEquals(jugador1.obtenerOro(), oroInicial);
 		
 		aldeano.realizarAccion();
-		assertEquals(jugador1.obtenerOro(), 120);
+		assertEquals(jugador1.obtenerOro(), oroInicial + 20);
 	}
 	
 	@Test
@@ -886,7 +889,6 @@ public class ReglasJuegoTest {
 		aldeano2.realizarAccion();
 		
 		assertEquals(425, plazaCentral.obtenerVida());
-		assertEquals(120, jugador1.obtenerOro());
 	}
 	
 	@Test
@@ -1113,6 +1115,40 @@ public class ReglasJuegoTest {
 		unidad.mover(posicionInicial);
 		
 		assertEquals(unidad.obtenerPosicion(), nuevaPosicion);
+	}
+	
+	@Test
+	public void construirUnaPlazaCentralDeberiaRestar100DeOro() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		int oroInicial = jugador1.obtenerOro();
+		
+		aldeano.construirPlazaCentral(new Posicion(5, 6));
+
+		assertEquals(oroInicial - 100, jugador1.obtenerOro());
+	}
+	
+	@Test
+	public void construirUnCuartelDeberiaRestar50DeOro() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		int oroInicial = jugador1.obtenerOro();
+		
+		aldeano.construirCuartel(new Posicion(5, 6));
+
+		assertEquals(oroInicial - 50, jugador1.obtenerOro());
 	}
 
 }

@@ -16,6 +16,8 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.*;
@@ -23,8 +25,14 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import juego.Juego;
 import unidades.Aldeano;
+import unidades.ArmaDeAsedio;
+import unidades.Arquero;
 import unidades.Espadachin;
 import javafx.scene.input.*;
+
+import java.io.Console;
+import java.io.File;
+
 import areaJuego.Posicion;
 import edificios.Castillo;
 import edificios.Cuartel;
@@ -33,7 +41,6 @@ import edificios.PlazaCentral;
 import interfaces.Atacable;
 import javafx.event.EventHandler;
 import vistaAcciones.*;
-import vistaAcciones.BotonCrearEspadachinHandler;
 import turnos.Jugador;
 
 
@@ -104,6 +111,8 @@ public class VentanaInicial extends BorderPane {
 			private void controlConstruccionEdificio() {
 				if(getEdificioConstruir() instanceof Cuartel)
 					((Aldeano) seleccionado).construirCuartel(posicionPrimaria);
+				if(getEdificioConstruir() instanceof PlazaCentral)
+					((Aldeano) seleccionado).construirPlazaCentral(posicionPrimaria);
 			}
 
 			private void clickDerechoEn(double x, double y) throws Exception {
@@ -179,6 +188,12 @@ public class VentanaInicial extends BorderPane {
 
     	if (seleccionado instanceof Espadachin)
     		setControlesEspadachin(modelo, contenedorVertical);
+    	
+    	if (seleccionado instanceof Arquero)
+    		setControlesArquero(modelo, contenedorVertical);
+    	
+    	if (seleccionado instanceof ArmaDeAsedio)
+    		setControlesArmaDeAsedio(modelo, contenedorVertical);
 
     	this.setLeft(contenedorVertical);
     	this.setRight(contenedorHorizontal);
@@ -204,7 +219,56 @@ public class VentanaInicial extends BorderPane {
         this.setLeft(contenedorVertical);
     }*/
 
-    private void setControlesEspadachin(Juego modelo, VBox contenedorVertical) throws Exception {
+    private void setControlesArmaDeAsedio(Juego modelo, VBox contenedorVertical) throws Exception {
+    	Label nombre = new Label("Arma de asedio");
+    	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
+    	ImageView imagen = new ImageView();
+    	if (((ArmaDeAsedio)seleccionado).estaMontada())
+    		imagen.setImage(new Image("file:aplicacion/assets/PNG Format/treb_open1.png"));
+    	else
+    		imagen.setImage(new Image("file:aplicacion/assets/PNG Format/treb_pack1.png"));
+    	imagen.setFitHeight(90);
+    	imagen.setFitWidth(90);
+    	HBox vida = dibujarVida();
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
+
+    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+    		if (seleccionadoSecundario != null) {
+    			((Arquero)seleccionado).seleccionarObjetivo(seleccionadoSecundario);
+    		}
+    		else if (posicionSecundaria != null) {
+        		((Arquero)seleccionado).mover(posicionSecundaria);
+        		this.vistaModelo.dibujar();
+        	}
+    	}
+
+        this.setLeft(contenedorVertical);
+	}
+
+	private void setControlesArquero(Juego modelo, VBox contenedorVertical) throws Exception {
+    	Label nombre = new Label("Arquero");
+    	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
+    	ImageView imagen = new ImageView();
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/archer1.png"));
+    	imagen.setFitHeight(90);
+    	imagen.setFitWidth(90);
+    	HBox vida = dibujarVida();
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
+
+    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+    		if (seleccionadoSecundario != null) {
+    			((Arquero)seleccionado).seleccionarObjetivo(seleccionadoSecundario);
+    		}
+    		else if (posicionSecundaria != null) {
+        		((Arquero)seleccionado).mover(posicionSecundaria);
+        		this.vistaModelo.dibujar();
+        	}
+    	}
+
+        this.setLeft(contenedorVertical);
+	}
+
+	private void setControlesEspadachin(Juego modelo, VBox contenedorVertical) throws Exception {
     	Label nombre = new Label("Espadachin");
     	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
     	ImageView imagen = new ImageView();
@@ -266,18 +330,23 @@ public class VentanaInicial extends BorderPane {
         	imagenPlaza.setFitHeight(20);
         	imagenPlaza.setFitWidth(20);
         	
-    		MenuItem plazaCentral = new MenuItem("Plaza Central");
-    		plazaCentral.setGraphic(imagenPlaza);
+    		MenuItem menuPlazaCentral = new MenuItem("Plaza Central");
+    		menuPlazaCentral.setGraphic(imagenPlaza);
+    		
+    		BotonConstruirPlazaHandler construirPlazaCentralHandler = new BotonConstruirPlazaHandler(this, modelo, (Aldeano)seleccionado);
+    		menuPlazaCentral.setOnAction(construirPlazaCentralHandler);
     		
     		ImageView imagenCuartel = new ImageView();
         	imagenCuartel.setImage(new Image("file:aplicacion/assets/PNG Format/barracks.png"));
         	imagenCuartel.setFitHeight(20);
         	imagenCuartel.setFitWidth(20);
         	        	
-    		MenuItem cuartel = new MenuItem("Cuartel");
-    		cuartel.setGraphic(imagenCuartel);
+    		MenuItem menuCuartel = new MenuItem("Cuartel");
+    		menuCuartel.setGraphic(imagenCuartel);
+    		BotonConstruirCuartelHandler construirCuartelHandler = new BotonConstruirCuartelHandler(this, modelo, (Aldeano)seleccionado);
+    		menuCuartel.setOnAction(construirCuartelHandler);
     		    		    		
-    		menuConstruir.getItems().addAll(plazaCentral,cuartel);
+    		menuConstruir.getItems().addAll(menuPlazaCentral, menuCuartel);
     		
     		botonConstruir.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             	@Override
@@ -288,19 +357,16 @@ public class VentanaInicial extends BorderPane {
             	}
     		});	
     		
-    		Button botonReparar = new Button("Reparar");
-    		
-    		contenedorVertical.getChildren().addAll(botonConstruir, botonReparar);
+    		contenedorVertical.getChildren().addAll(botonConstruir);
 
     		if (posicionSecundaria != null) {
         		((Aldeano)seleccionado).mover(posicionSecundaria);
         		this.vistaModelo.dibujar();
         	}
-    		/*
-    		Button botonConstruirCuartel = new Button("Construir cuartel");
-    		BotonConstruirCuartelHandler construirCuartel = new BotonConstruirCuartelHandler(this, modelo, (Aldeano)seleccionado);
-    		botonConstruirCuartel.setOnAction(construirCuartel);
-    		*/
+    		if (seleccionadoSecundario != null && Edificio.class.isAssignableFrom(seleccionadoSecundario.getClass())) {
+    			((Aldeano)seleccionado).repararEdificio((Edificio) seleccionadoSecundario);
+    		}
+    		
     		
     	}
 
@@ -309,7 +375,11 @@ public class VentanaInicial extends BorderPane {
 
 
 	private void setControlesPlazaCentral(Juego modelo, VBox contenedorVertical) {
-		
+		Media media = new Media(new File("aplicacion/assets/sounds/towncenter.wav").toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        player.setAutoPlay(true);
+        player.setVolume(0.6);
+        player.setCycleCount(1);
     	Label nombre = new Label("Plaza Central");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter.png"));
@@ -330,6 +400,11 @@ public class VentanaInicial extends BorderPane {
 	}
 
     private void setControlesCastillo(Juego modelo, VBox contenedorVertical) {
+    	Media media = new Media(new File("aplicacion/assets/sounds/castle.wav").toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        player.setAutoPlay(true);
+        player.setVolume(0.6);
+        player.setCycleCount(1);
     	
     	Label nombre = new Label("Castillo");
     	ImageView imagen = new ImageView();
@@ -351,7 +426,11 @@ public class VentanaInicial extends BorderPane {
 	}
 
     private void setControlesCuartel(Juego modelo, VBox contenedorVertical) {
-    	
+        Media media = new Media(new File("aplicacion/assets/sounds/barracks.wav").toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        player.setAutoPlay(true);
+        player.setVolume(0.6);
+        player.setCycleCount(1);
     	Label nombre = new Label("Cuartel");
     	ImageView imagen = new ImageView();
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/barracks.png"));
