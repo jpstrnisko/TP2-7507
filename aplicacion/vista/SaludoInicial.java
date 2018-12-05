@@ -34,7 +34,7 @@ public class SaludoInicial extends VBox {
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
         this.setPadding(new Insets(25));
-        Image imagen = new Image("file:src/vistaImagenes/principalEditado.jpg");
+        Image imagen = new Image("file:aplicacion/assets/principalEditado.jpg");
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
         

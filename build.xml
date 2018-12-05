@@ -79,6 +79,7 @@
 			<fileset dir="${classes.dir}">
 				<include name="**/*.class" />
 				<exclude name="**/*Test.class" />
+				<exclude name="aplicacion/*.class" />
 			</fileset>
 		</cobertura-instrument>
 	</target>

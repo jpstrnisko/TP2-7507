@@ -1,4 +1,4 @@
-package vista;
+package vistaAcciones;
 
 import edificios.Cuartel;
 import interfaces.Atacable;
@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import juego.Juego;
 import unidades.Aldeano;
+import vista.VentanaInicial;
 
 public class BotonConstruirCuartelHandler implements EventHandler<ActionEvent> {
 
@@ -23,7 +24,7 @@ public class BotonConstruirCuartelHandler implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		ventanaInicial.edificioConstruir = new Cuartel();
+		ventanaInicial.setEdificioConstruir(new Cuartel());
 	}
 
 }

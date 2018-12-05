@@ -24,8 +24,6 @@ import javafx.stage.Stage;
 import juego.Juego;
 import unidades.Aldeano;
 import unidades.Espadachin;
-import vistaAcciones.BotonEntrarEventHandler;
-import vistaAcciones.BotonMoverHandler;
 import javafx.scene.input.*;
 import areaJuego.Posicion;
 import edificios.Castillo;
@@ -35,22 +33,23 @@ import edificios.PlazaCentral;
 import interfaces.Atacable;
 import javafx.event.EventHandler;
 import vistaAcciones.*;
+import vistaAcciones.BotonCrearEspadachinHandler;
 import turnos.Jugador;
 
 
 
 public class VentanaInicial extends BorderPane {
 
-    MenuOpciones menu;
-    VistaModelo vistaModelo;
-    Juego juego;
-    Canvas canvas;
-    VBox box;
+	private MenuOpciones menu;
+    private VistaModelo vistaModelo;
+    private Juego juego;
+    private Canvas canvas;
+    private VBox box;
     public Posicion posicionPrimaria = null;
     public Atacable seleccionado = null;
     public Posicion posicionSecundaria = null;
     public Atacable seleccionadoSecundario = null;
-    Edificio edificioConstruir = null;
+    private Edificio edificioConstruir = null;
 
     public VentanaInicial(Stage stage, Juego modelo) throws Exception {
         this.setMenu(stage);
@@ -92,9 +91,9 @@ public class VentanaInicial extends BorderPane {
 
 			private void clickIzquierdoEn(double x, double y) throws Exception {
 				posicionPrimaria = new Posicion((int) x/anchoCelda, (int) y/altoCelda);
-				if(edificioConstruir != null) {
+				if(getEdificioConstruir() != null) {
 					this.controlConstruccionEdificio();
-					edificioConstruir = null;
+					setEdificioConstruir(null);
 				}
 				seleccionado = modelo.obtenerMapa().obtenerAtacableEn(posicionPrimaria);
 				posicionSecundaria = null;
@@ -103,7 +102,7 @@ public class VentanaInicial extends BorderPane {
 			}
 
 			private void controlConstruccionEdificio() {
-				if(edificioConstruir instanceof Cuartel)
+				if(getEdificioConstruir() instanceof Cuartel)
 					((Aldeano) seleccionado).construirCuartel(posicionPrimaria);
 			}
 
@@ -377,5 +376,13 @@ public class VentanaInicial extends BorderPane {
 	public MenuOpciones getMenuOpciones() {
         return menu;
     }
+
+	public Edificio getEdificioConstruir() {
+		return edificioConstruir;
+	}
+
+	public void setEdificioConstruir(Edificio edificioConstruir) {
+		this.edificioConstruir = edificioConstruir;
+	}
 
 }

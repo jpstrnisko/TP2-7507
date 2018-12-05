@@ -1,4 +1,4 @@
-package vista;
+package vistaAcciones;
 
 import edificios.Cuartel;
 import javafx.event.ActionEvent;
