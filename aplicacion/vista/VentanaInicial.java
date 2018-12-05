@@ -64,7 +64,7 @@ public class VentanaInicial extends BorderPane {
 
     public void setCentro(Juego modelo) {
 
-        canvas = new Canvas(900, 690);
+        canvas = new Canvas(910, 700);
         vistaModelo = new VistaModelo(modelo, canvas);
         vistaModelo.dibujar();
         int altoCelda = (int) canvas.getHeight()/(modelo.obtenerMapa().obtenerAlto());

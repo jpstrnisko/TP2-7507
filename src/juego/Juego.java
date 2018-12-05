@@ -25,7 +25,7 @@ public class Juego {
 
 	private Juego() {
 		sistemaTurnos = new SistemaTurnos();
-		mapa = new Mapa(30, 23);
+		mapa = new Mapa(26, 20);
 		ganador = null;
 	}
 	
@@ -57,17 +57,17 @@ public class Juego {
 		FabricaAldeano fabricaAldeanos = new FabricaAldeano();
 		FabricaEdificiosConstruidos fabricaEdificios = new FabricaEdificiosConstruidos();
 		
-		fabricaAldeanos.crearAldeano(new Posicion(4, 6), jugador1);
-		fabricaAldeanos.crearAldeano(new Posicion(6, 9), jugador1);
-		fabricaAldeanos.crearAldeano(new Posicion(4, 11), jugador1);
-		fabricaAldeanos.crearAldeano(new Posicion(22, 15), jugador2);
-		fabricaAldeanos.crearAldeano(new Posicion(20, 17), jugador2);
-		fabricaAldeanos.crearAldeano(new Posicion(22, 20), jugador2);
-		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(3, 8), jugador1);
-		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(22, 17), jugador2);
+		fabricaAldeanos.crearAldeano(new Posicion(2, 7), jugador1);
+		fabricaAldeanos.crearAldeano(new Posicion(3, 9), jugador1);
+		fabricaAldeanos.crearAldeano(new Posicion(2, 10), jugador1);
+		fabricaAldeanos.crearAldeano(new Posicion(23, 9), jugador2);
+		fabricaAldeanos.crearAldeano(new Posicion(22, 10), jugador2);
+		fabricaAldeanos.crearAldeano(new Posicion(23, 12), jugador2);
+		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(1, 8), jugador1);
+		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(23, 10), jugador2);
 		
-		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(2, 13), jugador1);
-		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(21, 10), jugador2);
+		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(1, 1), jugador1);
+		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(21, 15), jugador2);
 		
 	}
 

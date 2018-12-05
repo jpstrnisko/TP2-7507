@@ -23,7 +23,6 @@ public class Aplicacion extends Application {
     public void start(final Stage stage) throws Exception {
 
         stage.setTitle("Algo Empires II");
-        Mapa mapa = new Mapa(100,100);
         
         Juego modelo = this.crearModelo();
         
