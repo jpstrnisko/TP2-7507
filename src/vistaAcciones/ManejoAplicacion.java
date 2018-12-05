@@ -21,6 +21,7 @@ public class ManejoAplicacion implements EventHandler<KeyEvent> {
 
         if (event.getCode() == KeyCode.ESCAPE) {
             stage.setMaximized(false);
+            menu.aplicacionMinimizada();
             
            
         }

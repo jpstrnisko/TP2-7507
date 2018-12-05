@@ -1,6 +1,7 @@
 package edificios;
 
 import juego.Juego;
+import unidades.Aldeano;
 import unidades.ArmaDeAsedio;
 import unidades.Unidad;
 
@@ -21,6 +22,10 @@ public class Castillo extends Edificio {
 	
 	public ArmaDeAsedio crearUnArmaDeAsedio() {
 		return new ArmaDeAsedio();
+	}
+	
+	public void comenzarProduccionArmaDeAsedio() {
+		this.estadoEdificio.producir(new ArmaDeAsedio(), this);
 	}
 	
 	public void atacar(Edificio edificio) {

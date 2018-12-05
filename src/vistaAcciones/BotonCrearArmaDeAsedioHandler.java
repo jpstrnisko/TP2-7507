@@ -15,7 +15,7 @@ public class BotonCrearArmaDeAsedioHandler implements EventHandler<ActionEvent> 
 
 	@Override
 	public void handle(ActionEvent event) {
-		seleccionada.crearUnArmaDeAsedio();
+		seleccionada.comenzarProduccionArmaDeAsedio();
 	}
 
 }

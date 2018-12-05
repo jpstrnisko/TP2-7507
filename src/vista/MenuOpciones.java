@@ -44,7 +44,9 @@ public class MenuOpciones extends MenuBar {
     	   opcionPantallaCompleta.setDisable(true);
        }
        
-       
+       public void aplicacionMinimizada() {
+    	   opcionPantallaCompleta.setDisable(false);
+       }       
      
 
 }
