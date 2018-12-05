@@ -34,36 +34,44 @@ public class VistaModelo {
         this.dibujarTerreno();
         this.dibujarUnidades(modelo.obtenerUnidadesDelJugador(modelo.obtenerJugadores().get(0)), "Blue");
         this.dibujarUnidades(modelo.obtenerUnidadesDelJugador(modelo.obtenerJugadores().get(1)), "Red");
-        this.dibujarEdificios(modelo.obtenerEdificiosDelJugador(modelo.obtenerJugadores().get(0)));
-        this.dibujarEdificios(modelo.obtenerEdificiosDelJugador(modelo.obtenerJugadores().get(1)));
+        this.dibujarEdificios(modelo.obtenerEdificiosDelJugador(modelo.obtenerJugadores().get(0)), "Blue");
+        this.dibujarEdificios(modelo.obtenerEdificiosDelJugador(modelo.obtenerJugadores().get(1)), "Red");
     }
 
-    private void dibujarEdificios(List<Edificio> edificios) {
+    private void dibujarEdificios(List<Edificio> edificios, String color) {
 		Image imagen = null;
 		for (Edificio edificio: edificios) {
 			int tamanio = (int) Math.sqrt(edificio.obtenerTamanio());
 			if(edificio instanceof Castillo)
-				imagen = new Image("file:aplicacion/assets/PNG Format/castleBlue.png");
+				imagen = new Image("file:aplicacion/assets/PNG Format/castle" + color + ".png");
 			if(edificio instanceof PlazaCentral)
-				imagen = new Image("file:aplicacion/assets/PNG Format/Towncenter.png");
+				imagen = new Image("file:aplicacion/assets/PNG Format/towncenter" + color + ".png");
 			if(edificio instanceof Cuartel)
-				imagen = new Image("file:aplicacion/assets/PNG Format/barracks.png");
+				imagen = new Image("file:aplicacion/assets/PNG Format/barracks" + color + ".png");
 			canvas.getGraphicsContext2D().drawImage(imagen, edificio.obtenerPosicionInicial().obtenerPosicionX()*anchoCelda, edificio.obtenerPosicionInicial().obtenerPosicionY()*altoCelda, anchoCelda*tamanio, altoCelda*tamanio);
 		}
 	}
 
 	private void dibujarUnidades(List<Unidad> unidades, String color) {
     	Image imagen = null;
+    	
     	for (Unidad unidad: unidades) {
+    		int incrementoX = 0;
     		if(unidad instanceof Aldeano)
     			imagen = new Image("file:aplicacion/assets/PNG Format/male" + color + ".png");
     		if(unidad instanceof Espadachin)
-    			imagen = new Image("file:aplicacion/assets/PNG Format/champion1.png");
+    			imagen = new Image("file:aplicacion/assets/PNG Format/champion" + color + ".png");
     		if(unidad instanceof Arquero)
-    			imagen = new Image("file:aplicacion/assets/PNG Format/archer1.png");
+    			imagen = new Image("file:aplicacion/assets/PNG Format/archer" + color + ".png");
     		if(unidad instanceof ArmaDeAsedio)
-    			imagen = new Image("file:aplicacion/assets/PNG Format/treb_pack1.png");
-    		canvas.getGraphicsContext2D().drawImage(imagen, unidad.obtenerPosicion().obtenerPosicionX()*anchoCelda, unidad.obtenerPosicion().obtenerPosicionY()*altoCelda, anchoCelda, altoCelda);
+    			if (((ArmaDeAsedio)unidad).estaMontada()) {
+    				imagen = new Image("file:aplicacion/assets/PNG Format/treb_open" + color + ".png");
+    				incrementoX = anchoCelda/3;
+    			}
+    			else
+    				imagen = new Image("file:aplicacion/assets/PNG Format/treb_pack" + color + ".png");
+    		canvas.getGraphicsContext2D().drawImage(imagen, unidad.obtenerPosicion().obtenerPosicionX()*anchoCelda, unidad.obtenerPosicion().obtenerPosicionY()*altoCelda, anchoCelda + incrementoX, altoCelda);
+    		incrementoX = 0;
     	}
 	}
 
