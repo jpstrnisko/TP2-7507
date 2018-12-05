@@ -20,6 +20,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import juego.Juego;
 import vistaAcciones.BotonEntrarEventHandler;
+import vistaAcciones.TeclaEntrarEventHandler;
+import javafx.scene.input.*;
+import javafx.event.EventHandler;
 
 public class SaludoInicial extends VBox {
 
@@ -69,7 +72,11 @@ public class SaludoInicial extends VBox {
 
         BotonEntrarEventHandler opcionEntrar = new BotonEntrarEventHandler(stage, proximaEscena, campo1, campo2, modelo);
         botonEntrar.setOnAction(opcionEntrar);
-
+        
+        TeclaEntrarEventHandler teclaEntrar = new TeclaEntrarEventHandler(stage, proximaEscena,campo1, campo2, modelo);
+        botonEntrar.setOnKeyPressed(teclaEntrar);
+        
+        
         this.getChildren().addAll(botonEntrar, vb);
     }
 

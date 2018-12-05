@@ -31,6 +31,7 @@ public class BotonEntrarEventHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
     	String nombreJug1 = campo1.getText();
     	String nombreJug2 = campo2.getText();
+    	
     	if(nombreJug1.trim().equals("") || nombreJug2.trim().equals("")) {
     		Alert alert = new Alert(AlertType.WARNING);
     		alert.setTitle("Error");
@@ -48,6 +49,6 @@ public class BotonEntrarEventHandler implements EventHandler<ActionEvent> {
             //stage.setFullScreen(true);
     	}
     	
-
+    	
     }
 }
