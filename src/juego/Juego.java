@@ -69,28 +69,6 @@ public class Juego {
 		fabricaAldeanos.crearAldeano(new Posicion(22, 20), jugador2);
 		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(3, 8), jugador1);
 		fabricaEdificios.crearEdificio(PlazaCentral.class, new Posicion(22, 17), jugador2);
-		fabricaEdificios.crearEdificio(Cuartel.class, new Posicion(10, 10), jugador2);
-		Espadachin esp = new Espadachin();
-		esp.cambiarPosicion(new Posicion(1,1));
-		esp.cambiarJugador(jugador1);
-		mapa.colocarAtacable(new Posicion(1, 1), esp);
-		Arquero ar = new Arquero();
-		ar.cambiarPosicion(new Posicion(1,2));
-		ar.cambiarJugador(jugador1);
-		mapa.colocarAtacable(new Posicion(1, 2), ar);
-		Arquero ar1 = new Arquero();
-		ar1.cambiarPosicion(new Posicion(2,2));
-		ar1.cambiarJugador(jugador2);
-		mapa.colocarAtacable(new Posicion(2, 2), ar1);
-		Espadachin esp1 = new Espadachin();
-		esp1.cambiarPosicion(new Posicion(0, 0));
-		esp1.cambiarJugador(jugador2);
-		mapa.colocarAtacable(new Posicion(0, 0), esp1);
-		ArmaDeAsedio as = new ArmaDeAsedio();
-		as.cambiarPosicion(new Posicion(3, 6));
-		as.cambiarJugador(jugador1);
-		as.montar();
-		mapa.colocarAtacable(new Posicion(3, 6), as);
 		
 		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(2, 13), jugador1);
 		fabricaEdificios.crearEdificio(Castillo.class, new Posicion(21, 10), jugador2);
