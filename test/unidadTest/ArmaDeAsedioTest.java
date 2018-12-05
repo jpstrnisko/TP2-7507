@@ -1,4 +1,5 @@
 package unidadTest;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -6,13 +7,10 @@ import areaJuego.Posicion;
 import edificios.Castillo;
 import edificios.Cuartel;
 import edificios.Edificio;
-import interfaces.Atacable;
 import unidades.ArmaDeAsedio;
 import unidades.Espadachin;
 import unidades.Unidad;
-import edificios.PlazaCentral;
-import unidades.ArmaDeAsedio;
-import unidades.Espadachin;
+
 
 public class ArmaDeAsedioTest {
 	
