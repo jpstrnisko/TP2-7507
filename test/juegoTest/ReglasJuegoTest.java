@@ -1150,5 +1150,29 @@ public class ReglasJuegoTest {
 
 		assertEquals(oroInicial - 50, jugador1.obtenerOro());
 	}
+	
+	@Test
+	public void unaUnidadSoloDebeQueSeLeOrdeneAtacarNoDeberiaAtacarElTurnoSiguienteSiNoRecibeNuevasOrdenes() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Mapa mapa = juego.obtenerMapa();
+		Aldeano aldeano = new Aldeano();
+		Posicion posicionAldeano = new Posicion(5, 5);
+		Espadachin espadachin = new Espadachin();
+		Posicion posicionEspadachin = new Posicion(6, 5);
+		aldeano.cambiarPosicion(posicionAldeano);
+		espadachin.cambiarPosicion(posicionEspadachin);
+		aldeano.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionAldeano, aldeano);
+		mapa.colocarAtacable(posicionEspadachin, espadachin);
+		
+		espadachin.seleccionarObjetivo(aldeano);
+		espadachin.realizarAccion();
+		
+		assertEquals(25, aldeano.obtenerVida());
+		
+		espadachin.realizarAccion();
+		assertEquals(25, aldeano.obtenerVida());
+	}
 
 }

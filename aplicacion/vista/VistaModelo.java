@@ -48,6 +48,8 @@ public class VistaModelo {
 				imagen = new Image("file:aplicacion/assets/PNG Format/towncenter" + color + ".png");
 			if(edificio instanceof Cuartel)
 				imagen = new Image("file:aplicacion/assets/PNG Format/barracks" + color + ".png");
+			if(edificio.estaEnConstruccion())
+				imagen = new Image("file:aplicacion/assets/PNG Format/rubble" + color + ".png");
 			canvas.getGraphicsContext2D().drawImage(imagen, edificio.obtenerPosicionInicial().obtenerPosicionX()*anchoCelda, edificio.obtenerPosicionInicial().obtenerPosicionY()*altoCelda, anchoCelda*tamanio, altoCelda*tamanio);
 		}
 	}

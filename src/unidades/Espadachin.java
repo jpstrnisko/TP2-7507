@@ -36,6 +36,13 @@ public class Espadachin extends Unidad implements IAtacante {
 	}
 
 	@Override
+	public void realizarAccion() {
+		this.accion.hacer();
+		this.turnoMovimiento = new TurnoMovimientoHabilitado(this);
+		this.reiniciarAccion();
+	}
+	
+	@Override
 	public void reiniciarAccion() {
 		this.accion = new Inactivo();
 	}

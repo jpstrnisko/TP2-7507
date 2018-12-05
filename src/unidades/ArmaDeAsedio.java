@@ -18,6 +18,7 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 		this.costo = 200;
 		this.distanciaMaximaAtaque = 5;
 		this.estado = new EstadoDesmontada(this);
+		this.accion = new Inactivo();
 		this.turnoMovimiento = new TurnoMovimientoHabilitado(this);
 	}
 	
@@ -31,6 +32,13 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 
 	public void desmontar() {
 		this.estado = new EstadoDesmontada(this);
+	}
+	
+	@Override
+	public void realizarAccion() {
+		this.accion.hacer();
+		this.turnoMovimiento = new TurnoMovimientoHabilitado(this);
+		this.reiniciarAccion();
 	}
 
 	@Override

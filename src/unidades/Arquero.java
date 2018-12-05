@@ -36,6 +36,12 @@ public class Arquero extends Unidad implements IAtacante {
 		this.atacante.atacar(unidad);
 	}
 
+	@Override
+	public void realizarAccion() {
+		this.accion.hacer();
+		this.turnoMovimiento = new TurnoMovimientoHabilitado(this);
+		this.reiniciarAccion();
+	}
 
 	@Override
 	public void reiniciarAccion() {

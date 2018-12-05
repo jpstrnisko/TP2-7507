@@ -109,10 +109,15 @@ public class VentanaInicial extends BorderPane {
 			}
 
 			private void controlConstruccionEdificio() {
-				if(getEdificioConstruir() instanceof Cuartel)
+				if(getEdificioConstruir() instanceof Cuartel) {
 					((Aldeano) seleccionado).construirCuartel(posicionPrimaria);
-				if(getEdificioConstruir() instanceof PlazaCentral)
+					vistaModelo.dibujar();
+				}
+					
+				if(getEdificioConstruir() instanceof PlazaCentral) {
 					((Aldeano) seleccionado).construirPlazaCentral(posicionPrimaria);
+					vistaModelo.dibujar();
+				}
 			}
 
 			private void clickDerechoEn(double x, double y) throws Exception {
