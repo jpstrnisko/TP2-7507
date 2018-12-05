@@ -115,6 +115,10 @@ public class VentanaInicial extends BorderPane {
         });
 
         box = new VBox(canvas);
+        Image tile = new Image("file:aplicacion/assets/PNG Format/tile.png", altoCelda, anchoCelda, false, false);
+        BackgroundImage bkI = new BackgroundImage(tile, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background bk = new Background(bkI);
+        box.setBackground(bk);
         box.setAlignment(Pos.CENTER);
         box.setSpacing(20);
         box.setPadding(new Insets(25));

@@ -32,7 +32,8 @@ public class VistaModelo {
 
     public void dibujar() {
         this.dibujarTerreno();
-        this.dibujarUnidades();
+        this.dibujarUnidades(modelo.obtenerUnidadesDelJugador(modelo.obtenerJugadores().get(0)), "Blue");
+        this.dibujarUnidades(modelo.obtenerUnidadesDelJugador(modelo.obtenerJugadores().get(1)), "Red");
         this.dibujarEdificios(modelo.obtenerEdificiosDelJugador(modelo.obtenerJugadores().get(0)));
         this.dibujarEdificios(modelo.obtenerEdificiosDelJugador(modelo.obtenerJugadores().get(1)));
     }
@@ -42,7 +43,7 @@ public class VistaModelo {
 		for (Edificio edificio: edificios) {
 			int tamanio = (int) Math.sqrt(edificio.obtenerTamanio());
 			if(edificio instanceof Castillo)
-				imagen = new Image("file:aplicacion/assets/PNG Format/castle.png");
+				imagen = new Image("file:aplicacion/assets/PNG Format/castleBlue.png");
 			if(edificio instanceof PlazaCentral)
 				imagen = new Image("file:aplicacion/assets/PNG Format/Towncenter.png");
 			if(edificio instanceof Cuartel)
@@ -51,12 +52,11 @@ public class VistaModelo {
 		}
 	}
 
-	private void dibujarUnidades() {
-    	List <Unidad> unidades = modelo.obtenerUnidades();
+	private void dibujarUnidades(List<Unidad> unidades, String color) {
     	Image imagen = null;
     	for (Unidad unidad: unidades) {
     		if(unidad instanceof Aldeano)
-    			imagen = new Image("file:aplicacion/assets/PNG Format/male1ed.png");
+    			imagen = new Image("file:aplicacion/assets/PNG Format/male" + color + ".png");
     		if(unidad instanceof Espadachin)
     			imagen = new Image("file:aplicacion/assets/PNG Format/champion1.png");
     		if(unidad instanceof Arquero)
@@ -74,12 +74,13 @@ public class VistaModelo {
 
 	private void dibujarTerreno() {
 		this.clean();
-		canvas.getGraphicsContext2D().setFill(Color.GREEN);
+		/*canvas.getGraphicsContext2D().setFill(Color.GREEN);*/
 	}
 
     public void clean() {
-        canvas.getGraphicsContext2D().setFill(Color.GREEN);
-        canvas.getGraphicsContext2D().fillRect(0, 0, 1000, 800);
+    	canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        /*canvas.getGraphicsContext2D().setFill(Color.GREEN);
+        canvas.getGraphicsContext2D().fillRect(0, 0, 1000, 800);*/
     }
 
     public void update() {
