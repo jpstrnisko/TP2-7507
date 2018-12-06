@@ -19,6 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import juego.Juego;
+import vistaAcciones.BotonAyudaHandler;
 import vistaAcciones.BotonEntrarEventHandler;
 import vistaAcciones.TeclaEntrarEventHandler;
 import javafx.scene.input.*;
@@ -63,6 +64,13 @@ public class SaludoInicial extends VBox {
 
         Button botonEntrar = new Button();
         botonEntrar.setText("Entrar");
+        
+        Button botonAyuda = new Button();
+        botonAyuda.setText("Ayuda");
+        
+        BotonAyudaHandler ayuda = new BotonAyudaHandler(stage);
+        botonAyuda.setOnAction(ayuda);
+        
 
         Label etiqueta = new Label();
         etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
@@ -77,7 +85,9 @@ public class SaludoInicial extends VBox {
         botonEntrar.setOnKeyPressed(teclaEntrar);
         
         
-        this.getChildren().addAll(botonEntrar, vb);
+        
+        
+        this.getChildren().addAll(botonEntrar, vb, botonAyuda);
     }
 
 }
