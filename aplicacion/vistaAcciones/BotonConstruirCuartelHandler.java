@@ -9,6 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import juego.Juego;
 import unidades.Aldeano;
 import vista.VentanaInicial;
+import areaJuego.Posicion;
 
 public class BotonConstruirCuartelHandler implements EventHandler<ActionEvent> {
 
@@ -16,10 +17,12 @@ public class BotonConstruirCuartelHandler implements EventHandler<ActionEvent> {
 	Aldeano constructor;
 	Juego modelo;
 	
+	
 	public BotonConstruirCuartelHandler(VentanaInicial ventanaInicial, Juego modelo, Aldeano seleccionado) {
 		this.ventanaInicial = ventanaInicial;
 		constructor = seleccionado;
 		this.modelo = modelo;
+		
 	}
 
 	@Override

@@ -29,10 +29,9 @@ import unidades.ArmaDeAsedio;
 import unidades.Arquero;
 import unidades.Espadachin;
 import javafx.scene.input.*;
-
+import edificios.*;
 import java.io.Console;
 import java.io.File;
-
 import areaJuego.Posicion;
 import edificios.Castillo;
 import edificios.Cuartel;
@@ -243,6 +242,9 @@ public class VentanaInicial extends BorderPane {
 
     private void setControlesArmaDeAsedio(Juego modelo, VBox contenedorVertical) throws Exception {
     	Label nombre = new Label("Arma de asedio");
+    	Label costo = new Label("Costo:");
+    	int costoArma = ((ArmaDeAsedio)seleccionado).obtenerCosto();
+    	Label costoOro = new Label(String.valueOf(costoArma));
     	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
     	ImageView imagen = new ImageView();
     	if (((ArmaDeAsedio)seleccionado).estaMontada())
@@ -251,8 +253,26 @@ public class VentanaInicial extends BorderPane {
     		imagen.setImage(new Image("file:aplicacion/assets/PNG Format/treb_pack1.png"));
     	imagen.setFitHeight(90);
     	imagen.setFitWidth(90);
+    	Label estado = new Label("Estado:");
+    	String estadoArma;
+    	if (((ArmaDeAsedio)seleccionado).estaMontada()) {
+    		estadoArma = "Montada";
+    	} else estadoArma = "Desmontada";
+    	Label estadoActual = new Label(estadoArma.toString());
     	HBox vida = dibujarVida();
-    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
+    	
+    	Button botonMontar = new Button("Montar");
+    	Button botonDesmontar = new Button("Desmontar");
+    	
+    	BotonMontarArmaDeAsedioEventHandler montar = new BotonMontarArmaDeAsedioEventHandler(modelo, (ArmaDeAsedio) seleccionado);
+    	botonMontar.setOnAction(montar);
+    	
+    	BotonDesmontarArmaDeAsedioEventHandler desmontar = new BotonDesmontarArmaDeAsedioEventHandler(modelo, (ArmaDeAsedio) seleccionado);
+    	botonDesmontar.setOnAction(desmontar);
+    	
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, costo, costoOro,estado, estadoActual, imagen, botonMontar, botonDesmontar);
+    	
+    	
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		if (seleccionadoSecundario != null) {
@@ -274,8 +294,11 @@ public class VentanaInicial extends BorderPane {
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/archer1.png"));
     	imagen.setFitHeight(90);
     	imagen.setFitWidth(90);
+    	Label costo = new Label("Costo:");
+    	int costoArquero = ((Arquero)seleccionado).obtenerCosto();
+    	Label costoOro = new Label(String.valueOf(costoArquero));
     	HBox vida = dibujarVida();
-    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, costo, costoOro, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		if (seleccionadoSecundario != null) {
@@ -297,8 +320,11 @@ public class VentanaInicial extends BorderPane {
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/twohanded1.png"));
     	imagen.setFitHeight(90);
     	imagen.setFitWidth(90);
+    	Label costo = new Label("Costo:");
+    	int costoEspadachin = ((Espadachin)seleccionado).obtenerCosto();
+    	Label costoOro = new Label(String.valueOf(costoEspadachin));
     	HBox vida = dibujarVida();
-    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, costo, costoOro, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		if (seleccionadoSecundario != null) {
@@ -337,9 +363,12 @@ public class VentanaInicial extends BorderPane {
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/male1.png"));
     	imagen.setFitHeight(90);
     	imagen.setFitWidth(90);
+    	Label costo = new Label("Costo:");
+    	int costoAldeano = ((Aldeano)seleccionado).obtenerCosto();
+    	Label costoOro = new Label(String.valueOf(costoAldeano));
     	HBox vida = dibujarVida();
     	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
-    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, costo, costoOro, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		
@@ -407,9 +436,12 @@ public class VentanaInicial extends BorderPane {
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter.png"));
     	imagen.setFitHeight(90);
     	imagen.setFitWidth(90);
+    	Label costo = new Label("Costo:");
+    	int costoPlaza = ((PlazaCentral)seleccionado).obtenerCosto();
+    	Label costoOro = new Label(String.valueOf(costoPlaza));
     	HBox vida = dibujarVida();
     	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
-    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, costo, costoOro, vida, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button botonCrearAldeano = new Button("Crear Aldeano");
@@ -458,9 +490,12 @@ public class VentanaInicial extends BorderPane {
     	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/barracks.png"));
     	imagen.setFitHeight(100);
     	imagen.setFitWidth(100);
+    	Label costo = new Label("Costo:");
+    	int costoCuartel = ((Cuartel)seleccionado).obtenerCosto();
+    	Label costoOro = new Label(String.valueOf(costoCuartel));
     	HBox vida = dibujarVida();
     	Label nombreJugador = new Label(((Jugador) seleccionado.obtenerJugador()).obtenerNombre().toString().toUpperCase());
-    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, imagen);
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, costo, costoOro, vida, imagen);
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
 
