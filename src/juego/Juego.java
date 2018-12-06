@@ -120,11 +120,7 @@ public class Juego {
 	}
 
 	public void esDerrotado(Jugador jugadorPerdedor) {
-		List<Jugador> jugadores = sistemaTurnos.obtenerJugadores();
-		if(jugadores.get(0) == jugadorPerdedor) 
-			ganador = jugadores.get(1);
-		else
-			ganador = jugadores.get(0);
+		ganador = this.obtenerEnemigo(jugadorPerdedor);
 	}
 
 	public Jugador obtenerJugadorActual() {
@@ -137,6 +133,18 @@ public class Juego {
 		for (Unidad unidad: obtenerUnidadesDelJugador(sistemaTurnos.obtenerJugadorActual()))
 			unidad.realizarAccion();
 		sistemaTurnos.avanzarTurno();
+	}
+
+	public Jugador obtenerEnemigo(Jugador jugador) {
+		List<Jugador> jugadores = sistemaTurnos.obtenerJugadores();
+		if(jugadores.get(0) == jugador) 
+			return jugadores.get(1);
+		else
+			return jugadores.get(0);
+	}
+
+	public List<Edificio> obtenerEdificios() {
+		return mapa.obtenerEdificios();
 	}
 
 }

@@ -93,7 +93,7 @@ public class Mapa {
 	}
 
 
-	public Collection<Edificio> obtenerEdificios() {
+	public List<Edificio> obtenerEdificios() {
 		List<Edificio> edificios = new ArrayList<Edificio>();
 		for(Celda cadaCelda: this.zonaDeJuego.keySet()) {
 			Atacable atacable = this.zonaDeJuego.get(cadaCelda);

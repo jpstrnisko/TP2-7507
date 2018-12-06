@@ -20,6 +20,7 @@ import edificios.PlazaCentral;
 import juego.Juego;
 import turnos.Jugador;
 import unidades.Aldeano;
+import unidades.ArmaDeAsedio;
 import unidades.Arquero;
 import unidades.Espadachin;
 import unidades.Unidad;
@@ -1173,6 +1174,154 @@ public class ReglasJuegoTest {
 		
 		espadachin.realizarAccion();
 		assertEquals(25, aldeano.obtenerVida());
+	}
+	
+	@Test
+	public void unCastilloDeberiaQuitarAutomaticamente20DeDanioAUnidadesYEdificiosCercanosEnemigos() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Jugador jugador2 = new Jugador("Jugador 2");
+		Mapa mapa = juego.obtenerMapa();
+		
+		Posicion posicionPlaza = new Posicion(4, 4);
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.finalizarConstruccion();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(posicionPlaza);
+		mapa.colocarAtacable(posicionPlaza, plaza);
+
+		Posicion posicionEspadachin = new Posicion(5, 10);
+		Espadachin espadachin = new Espadachin();
+		espadachin.cambiarPosicion(posicionEspadachin);
+		espadachin.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionEspadachin, espadachin);
+		
+		Posicion posicionCastillo = new Posicion(8, 4);
+		Castillo castillo = new Castillo();
+		castillo.finalizarConstruccion();
+		castillo.cambiarJugador(jugador2);
+		castillo.establecerPosicion(posicionCastillo);
+		mapa.colocarAtacable(posicionCastillo, castillo);
+		
+		int vidaInicialEspadachin = espadachin.obtenerVida();
+		int vidaInicialPlazaCentral = plaza.obtenerVida();
+		
+		castillo.realizarAccion();
+		assertEquals(vidaInicialEspadachin - 20, espadachin.obtenerVida());
+		assertEquals(vidaInicialPlazaCentral - 20, plaza.obtenerVida());
+	}
+	
+	@Test
+	public void unArmaDeAsedioDeberiaPoderAtacarAlEstarMontadaYEstarEnRangoDeAtaque() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Jugador jugador2 = new Jugador("Jugador 2");
+		Mapa mapa = juego.obtenerMapa();
+		
+		Posicion posicionPlaza = new Posicion(4, 4);
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.finalizarConstruccion();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(posicionPlaza);
+		mapa.colocarAtacable(posicionPlaza, plaza);
+
+		Posicion posicionArmaDeAsedio = new Posicion(4, 7);
+		ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
+		armaDeAsedio.cambiarPosicion(posicionArmaDeAsedio);
+		armaDeAsedio.cambiarJugador(jugador2);
+		mapa.colocarAtacable(posicionArmaDeAsedio, armaDeAsedio);
+		
+		int vidaInicialPlazaCentral = plaza.obtenerVida();
+		armaDeAsedio.montar();
+		armaDeAsedio.realizarAccion();
+		armaDeAsedio.seleccionarObjetivo(plaza);
+		armaDeAsedio.realizarAccion();
+
+		assertEquals(vidaInicialPlazaCentral - 75, plaza.obtenerVida());
+	}
+	
+	@Test
+	public void unArmaDeAsedioNoDeberiaPoderAtacarUnidadesFueraDeSuRangoDeAtaque() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Jugador jugador2 = new Jugador("Jugador 2");
+		Mapa mapa = juego.obtenerMapa();
+		
+		Posicion posicionPlaza = new Posicion(4, 4);
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.finalizarConstruccion();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(posicionPlaza);
+		mapa.colocarAtacable(posicionPlaza, plaza);
+
+		Posicion posicionArmaDeAsedio = new Posicion(4, 15);
+		ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
+		armaDeAsedio.cambiarPosicion(posicionArmaDeAsedio);
+		armaDeAsedio.cambiarJugador(jugador2);
+		mapa.colocarAtacable(posicionArmaDeAsedio, armaDeAsedio);
+		
+		int vidaInicialPlazaCentral = plaza.obtenerVida();
+		armaDeAsedio.montar();
+		armaDeAsedio.realizarAccion();
+		armaDeAsedio.seleccionarObjetivo(plaza);
+		armaDeAsedio.realizarAccion();
+
+		assertEquals(vidaInicialPlazaCentral, plaza.obtenerVida());
+	}
+	
+	@Test
+	public void unArmaDeAsedioDesmontadaNoDeberiaPoderAtacar() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Jugador jugador2 = new Jugador("Jugador 2");
+		Mapa mapa = juego.obtenerMapa();
+		
+		Posicion posicionPlaza = new Posicion(4, 4);
+		PlazaCentral plaza = new PlazaCentral();
+		plaza.finalizarConstruccion();
+		plaza.cambiarJugador(jugador1);
+		plaza.establecerPosicion(posicionPlaza);
+		mapa.colocarAtacable(posicionPlaza, plaza);
+
+		Posicion posicionArmaDeAsedio = new Posicion(4, 7);
+		ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
+		armaDeAsedio.cambiarPosicion(posicionArmaDeAsedio);
+		armaDeAsedio.cambiarJugador(jugador2);
+		mapa.colocarAtacable(posicionArmaDeAsedio, armaDeAsedio);
+		
+		int vidaInicialPlazaCentral = plaza.obtenerVida();
+		armaDeAsedio.seleccionarObjetivo(plaza);
+		armaDeAsedio.realizarAccion();
+
+		assertEquals(vidaInicialPlazaCentral, plaza.obtenerVida());
+	}
+	
+	@Test
+	public void unArmaDeAsedioNoLeDeberiaQuitarDanioAlAtacarUnaUnidad() throws Exception {
+		Juego juego = Juego.obtenerNuevaInstancia();
+		Jugador jugador1 = new Jugador("Jugador 1");
+		Jugador jugador2 = new Jugador("Jugador 2");
+		Mapa mapa = juego.obtenerMapa();
+		
+		Posicion posicionEspadachin = new Posicion(4, 8);
+		Espadachin espadachin = new Espadachin();
+		espadachin.cambiarPosicion(posicionEspadachin);
+		espadachin.cambiarJugador(jugador1);
+		mapa.colocarAtacable(posicionEspadachin, espadachin);
+		
+		Posicion posicionArmaDeAsedio = new Posicion(4, 7);
+		ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
+		armaDeAsedio.cambiarPosicion(posicionArmaDeAsedio);
+		armaDeAsedio.cambiarJugador(jugador2);
+		mapa.colocarAtacable(posicionArmaDeAsedio, armaDeAsedio);
+		
+		int vidaInicialEspadachin = espadachin.obtenerVida();
+		armaDeAsedio.montar();
+		armaDeAsedio.realizarAccion();
+		armaDeAsedio.seleccionarObjetivo(espadachin);
+		armaDeAsedio.realizarAccion();
+
+		assertEquals(vidaInicialEspadachin, espadachin.obtenerVida());
 	}
 
 }

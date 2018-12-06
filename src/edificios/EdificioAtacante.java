@@ -38,17 +38,20 @@ public class EdificioAtacante {
 	}
 	
 	public void atacar(Edificio edificio) {
-		List<Posicion> posicionesEdificioObjetivo = edificio.obtenerPosiciones();
-		for (int i = 0; i < posicionesEdificioObjetivo.size(); i++) {
-			if(this.estaEnRangoDeAtaqueEnX(posicionesEdificioObjetivo.get(i)) && this.estaEnRangoDeAtaqueEnX(posicionesEdificioObjetivo.get(i))) {
-				edificio.quitarVida(this.danioAEdificiosYUnidades);
-				return;
+		if(edificio.obtenerJugador() != edificioPadre.obtenerJugador()) {
+			List<Posicion> posicionesEdificioObjetivo = edificio.obtenerPosiciones();
+			for (int i = 0; i < posicionesEdificioObjetivo.size(); i++) {
+				if(this.estaEnRangoDeAtaqueEnX(posicionesEdificioObjetivo.get(i)) && this.estaEnRangoDeAtaqueEnX(posicionesEdificioObjetivo.get(i))) {
+					edificio.quitarVida(this.danioAEdificiosYUnidades);
+					return;
+				}
 			}
 		}
+		
 	}
 
 	public void atacar(Unidad unidad) {
-		if(this.estaEnRangoDeAtaqueEnX(unidad.obtenerPosicion()) && this.estaEnRangoDeAtaqueEnY(unidad.obtenerPosicion()))
+		if(this.estaEnRangoDeAtaqueEnX(unidad.obtenerPosicion()) && this.estaEnRangoDeAtaqueEnY(unidad.obtenerPosicion()) && unidad.obtenerJugador() != edificioPadre.obtenerJugador())
 			unidad.quitarVida(this.danioAEdificiosYUnidades);
 	}
 

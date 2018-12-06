@@ -27,22 +27,15 @@ public class Aplicacion extends Application {
         stage.setTitle("Algo Empires II");
         
         Juego modelo = this.crearModelo();
-        
-        /*File f = new File("aplicacion/aoe2mainmusic.mp3");
-        Media media = new Media(f.toURI().toString());
-        MediaPlayer player = new MediaPlayer(media);
-        player.setAutoPlay(true);
-        player.setVolume(0.8);
-        player.setCycleCount(1);*/
 
         VentanaInicial ventana = new VentanaInicial(stage, modelo);
-        Scene escenaVentana = new Scene(ventana, 1200, 800);
+        Scene escenaVentana = new Scene(ventana, 1300, 800);
 
         ManejoAplicacion aplicacion = new ManejoAplicacion(stage, ventana.getMenuOpciones());
         escenaVentana.setOnKeyPressed(aplicacion);
         
         SaludoInicial saludo = new SaludoInicial(stage, escenaVentana, modelo);
-        Scene escenaSaludo = new Scene(saludo, 1200, 800);
+        Scene escenaSaludo = new Scene(saludo, 1300, 800);
         
              
         if (modelo.obtenerGanador() == modelo.obtenerJugadorActual() ) {

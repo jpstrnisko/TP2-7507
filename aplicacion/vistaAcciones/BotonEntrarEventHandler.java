@@ -1,10 +1,14 @@
 package vistaAcciones;
 
+import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import juego.Juego;
@@ -47,6 +51,7 @@ public class BotonEntrarEventHandler implements EventHandler<ActionEvent> {
             stage.setScene(proximaEscena);
             stage.setFullScreenExitHint("");
             //stage.setFullScreen(true);
+            
     	}
     	
     	

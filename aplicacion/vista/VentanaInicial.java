@@ -63,7 +63,18 @@ public class VentanaInicial extends BorderPane {
         this.setControles(modelo);
     }
 
-    private void setMenu(Stage stage) {
+    private void chequearGanador(Juego modelo) {
+		if(modelo.finalizo()) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information Dialog");
+			alert.setHeaderText(null);
+			alert.setContentText("Ha ganado el jugador " + modelo.obtenerGanador().obtenerNombre());
+
+			alert.showAndWait();
+		}
+	}
+
+	private void setMenu(Stage stage) {
         this.menu = new MenuOpciones(stage);
         this.setTop(menu);
     }
@@ -146,6 +157,8 @@ public class VentanaInicial extends BorderPane {
 
     public void setControles(Juego modelo) throws Exception {
     	
+    	this.chequearGanador(modelo);
+    	
     	VBox contenedorHorizontal = new VBox();
     	contenedorHorizontal.setMaxSize(200, 400);
     	contenedorHorizontal.setSpacing(5);
@@ -221,25 +234,6 @@ public class VentanaInicial extends BorderPane {
 
     }
 
-    /*private void setControlesCuartel(Juego modelo, VBox contenedorVertical) {
-    	Label nombre = new Label("Cuartel");
-    	ImageView imagen = new ImageView();
-    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/barracks.png"));
-    	imagen.setFitHeight(100);
-    	imagen.setFitWidth(100);
-    	HBox vida = dibujarVida();
-    	contenedorVertical.getChildren().addAll(nombre, vida, imagen);
-
-    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
-    		Button botonCrearEspadachin = new Button("Crear Espadachin");
-    		BotonCrearEspadachinHandler crearEspadachin = new BotonCrearEspadachinHandler(modelo, (Cuartel) seleccionado);
-    		botonCrearEspadachin.setOnAction(crearEspadachin);
-    		contenedorVertical.getChildren().addAll(botonCrearEspadachin);
-    	}
-
-        this.setLeft(contenedorVertical);
-    }*/
-
     private void setControlesArmaDeAsedio(Juego modelo, VBox contenedorVertical) throws Exception {
     	Label nombre = new Label("Arma de asedio");
     	Label costo = new Label("Costo:");
@@ -261,30 +255,34 @@ public class VentanaInicial extends BorderPane {
     	Label estadoActual = new Label(estadoArma.toString());
     	estadoActual.setTextFill(Color.BLUE);
     	HBox vida = dibujarVida();
+    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, costo, costoOro,estado, estadoActual, imagen);
     	
-    	Button botonMontar = new Button("Montar");
-    	Button botonDesmontar = new Button("Desmontar");
-    	
-    	BotonMontarArmaDeAsedioEventHandler montar = new BotonMontarArmaDeAsedioEventHandler(modelo, (ArmaDeAsedio) seleccionado);
-    	botonMontar.setOnAction(montar);
-    	
-    	BotonDesmontarArmaDeAsedioEventHandler desmontar = new BotonDesmontarArmaDeAsedioEventHandler(modelo, (ArmaDeAsedio) seleccionado);
-    	botonDesmontar.setOnAction(desmontar);
-    	
-    	  	
-    	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, costo, costoOro,estado, estadoActual, imagen, botonMontar, botonDesmontar);
-    	
-    	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
-    		if (seleccionadoSecundario != null) {
-    			((Arquero)seleccionado).seleccionarObjetivo(seleccionadoSecundario);
-    		}
-    		else if (posicionSecundaria != null) {
-        		((Arquero)seleccionado).mover(posicionSecundaria);
-        		this.vistaModelo.dibujar();
+    	if(seleccionado.obtenerJugador() == modelo.obtenerJugadorActual()) {
+    		Button botonMontar = new Button("Montar");
+        	Button botonDesmontar = new Button("Desmontar");
+        	
+        	BotonMontarArmaDeAsedioEventHandler montar = new BotonMontarArmaDeAsedioEventHandler(modelo, (ArmaDeAsedio) seleccionado);
+        	botonMontar.setOnAction(montar);
+        	
+        	BotonDesmontarArmaDeAsedioEventHandler desmontar = new BotonDesmontarArmaDeAsedioEventHandler(modelo, (ArmaDeAsedio) seleccionado);
+        	botonDesmontar.setOnAction(desmontar);
+        	
+        	  	
+        	contenedorVertical.getChildren().addAll(botonMontar, botonDesmontar);
+        	
+        	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
+        		if (seleccionadoSecundario != null) {
+        			((ArmaDeAsedio)seleccionado).seleccionarObjetivo(seleccionadoSecundario);
+        		}
+        		else if (posicionSecundaria != null) {
+            		((ArmaDeAsedio)seleccionado).mover(posicionSecundaria);
+            		this.vistaModelo.dibujar();
+            	}
         	}
-    	}
 
-        this.setLeft(contenedorVertical);
+            this.setLeft(contenedorVertical);
+    	}
+    	
 	}
 
 	private void setControlesArquero(Juego modelo, VBox contenedorVertical) throws Exception {
@@ -373,10 +371,10 @@ public class VentanaInicial extends BorderPane {
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		
     		Button botonConstruir = new Button("Construir");
-    		Button botonMover = new Button("Mover");
+    		/*Button botonMover = new Button("Mover");
     				
     		BotonMoverHandler mover = new BotonMoverHandler(vistaModelo,(Aldeano) seleccionado,posicionPrimaria);
-    		botonMover.setOnAction(mover);
+    		botonMover.setOnAction(mover);*/
     		
     		ContextMenu menuConstruir = new ContextMenu();
     		
@@ -412,7 +410,7 @@ public class VentanaInicial extends BorderPane {
             	}
     		});	
     		
-    		contenedorVertical.getChildren().addAll(botonConstruir,botonMover);
+    		contenedorVertical.getChildren().addAll(botonConstruir);
 
     		if (posicionSecundaria != null) {
         		((Aldeano)seleccionado).mover(posicionSecundaria);
@@ -450,15 +448,15 @@ public class VentanaInicial extends BorderPane {
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button botonCrearAldeano = new Button("Crear Aldeano");
     		
-    		Button botonMover = new Button("Mover");
+    		/*Button botonMover = new Button("Mover");
 			
     		BotonMoverEdificioEventHandler mover = new BotonMoverEdificioEventHandler(vistaModelo, (PlazaCentral) seleccionado, posicionPrimaria);
-    		botonMover.setOnAction(mover);
+    		botonMover.setOnAction(mover);*/
     		
     		
     		BotonCrearAldeanoHandler crearAldeano = new BotonCrearAldeanoHandler(modelo, (PlazaCentral) seleccionado);
     		botonCrearAldeano.setOnAction(crearAldeano);
-    		contenedorVertical.getChildren().addAll(botonCrearAldeano, botonMover);
+    		contenedorVertical.getChildren().addAll(botonCrearAldeano);
     	}
 
         this.setLeft(contenedorVertical);

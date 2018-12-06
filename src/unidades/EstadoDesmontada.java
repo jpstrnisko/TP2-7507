@@ -30,4 +30,9 @@ public class EstadoDesmontada implements EstadoArmaDeAsedio {
 	public void atacar(Unidad unidad) {
 		
 	}
+
+	@Override
+	public void seleccionarObjetivo(Atacable objetivo) {
+		
+	}
 }

@@ -28,6 +28,17 @@ public class Castillo extends Edificio {
 		this.estadoEdificio.producir(new ArmaDeAsedio(), this);
 	}
 	
+	@Override
+	public void realizarAccion() throws Exception {
+		for(Unidad unidad: Juego.obtenerInstancia().obtenerUnidades()) 
+			this.atacante.atacar(unidad);
+		
+		for(Edificio edificio: Juego.obtenerInstancia().obtenerEdificios())
+			this.atacante.atacar(edificio);
+		
+		this.productorUnidades.avanzar();
+	}
+	
 	public void atacar(Edificio edificio) {
 		this.atacante.atacar(edificio);
 	}
@@ -38,6 +49,7 @@ public class Castillo extends Edificio {
 	
 	@Override
 	public void destruir() {
+		Juego.obtenerInstancia().obtenerMapa().removerAtacable(this);
 		Juego juego = Juego.obtenerInstancia();
 		juego.esDerrotado(this.obtenerJugador());
 	}

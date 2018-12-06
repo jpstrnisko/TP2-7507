@@ -14,6 +14,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -23,6 +25,9 @@ import vistaAcciones.BotonAyudaHandler;
 import vistaAcciones.BotonEntrarEventHandler;
 import vistaAcciones.TeclaEntrarEventHandler;
 import javafx.scene.input.*;
+
+import java.io.File;
+
 import javafx.event.EventHandler;
 
 public class SaludoInicial extends VBox {
@@ -34,6 +39,13 @@ public class SaludoInicial extends VBox {
         super();
 
         this.stage = stage;
+        
+        File f = new File("aplicacion/aoe2mainmusic.mp3");
+        Media media = new Media(f.toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        player.setAutoPlay(true);
+        player.setVolume(0.2);
+        player.setCycleCount(5);
 
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);

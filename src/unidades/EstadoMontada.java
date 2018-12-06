@@ -1,5 +1,6 @@
 package unidades;
 
+import acciones.Atacar;
 import edificios.Edificio;
 import interfaces.Atacable;
 import interfaces.EstadoArmaDeAsedio;
@@ -30,5 +31,10 @@ public class EstadoMontada implements EstadoArmaDeAsedio {
 	@Override
 	public void atacar(Unidad unidad) {
 		atacante.atacar(unidad);
+	}
+
+	@Override
+	public void seleccionarObjetivo(Atacable objetivo) {
+		armaDeAsedio.accion = Atacar.obtenerInstanciaAccion(objetivo, armaDeAsedio, distanciaMaximaAtaque);
 	}
 }

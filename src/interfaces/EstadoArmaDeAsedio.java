@@ -10,4 +10,6 @@ public interface EstadoArmaDeAsedio {
 	void atacar(Edificio edificio);
 
 	void atacar(Unidad unidad);
+
+	void seleccionarObjetivo(Atacable objetivo);
 }

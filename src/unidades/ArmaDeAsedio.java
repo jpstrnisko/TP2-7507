@@ -61,13 +61,12 @@ public class ArmaDeAsedio extends Unidad implements IAtacante {
 
 	@Override
 	public void reiniciarAccion() {
-		// TODO Auto-generated method stub
-		
+		this.accion = new Inactivo();
 	}
 
 	@Override
 	public void seleccionarObjetivo(Atacable objetivo) {
-		
+		this.estado.seleccionarObjetivo(objetivo);
 	}
 
 	@Override

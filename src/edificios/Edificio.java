@@ -72,7 +72,7 @@ public abstract class Edificio implements Atacable{
 	}
 
 	public void destruir() {
-		
+		Juego.obtenerInstancia().obtenerMapa().removerAtacable(this);
 	}
 	
 	public boolean estaEnConstruccion() {
