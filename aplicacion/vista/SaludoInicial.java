@@ -45,34 +45,34 @@ public class SaludoInicial extends VBox {
         MediaPlayer player = new MediaPlayer(media);
         player.setAutoPlay(true);
         player.setVolume(0.2);
-        player.setCycleCount(5);
+        player.setCycleCount(1);
 
-        this.setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.CENTER_RIGHT);
         this.setSpacing(20);
         this.setPadding(new Insets(25));
-        Image imagen = new Image("file:aplicacion/assets/principalEditado.jpg");
+        Image imagen = new Image("file:aplicacion/assets/fondo-algoempires.jpg");
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
         
         Label labelJug1 = new Label("Jugador 1:");
         labelJug1.setTextFill(Color.web("#FF9922"));
-        labelJug1.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
+        labelJug1.setFont(Font.font ("Castellar", FontWeight.EXTRA_BOLD, 12));
         TextField campo1 = new TextField();
         HBox hb1 = new HBox();
-        hb1.setAlignment(Pos.CENTER);
+        hb1.setAlignment(Pos.CENTER_RIGHT);
         hb1.getChildren().addAll(labelJug1, campo1);
         
         Label labelJug2 = new Label("Jugador 2:");
         labelJug2.setTextFill(Color.web("#FF9922"));
-        labelJug2.setFont(Font.font ("Verdana", FontWeight.EXTRA_BOLD, 12));
+        labelJug2.setFont(Font.font ("Castellar", FontWeight.EXTRA_BOLD, 12));
         TextField campo2 = new TextField();
         HBox hb2 = new HBox();
-        hb2.setAlignment(Pos.CENTER);
+        hb2.setAlignment(Pos.CENTER_RIGHT);
         hb2.getChildren().addAll(labelJug2, campo2);
         
         VBox vb = new VBox();
         vb.getChildren().addAll(hb1, hb2);
-        vb.setAlignment(Pos.CENTER);
+        vb.setAlignment(Pos.CENTER_RIGHT);
 
         Button botonEntrar = new Button();
         botonEntrar.setText("Entrar");
