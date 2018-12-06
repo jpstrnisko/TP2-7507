@@ -57,16 +57,16 @@ public class SaludoInicial extends VBox {
         this.setBackground(new Background(imagenDeFondo));
         
         Label labelJug1 = new Label("Jugador 1:");
-        labelJug1.setTextFill(Color.web("#FF9922"));
-        labelJug1.setFont(Font.font ("Castellar", FontWeight.EXTRA_BOLD, 12));
+        labelJug1.setTextFill(Color.web("rgb(250,44,0)"));
+        labelJug1.setFont(Font.font ("Castellar", FontWeight.EXTRA_BOLD, 18));
         TextField campo1 = new TextField();
         HBox hb1 = new HBox();
         hb1.setAlignment(Pos.CENTER_RIGHT);
         hb1.getChildren().addAll(labelJug1, campo1);
         
         Label labelJug2 = new Label("Jugador 2:");
-        labelJug2.setTextFill(Color.web("#FF9922"));
-        labelJug2.setFont(Font.font ("Castellar", FontWeight.EXTRA_BOLD, 12));
+        labelJug2.setTextFill(Color.web("rgb(250,44,0)"));
+        labelJug2.setFont(Font.font ("Castellar", FontWeight.EXTRA_BOLD, 18));
         TextField campo2 = new TextField();
         HBox hb2 = new HBox();
         hb2.setAlignment(Pos.CENTER_RIGHT);
@@ -78,13 +78,7 @@ public class SaludoInicial extends VBox {
 
         Button botonEntrar = new Button();
         botonEntrar.setText("Entrar");
-        
 
-        Label etiqueta = new Label();
-        etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
-        
-        etiqueta.setText("Bienvenidos al videojuego AlgoEmpires II. Clickee en entrar.");
-        etiqueta.setTextFill(Color.web("#66A7C5"));
 
         BotonEntrarEventHandler opcionEntrar = new BotonEntrarEventHandler(stage, proximaEscena, campo1, campo2, modelo);
         botonEntrar.setOnAction(opcionEntrar);

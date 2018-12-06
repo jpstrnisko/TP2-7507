@@ -30,7 +30,9 @@ public class OpcionInstruccionesEventHandler implements EventHandler<ActionEvent
 				"-Una plaza central;\n -Un castillo;\n -3 aldeanos;\n -100 de oro.\n"+
 		"*Los aldeanos solo construyen cuarteles y plazas centrales.\n" + 
 		"*Los cuarteles pueden crear espadachines y arqueros.\n" +
-		"*Las plazas centrales solo pueden crear aldeanos.\n");
+		"*Las plazas centrales solo pueden crear aldeanos.\n" +
+		"*PARA MOVER UNA UNIDAD (UNA VEZ POR TURNO):\n" +
+				"-Seleccionar con click derecho la unidad, y con click izquierdo la posicion a mover.\n");
 		alerta.show();
 	}
 
