@@ -36,8 +36,8 @@ public class ProduccionOcupada implements ProductorUnidades {
 		
 		unidadAProducir.cambiarJugador(productor.obtenerJugador());
 		Juego.obtenerInstancia().obtenerMapa().colocarAtacable(unidadAProducir.obtenerPosicion(), unidadAProducir);
-		
 		productor.productorUnidades = new ProduccionDisponible();
+		productor.obtenerJugador().agregarUnidad();
 	}
 
 }

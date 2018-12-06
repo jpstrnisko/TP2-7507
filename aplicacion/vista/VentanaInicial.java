@@ -337,7 +337,7 @@ public class VentanaInicial extends BorderPane {
         this.setLeft(contenedorVertical);
 	}
 
-	private HBox dibujarVida() {
+	public HBox dibujarVida() {
 		int vida = seleccionado.obtenerVida();
 		int vidaMaxima = seleccionado.obtenerVidaMaxima();
 		double porcentajeVida = (double)vida / (double)vidaMaxima;
@@ -532,6 +532,11 @@ public class VentanaInicial extends BorderPane {
 
 	public void setEdificioConstruir(Edificio edificioConstruir) {
 		this.edificioConstruir = edificioConstruir;
+	}
+
+	public Atacable obtenerSeleccionado() {
+		
+		return seleccionado;
 	}
 
 }

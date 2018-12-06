@@ -150,5 +150,14 @@ public abstract class Edificio implements Atacable{
 		return vida.obtenerVidaMaxima();
 	}
 
+	public void pausarProduccion() {
+		this.productorUnidades = new ProduccionPausada();
+	}
+
+	public void reanudarProduccion() {
+		this.productorUnidades = new ProduccionDisponible();
+		
+	}
+
 		
 }

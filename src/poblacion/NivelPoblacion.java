@@ -1,9 +1,5 @@
 package poblacion;
 
-import unidades.ArmaDeAsedio;
-import unidades.Unidad;
-import edificios.PlazaCentral;
-
 
 
 public class NivelPoblacion {
@@ -12,22 +8,22 @@ public class NivelPoblacion {
 	private int limitePoblacion = 50;
 	
 		
-	public void crearUnidad() {
-		poblacion += 1;
+	public void agregarUnidad() {
+		if(!llegoAlLimiteDePoblacion())
+			poblacion += 1;
 	}
 	
-	public void matarUnidad(Unidad unidad) {
-		ArmaDeAsedio arma = new ArmaDeAsedio();
-		arma.atacar(unidad);
-		poblacion -= 1;
+	public void seEliminoUnaUnidad() {
+		if(poblacion > 0)
+			poblacion -= 1;
 	}
 	
 	public int obtenerPoblacion() {
 		return poblacion;
 	}
 	
-	public boolean noSuperaLimitePoblacion( ) {
-		return poblacion<limitePoblacion;
+	public boolean llegoAlLimiteDePoblacion( ) {
+		return poblacion == limitePoblacion;
 	}
 	
 }

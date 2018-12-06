@@ -70,6 +70,7 @@ public abstract class Unidad implements Atacable {
 
 	public void matar() {
 		Juego juego = Juego.obtenerInstancia();
+		jugador.restarUnidad();
 		juego.obtenerMapa().removerAtacable(this);
 	}
 	

@@ -56,10 +56,10 @@ public class Juego {
 		Jugador jugador2 = sistemaTurnos.obtenerJugadores().get(1);
 		FabricaAldeano fabricaAldeanos = new FabricaAldeano();
 		FabricaEdificiosConstruidos fabricaEdificios = new FabricaEdificiosConstruidos();
-		
 		fabricaAldeanos.crearAldeano(new Posicion(2, 7), jugador1);
 		fabricaAldeanos.crearAldeano(new Posicion(3, 9), jugador1);
 		fabricaAldeanos.crearAldeano(new Posicion(2, 10), jugador1);
+		
 		fabricaAldeanos.crearAldeano(new Posicion(23, 9), jugador2);
 		fabricaAldeanos.crearAldeano(new Posicion(22, 10), jugador2);
 		fabricaAldeanos.crearAldeano(new Posicion(23, 12), jugador2);
@@ -99,7 +99,7 @@ public class Juego {
 	}	
 
 	public int obtenerPoblacion(Jugador jugador) {
-		return this.obtenerUnidadesDelJugador(jugador).size();
+		return jugador.obtenerPoblacion();
 	}
 
 	public List<Edificio> obtenerEdificiosDelJugador(Jugador jugador) {
@@ -128,10 +128,15 @@ public class Juego {
 	}
 
 	public void avanzarTurno() throws Exception {
-		for (Edificio edificio: obtenerEdificiosDelJugador(sistemaTurnos.obtenerJugadorActual()))
-			edificio.realizarAccion();
-		for (Unidad unidad: obtenerUnidadesDelJugador(sistemaTurnos.obtenerJugadorActual()))
+		Jugador jugadorActual = sistemaTurnos.obtenerJugadorActual();
+		for (Edificio edificio: obtenerEdificiosDelJugador(jugadorActual)) {
+			if(jugadorActual.llegoAlLimiteDePoblacion())
+				edificio.pausarProduccion();
+			edificio.realizarAccion();		
+		}
+		for (Unidad unidad: obtenerUnidadesDelJugador(jugadorActual))
 			unidad.realizarAccion();
+		reanudarProduccionEdificios(obtenerEnemigo(jugadorActual));
 		sistemaTurnos.avanzarTurno();
 	}
 
@@ -145,6 +150,12 @@ public class Juego {
 
 	public List<Edificio> obtenerEdificios() {
 		return mapa.obtenerEdificios();
+	}
+	
+	private void reanudarProduccionEdificios(Jugador jugador) {
+		for (Edificio edificio: obtenerEdificiosDelJugador(sistemaTurnos.obtenerJugadorActual())) {
+				edificio.reanudarProduccion();	
+		}
 	}
 
 }

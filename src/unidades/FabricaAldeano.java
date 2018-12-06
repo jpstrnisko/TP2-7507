@@ -12,6 +12,7 @@ public class FabricaAldeano {
 		aldeano.establecerPosicion(posicion);
 		aldeano.cambiarJugador(jugador);
 		juego.obtenerMapa().colocarAtacable(aldeano.obtenerPosicion(), aldeano);
+		jugador.agregarUnidad();
 		return aldeano;
 	}
 

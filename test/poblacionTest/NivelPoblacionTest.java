@@ -14,18 +14,17 @@ public class NivelPoblacionTest {
 	
 	@Test
 	public void crearUnidadesAumentaPoblacion() {
-		poblacion.crearUnidad();
+		poblacion.agregarUnidad();
 		assertEquals(1,poblacion.obtenerPoblacion());
 		
 	}
 	
 	@Test
 	public void matarUnidadesBajaPoblacion() {
-		Espadachin espadachin = new Espadachin();
-		poblacion.crearUnidad();
-		poblacion.crearUnidad();
-		poblacion.crearUnidad();
-		poblacion.matarUnidad(espadachin);
+		poblacion.agregarUnidad();
+		poblacion.agregarUnidad();
+		poblacion.agregarUnidad();
+		poblacion.seEliminoUnaUnidad();
 		assertEquals(2,poblacion.obtenerPoblacion());
 		
 		
@@ -33,12 +32,20 @@ public class NivelPoblacionTest {
 	
 	@Test
 	public void matarAldeanosBajaPoblacionYProduccionOro() {
-		Aldeano aldeano = new Aldeano();
-		poblacion.crearUnidad();
-		poblacion.crearUnidad();
-		poblacion.matarUnidad(aldeano);
+		poblacion.agregarUnidad();
+		poblacion.agregarUnidad();
+		poblacion.seEliminoUnaUnidad();
 		assertEquals(1,poblacion.obtenerPoblacion());
 			
+	}
+	
+	@Test
+	public void noSePuedePasarElMaximoDePoblacion() {
+		for(int cantidad = 1; cantidad <= 50; cantidad++)
+			poblacion.agregarUnidad();
+		assertEquals(50,poblacion.obtenerPoblacion());
+		poblacion.agregarUnidad();	
+		assertEquals(50,poblacion.obtenerPoblacion());
 	}
 	
 }

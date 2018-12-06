@@ -1,6 +1,5 @@
 package turnos;
 
-import turnos.TurnoMovimientoHabilitado;
 import poblacion.NivelPoblacion;
 
 
@@ -8,11 +7,12 @@ public class Jugador {
 	
 	protected String nombre;
 	protected int oro = 100;
-	private TurnoMovimientoHabilitado turno;
+	protected NivelPoblacion poblacion;
+	
 		
 	public Jugador(String nombre) {
 		this.nombre = nombre;
-		
+		this.poblacion = new NivelPoblacion();
 	}
 
 	public String obtenerNombre() {
@@ -40,5 +40,20 @@ public class Jugador {
 
 	}
 	
+	public void agregarUnidad() {
+		this.poblacion.agregarUnidad();
+	}
+	
+	public void restarUnidad() {
+		this.poblacion.seEliminoUnaUnidad();
+	}
+	
+	public int obtenerPoblacion() {
+		return this.poblacion.obtenerPoblacion();
+	}
+		
+	public boolean llegoAlLimiteDePoblacion() {
+		return this.poblacion.llegoAlLimiteDePoblacion();
+	}
 		
 }
