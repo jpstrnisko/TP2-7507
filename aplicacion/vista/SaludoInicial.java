@@ -21,7 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import juego.Juego;
-import vistaAcciones.BotonAyudaHandler;
+import vistaAcciones.OpcionInstruccionesEventHandler;
 import vistaAcciones.BotonEntrarEventHandler;
 import vistaAcciones.TeclaEntrarEventHandler;
 import javafx.scene.input.*;
@@ -50,7 +50,7 @@ public class SaludoInicial extends VBox {
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
         this.setPadding(new Insets(25));
-        Image imagen = new Image("file:aplicacion/assets/principalEditado.jpg");
+        Image imagen = new Image("file:aplicacion/assets/principal.jpg");
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
         
@@ -77,12 +77,6 @@ public class SaludoInicial extends VBox {
         Button botonEntrar = new Button();
         botonEntrar.setText("Entrar");
         
-        Button botonAyuda = new Button();
-        botonAyuda.setText("Ayuda");
-        
-        BotonAyudaHandler ayuda = new BotonAyudaHandler(stage);
-        botonAyuda.setOnAction(ayuda);
-        
 
         Label etiqueta = new Label();
         etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
@@ -99,7 +93,7 @@ public class SaludoInicial extends VBox {
         
         
         
-        this.getChildren().addAll(botonEntrar, vb, botonAyuda);
+        this.getChildren().addAll(botonEntrar, vb);
     }
 
 }

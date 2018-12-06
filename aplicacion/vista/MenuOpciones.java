@@ -5,6 +5,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import vistaAcciones.OpcionAcercaDeEventHandler;
+import vistaAcciones.OpcionInstruccionesEventHandler;
 import vistaAcciones.OpcionPantallaCompletaEventHandler;
 import vistaAcciones.OpcionSalirEventHandler;
 
@@ -19,11 +20,16 @@ public class MenuOpciones extends MenuBar {
 	        Menu menuAyuda = new Menu("Ayuda");
 	        
 	        MenuItem opcionSalir = new MenuItem("Salir");
-	        MenuItem opcionAbrir = new MenuItem("Abrir");
+	        MenuItem opcionInstrucciones = new MenuItem("Instrucciones");
 	        MenuItem opcionAcerca = new MenuItem("Acerca de...");
+	        
 	        
 	        OpcionSalirEventHandler opcionSalirHandler = new OpcionSalirEventHandler();
 	        opcionSalir.setOnAction(opcionSalirHandler);
+	        
+	        OpcionInstruccionesEventHandler opcionAyudaHandler = new OpcionInstruccionesEventHandler(stage);
+	        opcionInstrucciones.setOnAction(opcionAyudaHandler);
+	        
 	        
 	        OpcionAcercaDeEventHandler opcionAcercaHandler = new OpcionAcercaDeEventHandler(stage);
 	        opcionAcerca.setOnAction(opcionAcercaHandler);
@@ -34,6 +40,7 @@ public class MenuOpciones extends MenuBar {
 	        opcionPantallaCompleta.setDisable(false);
 	        
 	        menuArchivo.getItems().addAll(opcionSalir);
+	        menuAyuda.getItems().addAll(opcionInstrucciones);
 	        menuAyuda.getItems().addAll(opcionAcerca);
 	        menuVer.getItems().addAll(opcionPantallaCompleta);
 	        

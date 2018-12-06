@@ -9,11 +9,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import juego.Juego;
 
-public class BotonAyudaHandler implements EventHandler<ActionEvent> {
+public class OpcionInstruccionesEventHandler implements EventHandler<ActionEvent> {
 	
 	Stage stage;
 	
-	public BotonAyudaHandler(Stage stage) {
+	public OpcionInstruccionesEventHandler(Stage stage) {
 		this.stage = stage;
 				
 	}
