@@ -259,6 +259,7 @@ public class VentanaInicial extends BorderPane {
     		estadoArma = "Montada";
     	} else estadoArma = "Desmontada";
     	Label estadoActual = new Label(estadoArma.toString());
+    	estadoActual.setTextFill(Color.BLUE);
     	HBox vida = dibujarVida();
     	
     	Button botonMontar = new Button("Montar");
@@ -270,10 +271,9 @@ public class VentanaInicial extends BorderPane {
     	BotonDesmontarArmaDeAsedioEventHandler desmontar = new BotonDesmontarArmaDeAsedioEventHandler(modelo, (ArmaDeAsedio) seleccionado);
     	botonDesmontar.setOnAction(desmontar);
     	
+    	  	
     	contenedorVertical.getChildren().addAll(nombre, nombreJugador, vida, costo, costoOro,estado, estadoActual, imagen, botonMontar, botonDesmontar);
     	
-    	
-
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		if (seleccionadoSecundario != null) {
     			((Arquero)seleccionado).seleccionarObjetivo(seleccionadoSecundario);
@@ -373,6 +373,10 @@ public class VentanaInicial extends BorderPane {
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		
     		Button botonConstruir = new Button("Construir");
+    		Button botonMover = new Button("Mover");
+    				
+    		BotonMoverHandler mover = new BotonMoverHandler(vistaModelo,(Aldeano) seleccionado,posicionPrimaria);
+    		botonMover.setOnAction(mover);
     		
     		ContextMenu menuConstruir = new ContextMenu();
     		
@@ -408,7 +412,7 @@ public class VentanaInicial extends BorderPane {
             	}
     		});	
     		
-    		contenedorVertical.getChildren().addAll(botonConstruir);
+    		contenedorVertical.getChildren().addAll(botonConstruir,botonMover);
 
     		if (posicionSecundaria != null) {
         		((Aldeano)seleccionado).mover(posicionSecundaria);
@@ -445,9 +449,16 @@ public class VentanaInicial extends BorderPane {
 
     	if (modelo.obtenerJugadorActual() == seleccionado.obtenerJugador()) {
     		Button botonCrearAldeano = new Button("Crear Aldeano");
+    		
+    		Button botonMover = new Button("Mover");
+			
+    		BotonMoverEdificioEventHandler mover = new BotonMoverEdificioEventHandler(vistaModelo, (PlazaCentral) seleccionado, posicionPrimaria);
+    		botonMover.setOnAction(mover);
+    		
+    		
     		BotonCrearAldeanoHandler crearAldeano = new BotonCrearAldeanoHandler(modelo, (PlazaCentral) seleccionado);
     		botonCrearAldeano.setOnAction(crearAldeano);
-    		contenedorVertical.getChildren().addAll(botonCrearAldeano);
+    		contenedorVertical.getChildren().addAll(botonCrearAldeano, botonMover);
     	}
 
         this.setLeft(contenedorVertical);

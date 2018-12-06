@@ -4,31 +4,28 @@ package vistaAcciones;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import vista.VistaModelo;
-import juego.Juego;
 import areaJuego.Posicion;
-import unidades.Unidad;
+import edificios.Edificio;
 
 
-public class BotonMoverHandler implements EventHandler<ActionEvent> {
+public class BotonMoverEdificioEventHandler implements EventHandler<ActionEvent> {
 
     VistaModelo vista;
     Posicion posicion;
-    Unidad seleccionada;
+    Edificio seleccionada;
     
 
-    public BotonMoverHandler(VistaModelo vista, Unidad seleccionada, Posicion posicion) {
+    public BotonMoverEdificioEventHandler(VistaModelo vista, Edificio seleccionada, Posicion posicion) {
        this.posicion = posicion;
        this.seleccionada = seleccionada;
     }
 
     @Override
     public void handle(ActionEvent evento) {
-         seleccionada.cambiarPosicion(posicion);
+         seleccionada.establecerPosicion(posicion);
          this.vista.update();
          
      }
         
     }
     
-
-

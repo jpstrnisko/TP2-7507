@@ -2,6 +2,8 @@ package vista;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import juego.Juego;
 import turnos.Jugador;
@@ -41,8 +43,18 @@ public class Aplicacion extends Application {
         
         SaludoInicial saludo = new SaludoInicial(stage, escenaVentana, modelo);
         Scene escenaSaludo = new Scene(saludo, 1200, 800);
-
-
+        
+             
+        if (modelo.obtenerGanador() == modelo.obtenerJugadorActual() ) {
+        	
+        	Alert alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("FELICITACIONES");
+            String mensaje = "Ganaste !!!";
+            alert.setContentText(mensaje);
+            alert.show();
+        }
+         
+        
         stage.setScene(escenaSaludo);
 
 
