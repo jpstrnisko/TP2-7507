@@ -79,13 +79,15 @@ public class SaludoInicial extends VBox {
         Button botonEntrar = new Button();
         botonEntrar.setText("Entrar");
 
-
+        
         BotonEntrarEventHandler opcionEntrar = new BotonEntrarEventHandler(stage, proximaEscena, campo1, campo2, modelo);
         botonEntrar.setOnAction(opcionEntrar);
         
         TeclaEntrarEventHandler teclaEntrar = new TeclaEntrarEventHandler(stage, proximaEscena,campo1, campo2, modelo);
         botonEntrar.setOnKeyPressed(teclaEntrar);
         
+        campo1.setOnKeyPressed(teclaEntrar);
+        campo2.setOnKeyPressed(teclaEntrar);
         
         
         

@@ -31,8 +31,15 @@ public class OpcionInstruccionesEventHandler implements EventHandler<ActionEvent
 		"*Los aldeanos solo construyen cuarteles y plazas centrales.\n" + 
 		"*Los cuarteles pueden crear espadachines y arqueros.\n" +
 		"*Las plazas centrales solo pueden crear aldeanos.\n" +
-		"*PARA MOVER UNA UNIDAD (UNA VEZ POR TURNO):\n" +
-				"-Seleccionar con click derecho la unidad, y con click izquierdo la posicion a mover.\n");
+		"*PARA MOVER UNA UNIDAD (UNA VEZ POR TURNO POR UNIDAD):\n" +
+				"-Seleccionar con click izquierdo la unidad, y con click derecho la posicion a mover.\n" +
+		"*PARA CREAR UN EDIFICIO (UNA VEZ POR TURNO POR ALDEANO):\n" +
+				"-Seleccionar con click izquierdo el aldeano, luego con click derecho sobre el Boton de Crear abrira el"
+				+ " menu de edificios. Apretar sobre la opcion elegida y con boton izquierdo sobre una posicion en la cercania"
+				+ " del aldeano para posicionarlo.\n" +
+		"*PARA ATACAR A UNA UNIDAD (UNA VEZ POR TURNO POR UNIDAD):\n" +
+				"-Seleccionar con click izquierdo la unidad, luego con click derecho sobre la unidad o edificio que se "
+				+ "desee atacar dentro del rango.");
 		alerta.show();
 	}
 

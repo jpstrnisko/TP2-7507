@@ -32,6 +32,8 @@ public class TeclaEntrarEventHandler implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent keyEvent) {
+    	String nombreJug1 = campo1.getText();
+    	String nombreJug2 = campo2.getText();
     	
     		    	
     	if(keyEvent.getCode() == KeyCode.ENTER)  {
@@ -43,6 +45,15 @@ public class TeclaEntrarEventHandler implements EventHandler<KeyEvent> {
                 String mensaje = "Por favor ingrese un nombre para ambos jugadores.";
                 alert.setContentText(mensaje);
                 alert.show();
+        	}else {
+        		
+        		modelo.obtenerJugadores().get(0).cambiarNombre(nombreJug1);
+        		modelo.obtenerJugadores().get(1).cambiarNombre(nombreJug2);
+
+                stage.setScene(proximaEscena);
+                stage.setFullScreenExitHint("");
+                //stage.setFullScreen(true);
+                
         	}
     		            
         }
