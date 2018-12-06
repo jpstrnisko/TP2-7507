@@ -195,7 +195,8 @@ public class VentanaInicial extends BorderPane {
     	contenedorHorizontal.getChildren().addAll(jugador,nombreJugador,oro,oroDisponible,nivelPoblacion,poblacion);
     	
     	VBox contenedorVertical = new VBox();
-    	contenedorVertical.setMaxWidth(200);
+    	contenedorVertical.setMinWidth(200);
+    	contenedorVertical.setMaxWidth(300);
     	Button botonAvanzarTurno = new Button("Avanzar turno");
     	
     	contenedorVertical.getChildren().addAll(botonAvanzarTurno);
@@ -435,7 +436,7 @@ public class VentanaInicial extends BorderPane {
         player.setCycleCount(1);
     	Label nombre = new Label("Plaza Central");
     	ImageView imagen = new ImageView();
-    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter.png"));
+    	imagen.setImage(new Image("file:aplicacion/assets/PNG Format/Towncenter2.png"));
     	imagen.setFitHeight(90);
     	imagen.setFitWidth(90);
     	Label costo = new Label("Costo:");
@@ -526,17 +527,12 @@ public class VentanaInicial extends BorderPane {
         return menu;
     }
 
-	public Edificio getEdificioConstruir() {
+	private Edificio getEdificioConstruir() {
 		return edificioConstruir;
 	}
 
 	public void setEdificioConstruir(Edificio edificioConstruir) {
 		this.edificioConstruir = edificioConstruir;
-	}
-
-	public Atacable obtenerSeleccionado() {
-		
-		return seleccionado;
 	}
 
 }
