@@ -1,4 +1,4 @@
-<project xmlns:ivy="antlib:org.apache.ivy.ant" name="nicopaez.tutoriales.oo.notas" basedir="." default="test">
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="TP27507" basedir="." default="ejecutar.aplicacion">
 	<property name="build" location="build" />
 	<property name="libs" location="libs" />
 	<property name="classes.dir" location="build" />
@@ -9,6 +9,7 @@
 	<property name="reports.xml.dir" location="${reports.dir}/junit-xml" />
 	<property name="reports.html.dir" location="${reports.dir}/junit-html" />
 	<property name="src.dir" location="src" />
+	<property name="vista.dir" location="aplicacion" />
 	<property name="coverage.xml.dir" location="${reports.dir}/cobertura-xml" />
 	<property name="coverage.summaryxml.dir" location="${reports.dir}/cobertura-summary-xml" />
 	<property name="coverage.html.dir" location="${reports.dir}/cobertura-html" />
@@ -148,8 +149,10 @@
 
 
     <target name="compilar.paquete" depends="test">
-		<javac srcdir="src" destdir="${build}/classes" debug="no">
-		</javac>
+    	<javac destdir="${build}/classes" debug="no" includeantruntime="false">
+    	    <src path="${src.dir}"/>
+    	    <src path="${vista.dir}"/>
+    	</javac>
 	</target>
 
 	<target name="empaquetar" depends="compilar.paquete">
@@ -200,15 +203,15 @@
 	</target>
 
 
-		<target name="empaquetar.con.imagenes" depends="compilar.paquete">
-			<copydir src="src/gui/imagess"
-				dest="${build}/classes/gui/imagess"
-				includes="**/*.png"/>
+		<target name="empaquetar.con.imagenes.y.sonido" depends="compilar.paquete">
+			<copydir src="aplicacion/"
+				dest="${build}/classes/gui/"
+				includes="**/*.*"/>
 		<jar destfile="${build}/dist/algo3.jar" basedir="${build}/classes"/>
 	</target>
 
-	<target name="ejecutar.aplicacion" depends="empaquetar">
-		<java classname="fiuba.algo3.ejemplo1.Foo" fork="true">
+	<target name="ejecutar.aplicacion" depends="empaquetar.con.imagenes.y.sonido">
+		<java classname="vista.Aplicacion" fork="true">
 			<classpath refid="classpath" />
 			<classpath location="${build}/dist/algo3.jar" />
 		</java>
